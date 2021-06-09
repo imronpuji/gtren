@@ -18,7 +18,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Test');
+$routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -32,10 +32,63 @@ $routes->setAutoRoute(false);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Test::index');
-// $routes->post('/login', 'Auth::login');
-// $routes->get('/register', 'Auth::register');
-// $routes->post('/register_proses', 'Auth::register_proses');
+$routes->get('/', 'Commerce::index');
+
+
+$routes->group('', ['namespace' => 'Myth\Auth\Controllers'], function($routes) {
+    // Login/out
+    $routes->get('login', 'AuthController::login', ['as' => 'login']);
+    $routes->post('login', 'AuthController::attemptLogin');
+    $routes->get('logout', 'AuthController::logout');
+
+    // Registration
+    $routes->get('register', 'AuthController::register', ['as' => 'register']);
+    $routes->post('register', 'AuthController::attemptRegister');
+
+    // Activation
+    $routes->get('activate-account', 'AuthController::activateAccount', ['as' => 'activate-account']);
+    $routes->get('resend-activate-account', 'AuthController::resendActivateAccount', ['as' => 'resend-activate-account']);
+
+    // Forgot/Resets
+    $routes->get('forgot', 'AuthController::forgotPassword', ['as' => 'forgot']);
+    $routes->post('forgot', 'AuthController::attemptForgot');
+    $routes->get('reset-password', 'AuthController::resetPassword', ['as' => 'reset-password']);
+    $routes->post('reset-password', 'AuthController::attemptReset');
+});
+
+
+// $routes->get('/login', 'Myth\Auth\Controllers\AuthController::login');
+$routes->get('/auth', 'commerce::Auth');
+
+$routes->get('/dashboard', 'Dashboard::index');
+
+
+$routes->group('admin', function($routes)
+{
+	// produk
+	$routes->get('tambahproduk', 'Admin::index');
+	$routes->get('produk', 'Admin::produk_list');
+
+	// kategori
+	$routes->get('kategori', 'Admin::kategori');
+
+	// order
+	$routes->get('order', 'Admin::order');
+	$routes->get('orderdetail', 'Admin::order_detail');
+
+	// member g-tren
+	$routes->get('adminlist', 'Admin::member_admin');
+	$routes->get('financelist', 'Admin::member_finance');
+	$routes->get('addmember', 'Admin::add_member');
+
+}
+);
+
+$routes->group('finance', ['filter' => 'login'], function($routes)
+{
+	$routes->get('profil', 'Finance::index');
+}
+);
 
 /*
  * --------------------------------------------------------------------

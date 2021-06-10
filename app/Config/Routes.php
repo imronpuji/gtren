@@ -33,6 +33,13 @@ $routes->setAutoRoute(false);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Commerce::index');
+$routes->get('/cart', 'Commerce::Cart', ['filter' => 'login']);
+$routes->get('/account', 'Commerce::Account');
+$routes->get('/contact', 'Commerce::Contact');
+$routes->get('/checkout', 'Commerce::Checkout');
+$routes->get('/product-detail', 'Commerce::Product_detail');
+$routes->get('/wishlist', 'Commerce::wishlist', ['filter' => 'login']);
+
 
 
 $routes->group('', ['namespace' => 'Myth\Auth\Controllers'], function($routes) {

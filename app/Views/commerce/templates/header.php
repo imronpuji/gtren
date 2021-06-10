@@ -68,13 +68,13 @@
                     <div class="header-action-right">
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
-                                <a href="shop-wishlist.html">
+                                <a href="/wishlist">
                                     <img class="svgInject" alt="wowy" src="frontend/imgs/theme/icons/icon-heart.svg">
                                     <span class="pro-count blue">4</span>
                                 </a>
                             </div>
                             <div class="header-action-icon-2">
-                                <a class="mini-cart-icon" href="shop-cart.html">
+                                <a class="mini-cart-icon" href="/cart">
                                     <img alt="wowy" src="frontend/imgs/theme/icons/icon-cart.svg">
                                     <span class="pro-count blue">2</span>
                                 </a>
@@ -117,7 +117,7 @@
                                 </div>
                             </div>
                             <div class="header-action-icon-2">
-                                <a href="page-login-register.html">
+                                <a href="/account">
                                     <img alt="wowy" src="frontend/imgs/theme/icons/icon-user.svg">
                                 </a>
                             </div>
@@ -423,7 +423,7 @@
                                 <li><a href="#">Pages <i class="fa fa-chevron-down"></i></a>
                                     <ul class="sub-menu">
                                         <li><a href="page-about.html">About Us</a></li>
-                                        <li><a href="page-contact.html">Contact</a></li>
+                                        <li><a href="/contact">Contact</a></li>
                                         <li><a href="page-account.html">My Account</a></li>
                                         <li><a href="page-login-register.html">login/register</a></li>
                                         <li><a href="page-purchase-guide.html">Purchase Guide</a></li>
@@ -433,7 +433,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="page-contact.html">Contact</a>
+                                    <a href="/contact">Contact</a>
                                 </li>
                             </ul>
                         </nav>

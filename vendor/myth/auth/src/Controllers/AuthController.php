@@ -174,6 +174,15 @@ class AuthController extends Controller
             $users = $users->withGroup($this->config->defaultUserGroup);
         }
 
+        // if is affiliate checked, assign affiliate
+        if ($this->request->getPost('is_affiliate')) {
+        	
+            $users = $users->withGroup('affiliate');
+        } else {
+            $users = $users->withGroup('user');
+
+        }
+
 		if (! $users->save($user))
 		{
 			return redirect()->back()->withInput()->with('errors', $users->errors());

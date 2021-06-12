@@ -107,13 +107,6 @@
                                         <input type="password" name="pass_confirm" class="form-control <?php if(session('errors.pass_confirm')) : ?>is-invalid<?php endif ?>" placeholder="<?=lang('Auth.repeatPassword')?>" autocomplete="off">
                                     </div>
 
-
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input type="checkbox" name="is_affiliate" class="form-check-input"> Daftar Sebagai Affiliate
-                                        </label>
-                                    </div>
-
                                     <button type="submit" class="btn btn-primary btn-block"><?=lang('Auth.register')?></button>
                                 </form>
 

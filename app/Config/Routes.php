@@ -22,7 +22,7 @@ $routes->setDefaultController('Commerce');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-$routes->setAutoRoute(false);
+$routes->setAutoRoute(true);
 
 /*
  * --------------------------------------------------------------------
@@ -81,7 +81,13 @@ $routes->group('admin', function($routes)
 	$routes->get('produk', 'Admin::produk_list');
 
 	// kategori
-	$routes->get('kategori', 'Admin::kategori');
+ //    $routes->get('kategori/(:alpha)/(:num)', 'Admin::kategori/$1/$2');
+	// $routes->get('kategori', 'Admin::kategori');
+    $routes->get('category', 'Category::index');
+    $routes->get('category/edit/(:num)', 'Category::edit/$1');
+    // $routes->post('kategori/save', 'Category::save/$1');
+    // $routes->get('kategori/edit/(:num)', 'Category::edit/$1');
+    // $routes->resource('kategori', 'Category');
 
 	// order
 	$routes->get('order', 'Admin::order');

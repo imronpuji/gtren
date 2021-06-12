@@ -1,9 +1,16 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\CategoryModel;
 
 class Admin extends BaseController
 {
+	public $model;
+
+	public function __construct()
+	{
+		$uri = service('uri');
+	}
 	public function index()
 	{
 		return view('db_admin/produk/tambah_produk');
@@ -13,12 +20,7 @@ class Admin extends BaseController
 	{
 		return view('db_admin/produk/produk_list');
 	}
-
-	public function kategori()
-	{
-		return view('db_admin/produk/kategori');
-	}
-
+	
 	public function order()
 	{
 		return view('db_admin/order/order');

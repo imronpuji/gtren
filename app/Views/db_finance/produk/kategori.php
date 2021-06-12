@@ -2,8 +2,8 @@
 <?php $this->section('content') ?>
 <div class="content-header">
     <div>
-        <h2 class="content-title card-title">Member </h2>
-        <p>Add, edit or delete a Member</p>
+        <h2 class="content-title card-title">Categories </h2>
+        <p>Add, edit or delete a category</p>
     </div>
     <div>
         <input type="text" placeholder="Search Categories" class="form-control bg-white">
@@ -15,22 +15,26 @@
             <div class="col-md-3">
                 <form>
                     <div class="mb-4">
-                        <label for="product_name" class="form-label">Username</label>
+                        <label for="product_name" class="form-label">Name</label>
                         <input type="text" placeholder="Type here" class="form-control" id="product_name" />
                     </div>
                     <div class="mb-4">
-                        <label for="product_slug" class="form-label">Password</label>
+                        <label for="product_slug" class="form-label">Slug</label>
                         <input type="text" placeholder="Type here" class="form-control" id="product_slug" />
                     </div>
                     <div class="mb-4">
-                        <label class="form-label">Jenis Akun</label>
+                        <label class="form-label">Parent</label>
                         <select class="form-select">
-                            <option>Admin</option>
-                            <option>Finance</option>
+                            <option>Clothes</option>
+                            <option>T-Shirts</option>
                         </select>
                     </div>
+                    <div class="mb-4">
+                        <label class="form-label">Description</label>
+                        <textarea placeholder="Type here" class="form-control"></textarea>
+                    </div>
                     <div class="d-grid">
-                        <button class="btn btn-primary">Create Member</button>
+                        <button class="btn btn-primary">Create category</button>
                     </div>
                 </form>
             </div>

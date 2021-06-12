@@ -18,7 +18,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('Commerce');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -65,7 +65,11 @@ $routes->group('', ['namespace' => 'Myth\Auth\Controllers'], function($routes) {
 
 
 // $routes->get('/login', 'Myth\Auth\Controllers\AuthController::login');
-$routes->get('/auth', 'commerce::Auth');
+$routes->group('/auth', ['namespace' => 'Myth\Auth\Controllers'], function($routes) {
+
+	$routes->get('login', 'Auth::login');
+	$routes->get('register', 'Auth::register');
+});
 
 $routes->get('/dashboard', 'Dashboard::index');
 
@@ -91,9 +95,33 @@ $routes->group('admin', function($routes)
 }
 );
 
-$routes->group('finance', ['filter' => 'login'], function($routes)
+$routes->group('finance', function($routes)
 {
-	$routes->get('profil', 'Finance::index');
+	$routes->get('tambahproduk', 'Finance::index');
+	$routes->get('produk', 'Finance::produk_list');
+
+	// kategori
+	$routes->get('kategori', 'Finance::kategori');
+
+	
+
+	// order
+	$routes->get('order', 'Finance::order');
+	$routes->get('orderdetail', 'Finance::order_detail');
+}
+);
+
+$routes->group('stokis', function($routes)
+{
+	$routes->get('tambahproduk', 'Stokis::index');
+	$routes->get('produk', 'Stokis::produk_list');
+
+	// kategori
+	$routes->get('kategori', 'Stokis::kategori');
+
+	// order
+	$routes->get('order', 'Stokis::order');
+	$routes->get('orderdetail', 'Stokis::order_detail');
 }
 );
 

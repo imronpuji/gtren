@@ -1,4 +1,15 @@
+function test(){
+	console.log("anjeng")
+	// if local storage exist
+	const dark = localStorage.getItem('isDark')
+	console.log(dark)
+	if (dark) {
+		$('body').toggleClass("dark")
+	} 
+}
+
 (function ($) {
+	test()
     "use strict";
 	//===== jquery code for sidebar menu
 	$('.menu-item.has-submenu .menu-link').on('click', function(e){
@@ -54,6 +65,16 @@
 	// Dark mode toogle
 	$('.darkmode').on('click', function () {
 		$('body').toggleClass("dark");
+		const dark = localStorage.getItem('isDark')
+
+		if(dark){			
+			localStorage.removeItem('isDark')
+		} else {
+			localStorage.setItem('isDark', true)
+
+		}
+		// save to local storage
+		// is_dark true
 	});
 	
 })(jQuery);

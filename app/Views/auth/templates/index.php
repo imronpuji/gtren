@@ -12,20 +12,20 @@
     <meta property="og:url" content="">
     <meta property="og:image" content="">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="backend/imgs/theme/favico.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php base_url() ?>/backend/imgs/theme/favico.svg">
     <!-- Template CSS -->
-    <link href="backend/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="<?php base_url() ?>/backend/css/main.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
     
     <?php $this->renderSection('content') ?>
     <?php $this->renderSection('footer') ?>
-    <script src="backend/js/vendors/jquery-3.5.1.min.js"></script>
-    <script src="backend/js/vendors/bootstrap.bundle.min.js"></script>
-    <script src="backend/js/vendors/jquery.fullscreen.min.js"></script>
+    <script src="<?php base_url() ?>/backend/js/vendors/jquery-3.5.1.min.js"></script>
+    <script src="<?php base_url() ?>/backend/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="<?php base_url() ?>/backend/js/vendors/jquery.fullscreen.min.js"></script>
     <!-- Main Script -->
-    <script src="backend/js/main.js" type="text/javascript"></script>
+    <script src="<?php base_url() ?>/backend/js/main.js" type="text/javascript"></script>
 </body>
 
 </html>

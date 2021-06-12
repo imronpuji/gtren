@@ -9,8 +9,8 @@
             <span class="text">Products</span>
         </a>
         <div class="submenu">
-            <a href="<?= base_url() ?>/admin/produk">Product List</a>
-            <a href="<?= base_url() ?>/admin/kategori">Categories</a>
+            <a href="<?= base_url() ?>/finance/produk">Product List</a>
+            <a href="<?= base_url() ?>/finance/kategori">Categories</a>
         </div>
     </li>
     <li class="menu-item has-submenu">
@@ -18,28 +18,8 @@
             <span class="text">Orders</span>
         </a>
         <div class="submenu">
-            <a href="<?= base_url() ?>/admin/order">Order list </a>
-            <a href="<?= base_url() ?>/admin/orderdetail">Order detail</a>
-        </div>
-    </li>
-    <li class="menu-item has-submenu">
-        <a class="menu-link" href="page-sellers-cards.html"> <i class="icon material-icons md-store"></i>
-            <span class="text">Member g-tren</span>
-        </a>
-        <div class="submenu">
-            <a href="page-sellers-cards.html">Admin</a>
-            <a href="page-sellers-list.html">Finance</a>
-        </div>
-    </li>
-    <li class="menu-item has-submenu">
-        <a class="menu-link" href="page-form-product-1.html"> <i class="icon material-icons md-add_box"></i>
-            <span class="text">Add product</span>
-        </a>
-        <div class="submenu">
-            <a href="page-form-product-1.html">Add product 1</a>
-            <a href="page-form-product-2.html">Add product 2</a>
-            <a href="page-form-product-3.html">Add product 3</a>
-            <a href="page-form-product-4.html">Add product 4</a>
+            <a href="<?= base_url() ?>/finance/order">Order list </a>
+            <a href="<?= base_url() ?>/finance/orderdetail">Order detail</a>
         </div>
     </li>
     <li class="menu-item has-submenu">
@@ -47,32 +27,18 @@
             <span class="text">Transactions</span>
         </a>
         <div class="submenu">
-            <a href="page-transactions-1.html">Transaction 1</a>
-            <a href="page-transactions-2.html">Transaction 2</a>
+            <a href="<?= base_url() ?>/finance/transaksi">Transaksi</a>
         </div>
     </li>
-    <li class="menu-item has-submenu">
-        <a class="menu-link" href="#"> <i class="icon material-icons md-person"></i>
-            <span class="text">Account</span>
-        </a>
-        <div class="submenu">
-            <a href="page-account-login.html">User login</a>
-            <a href="page-account-register.html">User registration</a>
-            <a href="page-error-404.html">Error 404</a>
-        </div>
-    </li>
+
     <li class="menu-item">
         <a class="menu-link" href="page-reviews.html"> <i class="icon material-icons md-comment"></i>
-            <span class="text">Reviews</span>
+            <span class="text">Komplain</span>
         </a>
-    </li>
-    <li class="menu-item">
-        <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i>
-            <span class="text">Brands</span> </a>
     </li>
     <li class="menu-item">
         <a class="menu-link" disabled href="#"> <i class="icon material-icons md-pie_chart"></i>
-            <span class="text">Statistics</span>
+            <span class="text">Statistik Keuangan</span>
         </a>
     </li>
 </ul>

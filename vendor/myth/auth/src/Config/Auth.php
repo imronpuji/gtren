@@ -28,6 +28,8 @@ class Auth extends BaseConfig
 
     public $views = [
         'login' => 'App\Views\commerce\auth_commerce\login_register',
+        'authLogin' => 'App\Views\auth\login',
+        'authRegister' => 'App\Views\auth\register',
         'register' => 'App\Views\commerce\auth_commerce\login_register',
         'forgot' => 'Myth\Auth\Views\forgot',
         'reset' => 'Myth\Auth\Views\reset',

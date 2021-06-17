@@ -1,9 +1,9 @@
 <?php namespace Myth\Auth\Authentication;
 
 use CodeIgniter\Router\Exceptions\RedirectException;
-use \Config\Services;
 use Myth\Auth\Entities\User;
 use Myth\Auth\Exceptions\AuthException;
+use Myth\Auth\Password;
 
 class LocalAuthenticator extends AuthenticationBase implements AuthenticatorInterface
 {
@@ -22,7 +22,7 @@ class LocalAuthenticator extends AuthenticationBase implements AuthenticatorInte
         if (empty($this->user))
         {
             // Always record a login attempt, whether success or not.
-            $ipAddress = Services::request()->getIPAddress();
+            $ipAddress = service('request')->getIPAddress();
             $this->recordLoginAttempt($credentials['email'] ?? $credentials['username'], $ipAddress, $this->user->id ?? null, false);
 
             $this->user = null;
@@ -32,11 +32,11 @@ class LocalAuthenticator extends AuthenticationBase implements AuthenticatorInte
         if ($this->user->isBanned())
         {
             // Always record a login attempt, whether success or not.
-            $ipAddress = Services::request()->getIPAddress();
+            $ipAddress = service('request')->getIPAddress();
             $this->recordLoginAttempt($credentials['email'] ?? $credentials['username'], $ipAddress, $this->user->id ?? null, false);
 
             $this->error = lang('Auth.userIsBanned');
-            
+
             $this->user = null;
             return false;
         }
@@ -44,7 +44,7 @@ class LocalAuthenticator extends AuthenticationBase implements AuthenticatorInte
         if (! $this->user->isActivated())
         {
             // Always record a login attempt, whether success or not.
-            $ipAddress = Services::request()->getIPAddress();
+            $ipAddress = service('request')->getIPAddress();
             $this->recordLoginAttempt($credentials['email'] ?? $credentials['username'], $ipAddress, $this->user->id ?? null, false);
 
             $param = http_build_query([
@@ -162,11 +162,7 @@ class LocalAuthenticator extends AuthenticationBase implements AuthenticatorInte
         }
 
         // Now, try matching the passwords.
-        $result = password_verify(base64_encode(
-            hash('sha384', $password, true)
-        ), $user->password_hash);
-
-        if (! $result)
+        if (! Password::verify($password, $user->password_hash))
         {
             $this->error = lang('Auth.invalidPassword');
             return false;
@@ -176,7 +172,7 @@ class LocalAuthenticator extends AuthenticationBase implements AuthenticatorInte
         // This would be due to the hash algorithm or hash
         // cost changing since the last time that a user
         // logged in.
-        if (password_needs_rehash($user->password_hash, $this->config->hashAlgorithm))
+        if (Password::needsRehash($user->password_hash, $this->config->hashAlgorithm))
         {
             $user->password = $password;
             $this->userModel->save($user);

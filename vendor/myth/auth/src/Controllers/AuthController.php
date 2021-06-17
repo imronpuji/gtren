@@ -1,19 +1,22 @@
 <?php namespace Myth\Auth\Controllers;
 
-use Config\Email;
 use CodeIgniter\Controller;
+use CodeIgniter\Session\Session;
+use Myth\Auth\Config\Auth as AuthConfig;
 use Myth\Auth\Entities\User;
+use Myth\Auth\Models\UserModel;
 
 class AuthController extends Controller
 {
 	protected $auth;
+
 	/**
-	 * @var Auth
+	 * @var AuthConfig
 	 */
 	protected $config;
 
 	/**
-	 * @var \CodeIgniter\Session\Session
+	 * @var Session
 	 */
 	protected $session;
 
@@ -42,16 +45,16 @@ class AuthController extends Controller
 		// is already logged in.
 		if ($this->auth->check())
 		{
-			$redirectURL = session('redirect_url') ?? '/';
+			$redirectURL = session('redirect_url') ?? site_url('/');
 			unset($_SESSION['redirect_url']);
 
 			return redirect()->to($redirectURL);
 		}
 
         // Set a return URL if none is specified
-        $_SESSION['redirect_url'] = session('redirect_url') ?? previous_url() ?? '/';
+        $_SESSION['redirect_url'] = session('redirect_url') ?? previous_url() ?? site_url('/');
 
-		return view($this->config->views['login'], ['config' => $this->config]);
+		return $this->_render($this->config->views['login'], ['config' => $this->config]);
 	}
 
 	/**
@@ -93,7 +96,7 @@ class AuthController extends Controller
 			return redirect()->to(route_to('reset-password') .'?token='. $this->auth->user()->reset_hash)->withCookies();
 		}
 
-		$redirectURL = session('redirect_url') ?? '/';
+		$redirectURL = session('redirect_url') ?? site_url('/');
 		unset($_SESSION['redirect_url']);
 
 		return redirect()->to($redirectURL)->withCookies()->with('message', lang('Auth.loginSuccess'));
@@ -109,7 +112,7 @@ class AuthController extends Controller
 			$this->auth->logout();
 		}
 
-		return redirect()->to('/');
+		return redirect()->to(site_url('/'));
 	}
 
 	//--------------------------------------------------------------------
@@ -133,7 +136,7 @@ class AuthController extends Controller
 			return redirect()->back()->withInput()->with('error', lang('Auth.registerDisabled'));
 		}
 
-		return view($this->config->views['register'], ['config' => $this->config]);
+		return $this->_render($this->config->views['register'], ['config' => $this->config]);
 	}
 
 	/**
@@ -147,12 +150,12 @@ class AuthController extends Controller
 			return redirect()->back()->withInput()->with('error', lang('Auth.registerDisabled'));
 		}
 
-		$users = model('UserModel');
+		$users = model(UserModel::class);
 
 		// Validate here first, since some things,
 		// like the password, can only be validated properly here.
 		$rules = [
-			'username'  	=> 'required|alpha_numeric_space|min_length[3]|is_unique[users.username]',
+			'username'  	=> 'required|alpha_numeric_space|min_length[3]|max_length[30]|is_unique[users.username]',
 			'email'			=> 'required|valid_email|is_unique[users.email]',
 			'password'	 	=> 'required|strong_password',
 			'pass_confirm' 	=> 'required|matches[password]',
@@ -160,14 +163,14 @@ class AuthController extends Controller
 
 		if (! $this->validate($rules))
 		{
-			return redirect()->back()->withInput()->with('errors', service('validation')->getErrors());
+			return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
 		}
 
 		// Save the user
 		$allowedPostFields = array_merge(['password'], $this->config->validFields, $this->config->personalFields);
 		$user = new User($this->request->getPost($allowedPostFields));
 
-		$this->config->requireActivation !== false ? $user->generateActivateHash() : $user->activate();
+		$this->config->requireActivation === null ? $user->activate : $user->generateActivateHash();
 
 		// Ensure default group gets assigned if set
         if (! empty($this->config->defaultUserGroup)) {
@@ -179,7 +182,7 @@ class AuthController extends Controller
 			return redirect()->back()->withInput()->with('errors', $users->errors());
 		}
 
-		if ($this->config->requireActivation !== false)
+		if ($this->config->requireActivation !== null)
 		{
 			$activator = service('activator');
 			$sent = $activator->send($user);
@@ -206,12 +209,12 @@ class AuthController extends Controller
 	 */
 	public function forgotPassword()
 	{
-		if ($this->config->activeResetter === false)
+		if ($this->config->activeResetter === null)
 		{
 			return redirect()->route('login')->with('error', lang('Auth.forgotDisabled'));
 		}
 
-		return view($this->config->views['forgot'], ['config' => $this->config]);
+		return $this->_render($this->config->views['forgot'], ['config' => $this->config]);
 	}
 
 	/**
@@ -220,12 +223,12 @@ class AuthController extends Controller
 	 */
 	public function attemptForgot()
 	{
-		if ($this->config->activeResetter === false)
+		if ($this->config->activeResetter === null)
 		{
 			return redirect()->route('login')->with('error', lang('Auth.forgotDisabled'));
 		}
 
-		$users = model('UserModel');
+		$users = model(UserModel::class);
 
 		$user = $users->where('email', $this->request->getPost('email'))->first();
 
@@ -254,14 +257,14 @@ class AuthController extends Controller
 	 */
 	public function resetPassword()
 	{
-		if ($this->config->activeResetter === false)
+		if ($this->config->activeResetter === null)
 		{
 			return redirect()->route('login')->with('error', lang('Auth.forgotDisabled'));
 		}
 
 		$token = $this->request->getGet('token');
 
-		return view($this->config->views['reset'], [
+		return $this->_render($this->config->views['reset'], [
 			'config' => $this->config,
 			'token'  => $token,
 		]);
@@ -275,12 +278,12 @@ class AuthController extends Controller
 	 */
 	public function attemptReset()
 	{
-		if ($this->config->activeResetter === false)
+		if ($this->config->activeResetter === null)
 		{
 			return redirect()->route('login')->with('error', lang('Auth.forgotDisabled'));
 		}
 
-		$users = model('UserModel');
+		$users = model(UserModel::class);
 
 		// First things first - log the reset attempt.
 		$users->logResetAttempt(
@@ -299,7 +302,7 @@ class AuthController extends Controller
 
 		if (! $this->validate($rules))
 		{
-			return redirect()->back()->withInput()->with('errors', $users->errors());
+			return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
 		}
 
 		$user = $users->where('email', $this->request->getPost('email'))
@@ -335,7 +338,7 @@ class AuthController extends Controller
 	 */
 	public function activateAccount()
 	{
-		$users = model('UserModel');
+		$users = model(UserModel::class);
 
 		// First things first - log the activation attempt.
 		$users->logActivationAttempt(
@@ -374,7 +377,7 @@ class AuthController extends Controller
 	 */
 	public function resendActivateAccount()
 	{
-		if ($this->config->requireActivation === false)
+		if ($this->config->requireActivation === null)
 		{
 			return redirect()->route('login');
 		}
@@ -389,7 +392,7 @@ class AuthController extends Controller
 		$login = urldecode($this->request->getGet('login'));
 		$type = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-		$users = model('UserModel');
+		$users = model(UserModel::class);
 
 		$user = $users->where($type, $login)
 					  ->where('active', 0)
@@ -411,5 +414,10 @@ class AuthController extends Controller
 		// Success!
 		return redirect()->route('login')->with('message', lang('Auth.activationSuccess'));
 
+	}
+
+	protected function _render(string $view, array $data = [])
+	{
+		return view($view, $data);
 	}
 }

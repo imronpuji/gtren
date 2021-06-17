@@ -6,11 +6,18 @@
     'aliases' => 
     array (
     ),
-    'reference' => '104df4400fbbb5737b0a157dfb63fab9596f5f3f',
+    'reference' => '114459a63a07ad80fb48078b372b7c8954231e3c',
     'name' => 'codeigniter4/framework',
   ),
   'versions' => 
   array (
+    'codeigniter4/authentication-implementation' => 
+    array (
+      'provided' => 
+      array (
+        0 => '1.0',
+      ),
+    ),
     'codeigniter4/codeigniter4-standard' => 
     array (
       'pretty_version' => 'v1.1.1',
@@ -27,7 +34,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '104df4400fbbb5737b0a157dfb63fab9596f5f3f',
+      'reference' => '114459a63a07ad80fb48078b372b7c8954231e3c',
     ),
     'doctrine/instantiator' => 
     array (
@@ -98,12 +105,12 @@
     ),
     'myth/auth' => 
     array (
-      'pretty_version' => '1.0-beta.3',
-      'version' => '1.0.0.0-beta3',
+      'pretty_version' => 'v1.0',
+      'version' => '1.0.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '85572d1f1bb312d7d2e0a444b45531170773d2de',
+      'reference' => '9bba52bd710a0c35a0b2d8cef64a70706224648a',
     ),
     'nikic/php-parser' => 
     array (
@@ -323,12 +330,12 @@
     ),
     'sebastian/global-state' => 
     array (
-      'pretty_version' => '5.0.2',
-      'version' => '5.0.2.0',
+      'pretty_version' => '5.0.3',
+      'version' => '5.0.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'a90ccbddffa067b51f574dea6eb25d5680839455',
+      'reference' => '23bd5951f7ff26f12d4e3242864df3e08dec4e49',
     ),
     'sebastian/lines-of-code' => 
     array (
@@ -377,12 +384,12 @@
     ),
     'sebastian/type' => 
     array (
-      'pretty_version' => '2.3.2',
-      'version' => '2.3.2.0',
+      'pretty_version' => '2.3.4',
+      'version' => '2.3.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '0d1c587401514d17e8f9258a27e23527cb1b06c1',
+      'reference' => 'b8cd8a1c753c90bc1a0f5372170e3e489136f914',
     ),
     'sebastian/version' => 
     array (

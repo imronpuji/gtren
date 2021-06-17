@@ -42,6 +42,9 @@ $routes->get('/product-detail', 'Commerce::Product_detail');
 $routes->get('/wishlist', 'Commerce::wishlist', ['filter' => 'login']);
 $routes->get('/products', 'Product::index');
 $routes->get('/products/edit', 'Product::edit');
+$routes->get('/slug', 'Product::slug');
+$routes->get('/test', 'Testing::index');
+$routes->post('/testfoto', 'Testing::testfoto');
 
 
 

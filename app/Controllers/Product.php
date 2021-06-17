@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\ProductModel;
 use App\Models\ProductPhoto;
 use App\Models\CategoryModel;
+use App\Libraries\Slug;
 
 class Product extends BaseController
 {
@@ -32,6 +33,14 @@ class Product extends BaseController
 
 
 		return view('db_admin/produk/produk_list', $data);
+	}
+
+	public function slug()
+	{
+		$slug = new Slug();
+		$string = "hello world halo dunia";
+
+		echo $slug->slugify($string);
 	}
 
 	public function edit()

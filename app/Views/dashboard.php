@@ -22,7 +22,7 @@
     <aside class="navbar-aside" id="offcanvas_aside">
         <div class="aside-top">
             <a href="index.html" class="brand-wrap">
-                <img src="<?= base_url() ?>/backend/imgs/theme/logo.png" class="logo" alt="Wowy Dashboard">
+                <img src="<?= base_url() ?>/backend/imgs/theme/favico.svg" class="logo" alt="Wowy Dashboard">
             </a>
             <div>
                 <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>

@@ -104,10 +104,23 @@
                                         <p>To track your order please enter your OrderID in the box below and press "Track" button. This was given to you on your receipt and in the confirmation email you should have received.</p>
                                         <div class="row">
                                             <div class="col-lg-8">
-                                                <form class="contact-form-style mt-30 mb-50" action="#" method="post">
+                                                <form class="contact-form-style mt-30 mb-50" action="<?php base_url() ?>/track" method="post">
+
+                                                        <div class="input-style mb-20">
+                                                             <label class="form-label">Kurir</label>
+                                                            <select class="form-select" name="courier">
+                                                                <?php foreach ($couries as $courier): ?>
+                                                                    <option value="<?= $courier['code'] ?>">
+                                                                        <?= $courier['description'] ?>
+            
+                                                                    </option>
+                                                                <?php endforeach ?>
+                                                            </select>
+                                                        </div>
+
                                                     <div class="input-style mb-20">
-                                                        <label>Order ID</label>
-                                                        <input name="order-id" placeholder="Found in your order confirmation email" type="text" class="square">
+                                                        <label>Nomor Resi</label>
+                                                        <input name="awb" placeholder="Found in your order confirmation email" type="text" class="square">
                                                     </div>
                                                     <div class="input-style mb-20">
                                                         <label>Billing email</label>

@@ -6,7 +6,7 @@
         <p>Add, edit or delete a category</p>
     </div>
     <div>
-        <input type="text" placeholder="Search Categories" class="form-control bg-white">
+        <input required type="text" placeholder="Search Categories" class="form-control bg-white">
     </div>
 </div>
 <div class="card">
@@ -34,7 +34,7 @@
                     <form action="<?= base_url('category/update/'.$category->id) ?>" method="post">
                         <div class="mb-4">
                             <label for="category" class="form-label">Category</label>
-                            <input type="text" placeholder="Type here" class="form-control" name="category" id="category" value="<?= $category->category ?>" />
+                            <input required type="text" placeholder="Type here" class="form-control" name="category" id="category" value="<?= $category->category ?>" />
                         </div>
                         <div class="d-grid">
                             <button class="btn btn-primary" type="submit">Update category</button>
@@ -44,7 +44,7 @@
                     <form action="<?= base_url('category/save') ?>" method="post">
                         <div class="mb-4">
                             <label for="category" class="form-label">Category</label>
-                            <input type="text" placeholder="Type here" name="category" class="form-control" id="category" />
+                            <input required type="text" placeholder="Type here" name="category" class="form-control" id="category" />
                         </div>
                         <div class="d-grid">
                             <button class="btn btn-primary" type="submit">Save category</button>
@@ -73,7 +73,7 @@
                                             </button>
                                         </a>
                                         <a href="<?= base_url('category/delete/'.$category->id) ?>">
-                                            <button class="btn btn-danger rounded">
+                                            <button class="btn rounded">
                                                 <i class="material-icons md-delete"></i>
                                                 Hapus
                                             </button>
@@ -104,7 +104,7 @@
                                             </button>
                                         </a>
                                         <a href="<?= base_url('category/delete/'.$category->id) ?>">
-                                            <button class="btn btn-danger rounded">
+                                            <button class="btn border rounded">
                                                 <i class="material-icons md-delete"></i>
                                                 Hapus
                                             </button>

@@ -21,6 +21,13 @@ class Category extends BaseController
 		return view('db_admin/produk/kategori', $data);
 	}
 
+	public function search()
+	{
+		$keyword            = $this->request->getPost('keyword');
+		$data['categories'] = $this->model->like(['category' => $keyword])->findAll();
+		return view('db_admin/produk/kategori', $data);;
+	}
+
 	public function save()
 	{
 		$data = [

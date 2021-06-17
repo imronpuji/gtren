@@ -1,5 +1,4 @@
 function test(){
-	console.log("anjeng")
 	// if local storage exist
 	const dark = localStorage.getItem('isDark')
 	console.log(dark)
@@ -73,8 +72,6 @@ function test(){
 			localStorage.setItem('isDark', true)
 
 		}
-		// save to local storage
-		// is_dark true
 	});
 	
 })(jQuery);

@@ -35,10 +35,13 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Commerce::index');
 $routes->get('/cart', 'Commerce::Cart', ['filter' => 'login']);
 $routes->get('/account', 'Commerce::Account');
+$routes->post('/track', 'Commerce::Track');
 $routes->get('/contact', 'Commerce::Contact');
 $routes->get('/checkout', 'Commerce::Checkout');
 $routes->get('/product-detail', 'Commerce::Product_detail');
 $routes->get('/wishlist', 'Commerce::wishlist', ['filter' => 'login']);
+$routes->get('/products', 'Product::index');
+$routes->get('/products/edit', 'Product::edit');
 
 
 
@@ -78,7 +81,7 @@ $routes->group('admin', function($routes)
 {
 	// produk
 	$routes->get('tambahproduk', 'Admin::index');
-	$routes->get('produk', 'Admin::produk_list');
+	$routes->get('products', 'Product::index');
 
 	// kategori
  //    $routes->get('kategori/(:alpha)/(:num)', 'Admin::kategori/$1/$2');
@@ -104,7 +107,7 @@ $routes->group('admin', function($routes)
 $routes->group('finance', function($routes)
 {
 	$routes->get('tambahproduk', 'Finance::index');
-	$routes->get('produk', 'Finance::produk_list');
+	$routes->get('products', 'Product::index');
 
 	// kategori
 	$routes->get('kategori', 'Finance::kategori');

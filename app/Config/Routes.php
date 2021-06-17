@@ -80,7 +80,8 @@ $routes->get('/dashboard', 'Dashboard::index');
 $routes->group('admin', function($routes)
 {
 	// produk
-	$routes->get('tambahproduk', 'Admin::index');
+	$routes->get('tambahproduk', 'Product::tambah_produk');
+	$routes->post('tambahproduk', 'Product::save');
 	$routes->get('products', 'Product::index');
 
 	// kategori

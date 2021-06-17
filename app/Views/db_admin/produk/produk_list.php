@@ -11,6 +11,23 @@
         <a href="<?= base_url() ?>/admin/tambahproduk" class="btn btn-primary btn-sm rounded">Create new</a>
     </div>
 </div>
+<div class="attention">
+    <?php if(!empty(session()->getFlashdata('success'))){ ?>
+
+        <div class="alert alert-success bg-success text-white">
+            <?php echo session()->getFlashdata('success');?>
+        </div>
+
+    <?php } ?>
+
+    <?php if(!empty(session()->getFlashdata('danger'))){ ?>
+
+        <div class="alert alert-danger bg-danger text-white">
+            <?php echo session()->getFlashdata('danger');?>
+        </div>
+
+    <?php } ?>
+</div>
 <div class="card mb-4">
     <header class="card-header">
         <div class="row align-items-center">
@@ -25,14 +42,14 @@
             <!-- <div class="col-md-2 col-6">
                 <input type="date" value="02.05.2021" class="form-control">
             </div> -->
-            <div class="col-md-2 col-6">
+           <!--  <div class="col-md-2 col-6">
                 <select class="form-select">
                     <option selected>Status</option>
                     <option>Active</option>
                     <option>Disabled</option>
                     <option>Show all</option>
                 </select>
-            </div>
+            </div> -->
         </div>
     </header> <!-- card-header end// -->
     <div class="card-body">

@@ -15,7 +15,7 @@ class CreateAuthTables extends Migration
             'username'         => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
             'fullname'         => ['type' => 'varchar', 'constraint' => 255, 'null' => true],
             'user_image'       => ['type' => 'varchar', 'constraint' => 255, 'default' => 'avatar.jpg'],
-            'phone'            => ['type' => 'varchar', 'constraint' => 15, 'null' => true],
+            'phone'            => ['type' => 'varchar', 'constraint' => 255, 'null' => true],
             'password_hash'    => ['type' => 'varchar', 'constraint' => 255],
             'reset_hash'       => ['type' => 'varchar', 'constraint' => 255, 'null' => true],
             'reset_at'         => ['type' => 'datetime', 'null' => true],
@@ -81,7 +81,7 @@ class CreateAuthTables extends Migration
             'created_at' => ['type' => 'datetime', 'null' => false],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->createTable('auth_reset_attempts');
+        $this->forge->createTable('auth_reset_attempts', true);
 
         /*
          * Activation Attempts Table
@@ -94,7 +94,7 @@ class CreateAuthTables extends Migration
             'created_at' => ['type' => 'datetime', 'null' => false],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->createTable('auth_activation_attempts');
+        $this->forge->createTable('auth_activation_attempts', true);
 
         /*
          * Groups Table
@@ -162,7 +162,7 @@ class CreateAuthTables extends Migration
         $this->forge->addKey(['user_id', 'permission_id']);
         $this->forge->addForeignKey('user_id', 'users', 'id', false, 'CASCADE');
         $this->forge->addForeignKey('permission_id', 'auth_permissions', 'id', false, 'CASCADE');
-        $this->forge->createTable('auth_users_permissions');
+        $this->forge->createTable('auth_users_permissions', true);
     }
 
     //--------------------------------------------------------------------

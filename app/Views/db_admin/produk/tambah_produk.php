@@ -13,6 +13,13 @@
             </div>
         </div>
         <div class="col-lg-6">
+            <?php if (! empty($errors)) : ?>
+                <div class="alert bg-danger text-white">
+                <?php foreach ($errors as $field => $error) : ?>
+                    <p><?= $error ?></p>
+                <?php endforeach ?>
+                </div>
+            <?php endif ?>
             <div class="card mb-4">
                 <div class="card-header">
                     <h4>Basic</h4>
@@ -20,7 +27,7 @@
                 <div class="card-body">
                         <div class="mb-4">
                             <label for="product_name" class="form-label">Nama Produk</label>
-                            <input name="product_name" type="text" placeholder="Type here" class="form-control" id="product_name">
+                            <input name="name" type="text" placeholder="Type here" class="form-control" id="product_name">
                         </div>
                         <div class="mb-4">
                             <label class="form-label">Deskripsi</label>

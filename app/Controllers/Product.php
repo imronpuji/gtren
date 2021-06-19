@@ -18,7 +18,7 @@ class Product extends BaseController
 
 		$this->model    = new ProductModel();
 		$this->category = new CategoryModel();
-		$this->photo = new ProductPhoto();
+		$this->photo    = new ProductPhoto();
 	}
 
 	public function index()
@@ -26,21 +26,12 @@ class Product extends BaseController
 
 		$data['categories'] = $this->category->findAll();
 
-
-		$data['products']   = $this->model->join('product_categories', 'product_categories.id = products.category_id')->paginate(15, 'products');
+		$data['products']   = $this->model->getProductWithCategory()->paginate(15, 'products');
 
 		$data['pager']      = $this->model->pager;
 
 
 		return view('db_admin/produk/produk_list', $data);
-	}
-
-	public function slug()
-	{
-		$slug = new Slug();
-		$string = "hello world halo dunia";
-
-		echo $slug->slugify($string);
 	}
 
 	public function edit()
@@ -50,86 +41,63 @@ class Product extends BaseController
 
 	public function save()
 	{
-		$db = db_connect('default'); 
+		$db   = db_connect('default'); 
+		$slug = new Slug();
+
 
 		// save product
 		$product = [
-			'category_id' => $this->request->getPost('category'),
-			'name' => $this->request->getPost('product_name'),
-			'description' => $this->request->getPost('description'),
-			'fixed_price' => $this->request->getPost('fixed_price'),
-			'sell_price' => $this->request->getPost('sell_price'),
+			'category_id'          => $this->request->getPost('category'),
+			'name'                 => $this->request->getPost('name'),
+			'description'          => $this->request->getPost('description'),
+			'slug'                 => $slug->slugify($this->request->getPost('name')),
+			'fixed_price'          => $this->request->getPost('fixed_price'),
+			'sell_price'           => $this->request->getPost('sell_price'),
 			'affiliate_commission' => $this->request->getPost('affiliate_commission'),
-			'stockist_commission' => $this->request->getPost('stockist_commission'),
+			'stockist_commission'  => $this->request->getPost('stockist_commission')
 		];
 
+
 		$save_product = $this->model->insert($product);
-		$product_id = $db->insertID();
+
+		if(!$save_product) {
+			$data['categories'] = $this->category->findAll();
+			$data['errors']     = $this->model->errors();
+	        return view('db_admin/produk/tambah_produk', $data); 
+	    }
+		
+		$product_id   = $db->insertID();
 
 		
-		// save photo
-		// $get_photo_1 = $this->request->getFile('photos');
+		if ($this->request->getFileMultiple('file')) {
+
+			foreach($this->request->getFileMultiple('file') as $file)
+			{   
+
+				$new_name = $file->getRandomName();
+
+				$file->move(WRITEPATH . 'uploads/product_photos', $new_name);
+
+				$photos   = [
+					[
+						'photo'      => $new_name,
+						'product_id' => $product_id,
+					]
+				];
+
+				$save_photo = $this->photo->insertBatch($photos);
+				if (!$save_photo) {
+					session()->setFlashdata('danger', 'Data Gagal Disimpan');
+				}
+				// $msg        = 'Files has been uploaded';
+			}
+		}
+	    session()->setFlashdata('success', 'Data Berhasil Disimpan');
+	    return redirect()->to(base_url('admin/products'));
+		// session()->setFlashdata('danger', $this->model->errors());
+	    // return redirect()->to(base_url('admin/products')); 
 
 
-
-		// $get_photo_2 = $this->request->getFile('photos_2');
-		// $get_photo_3 = $this->request->getFile('photos_3');
-
-        // $get_photo_1->move(ROOTPATH . 'public/product_photos');
-        // $get_photo_2->move(ROOTPATH . 'public/foto_produk');
-        // $get_photo_3->move(ROOTPATH . 'public/foto_produk');
-
-  //       $photos = [
-		// 			    [
-		// 			        'photo'  => $get_photo_1->getName(),
-		// 			        'product_id'  => $product_id,
-		// 			    ],
-		// 			    [
-		// 			        'photo'  => $get_photo_2->getName(),
-		// 			        'product_id'  => $product_id,
-		// 			    ],
-		// 			    [
-		// 			        'photo'  => $get_photo_3->getName(),
-		// 			        'product_id'  => $product_id,
-		// 			    ],
-		// 			];
-
-		// $save_photo = $this->photo->insertBatch($photos);
-
-
-
-		  if ($this->request->getFileMultiple('file')) {
- 
-             foreach($this->request->getFileMultiple('file') as $file)
-             {   
-
-
- 				$new_name = $file->getRandomName();
-
-                $file->move(ROOTPATH . 'public/product_photos', $new_name);
- 
-              $photos = [
-              	[
-                'photo' =>  $new_name,
-		        'product_id'  => $product_id,
-		    	]
-              ];
- 
-              $save_photo = $this->photo->insertBatch($photos);
-
-              $msg = 'Files has been uploaded';
-             }
-        } 
-
-		// Notif
-
-		if($save_product) {
-	        session()->setFlashdata('success', 'Data Berhasil Disimpan');
-	        return redirect()->to(base_url('admin/products'));
-	    } else {
-	        session()->setFlashdata('danger', 'Data Gagal Disimpan');
-	        return redirect()->to(base_url('admin/products')); 
-	    }
 	}
 
 	public function tambah_produk()

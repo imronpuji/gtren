@@ -82,6 +82,7 @@ $routes->group('admin', function($routes)
 	// produk
 	$routes->get('tambahproduk', 'Product::tambah_produk');
 	$routes->post('tambahproduk', 'Product::save');
+	$routes->get('products/delete/(:num)', 'Product::delete/$1');
 	$routes->get('products', 'Product::index');
 
 	// kategori

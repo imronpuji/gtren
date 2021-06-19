@@ -7,6 +7,7 @@ use App\Models\ProductModel;
 use App\Models\ProductPhoto;
 use App\Models\CategoryModel;
 
+
 class Product extends BaseController
 {
 	protected $category;
@@ -39,6 +40,22 @@ class Product extends BaseController
 		return view('db_admin/produk/edit_produk');
 	}
 
+	public function delete($id)
+	{	
+
+        $delete_product = $this->model->delete($id);
+
+        if($delete_product) {
+	        session()->setFlashdata('success', 'Data Berhasil Dihapus');
+	        return redirect()->to(base_url('admin/products'));
+	    } else {
+	        session()->setFlashdata('danger', 'Data Gagal Dihapus');
+	        return redirect()->to(base_url('admin/products')); 
+	    }
+
+		return view('db_admin/produk/produk_list');
+	}
+
 	public function save()
 	{
 		$db = db_connect('default'); 
@@ -69,24 +86,6 @@ class Product extends BaseController
         // $get_photo_1->move(ROOTPATH . 'public/product_photos');
         // $get_photo_2->move(ROOTPATH . 'public/foto_produk');
         // $get_photo_3->move(ROOTPATH . 'public/foto_produk');
-
-  //       $photos = [
-		// 			    [
-		// 			        'photo'  => $get_photo_1->getName(),
-		// 			        'product_id'  => $product_id,
-		// 			    ],
-		// 			    [
-		// 			        'photo'  => $get_photo_2->getName(),
-		// 			        'product_id'  => $product_id,
-		// 			    ],
-		// 			    [
-		// 			        'photo'  => $get_photo_3->getName(),
-		// 			        'product_id'  => $product_id,
-		// 			    ],
-		// 			];
-
-		// $save_photo = $this->photo->insertBatch($photos);
-
 
 
 		  if ($this->request->getFileMultiple('file')) {

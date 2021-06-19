@@ -39,17 +39,17 @@
                     <?php endforeach ?>
                 </select>
             </div>
-            <!-- <div class="col-md-2 col-6">
+            <div class="col-md-2 col-6">
                 <input type="date" value="02.05.2021" class="form-control">
-            </div> -->
-           <!--  <div class="col-md-2 col-6">
+            </div>
+            <div class="col-md-2 col-6">
                 <select class="form-select">
                     <option selected>Status</option>
                     <option>Active</option>
                     <option>Disabled</option>
                     <option>Show all</option>
                 </select>
-            </div> -->
+            </div>
         </div>
     </header> <!-- card-header end// -->
     <div class="card-body">
@@ -77,7 +77,7 @@
                         <a href="#" class="btn btn-sm font-sm rounded btn-brand">
                             <i class="material-icons md-edit"></i> Edit
                         </a>
-                        <a href="#" class="btn btn-sm font-sm btn-light rounded">
+                        <a href="<?= base_url('admin/products/delete/'.$product->id)  ?>" class="btn btn-sm font-sm btn-light rounded">
                             <i class="material-icons md-delete_forever"></i> Delete
                         </a>
                     </div>

@@ -12,6 +12,7 @@ class TestSeeder extends Seeder
 		$this->call('CategorySeeder');
 		$this->call('ProductSeeder');
 		$this->call('ProductsPhotosSeeder');
-		$this->call('UsersSeeder');
+		// $this->call('UsersSeeder');
+		$this->call('BillSeeder');
 	}
 }

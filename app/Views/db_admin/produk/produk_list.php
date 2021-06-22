@@ -66,20 +66,21 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-lg-2 col-sm-2 col-4 col-price"> <span><?= "Rp. ". number_format($product->sell_price) ?></span> </div>
+                    <div class="col-lg-2 col-sm-2 col-4 col-price"> <span><?= $product->sell_price ?></span> </div>
                     <div class="col-lg-2 col-sm-2 col-4 col-status">
-                        <span class="badge rounded-pill alert-success">Active</span>
+                        <span class="badge rounded-pill alert-success"><?= $product->category ?></span>
                     </div>
                     <div class="col-lg-1 col-sm-2 col-4 col-date">
                         <span><?= $product->updated_at ?></span>
                     </div>
                     <div class="col-lg-2 col-sm-2 col-4 col-action text-end">
-                        <a href="#" class="btn btn-sm font-sm rounded btn-brand">
-                            <i class="material-icons md-edit"></i> Edit
-                        </a>
-                        <a href="<?= base_url('admin/products/delete/'.$product->id)  ?>" class="btn btn-sm font-sm btn-light rounded">
-                            <i class="material-icons md-delete_forever"></i> Delete
-                        </a>
+                        <div class="dropdown">
+                            <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="<?= base_url('admin/products/edit/'.$product->id)  ?>">Edit info</a>
+                                <a class="dropdown-item text-danger" href="<?= base_url('admin/products/delete/'.$product->id)  ?>">Delete</a>
+                            </div>
+                        </div> 
                     </div>
                 </div> <!-- row .// -->
             </article>

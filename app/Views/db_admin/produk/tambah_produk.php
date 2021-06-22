@@ -38,14 +38,14 @@
                                 <div class="mb-4">
                                     <label class="form-label">Harga Pokok</label>
                                     <div class="row gx-2">
-                                        <input name="fixed_price" placeholder="$" type="text" class="form-control">
+                                        <input name="fixed_price" placeholder="$" type="number" class="form-control">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="mb-4">
                                     <label class="form-label">Harga Jual</label>
-                                    <input name="sell_price" placeholder="$" type="text" class="form-control">
+                                    <input name="sell_price" placeholder="$" type="number" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -53,13 +53,13 @@
                             <div class="col-lg-6">
                                 <div class="mb-4">
                                     <label class="form-label">Komisi Affiliate</label>
-                                    <input name="affiliate_commission" type="text" placeholder="%" class="form-control" id="product_name">
+                                    <input name="affiliate_commission" type="number" placeholder="%" class="form-control" id="product_name">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="mb-4">
                                     <label class="form-label">Komisi Stokis</label>
-                                    <input name="stockist_commission" type="text" placeholder="%" class="form-control" id="product_name">
+                                    <input name="stockist_commission" type="number" placeholder="%" class="form-control" id="product_name">
                                 </div>
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                 <div class="card-body">
                         <div class="mb-4">
                             <label class="form-label">Kategori</label>
-                            <select  name="category" class="form-select">
+                            <select name="category" class="form-select">
                                 <?php foreach ($categories as $category): ?>
                                     <option value="<?= $category->id ?>">
                                         <?= $category->category ?>

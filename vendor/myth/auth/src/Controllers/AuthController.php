@@ -99,6 +99,8 @@ class AuthController extends Controller
 		$redirectURL = session('redirect_url') ?? site_url('/');
 		unset($_SESSION['redirect_url']);
 
+
+
 		return redirect()->to($redirectURL)->withCookies()->with('message', lang('Auth.loginSuccess'));
 	}
 
@@ -144,6 +146,7 @@ class AuthController extends Controller
 	 */
 	public function attemptRegister()
 	{
+
 		// Check if registration is allowed
 		if (! $this->config->allowRegistration)
 		{
@@ -167,14 +170,16 @@ class AuthController extends Controller
 		}
 
 		// Save the user
-		$allowedPostFields = array_merge(['password'], $this->config->validFields, $this->config->personalFields);
+		$allowedPostFields = array_merge(['password', 'role'], $this->config->validFields, $this->config->personalFields);
 		$user = new User($this->request->getPost($allowedPostFields));
-
 		$this->config->requireActivation === null ? $user->activate : $user->generateActivateHash();
 
 		// Ensure default group gets assigned if set
-        if (! empty($this->config->defaultUserGroup)) {
-            $users = $users->withGroup($this->config->defaultUserGroup);
+
+        if ($this->request->getPost('role') !== null) {
+            $users = $users->withGroup($this->request->getPost('role'));
+        } else {
+            $users = $users->withGroup('user');
         }
 
 		if (! $users->save($user))

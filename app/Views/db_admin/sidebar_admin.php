@@ -9,8 +9,8 @@
             <span class="text">Products</span>
         </a>
         <div class="submenu">
-            <a href="<?= base_url() ?>/admin/produk">Product List</a>
-            <a href="<?= base_url() ?>/admin/kategori">Categories</a>
+            <a href="<?= base_url() ?>/admin/products">Product List</a>
+            <a href="<?= base_url() ?>/admin/category">Categories</a>
         </div>
     </li>
     <li class="menu-item has-submenu">
@@ -22,14 +22,10 @@
             <a href="<?= base_url() ?>/admin/orderdetail">Order detail</a>
         </div>
     </li>
-    <li class="menu-item has-submenu">
-        <a class="menu-link" href="page-sellers-cards.html"> <i class="icon material-icons md-store"></i>
+    <li class="menu-item">
+        <a class="menu-link" href="<?php base_url() ?>/admin/member"> <i class="icon material-icons md-store"></i>
             <span class="text">Member g-tren</span>
         </a>
-        <div class="submenu">
-            <a href="<?= base_url() ?>/admin/adminlist">Admin</a>
-            <a href="<?= base_url() ?>/admin/financelist">Finance</a>
-        </div>
     </li>
     <!-- <li class="menu-item has-submenu">
         <a class="menu-link" href="page-form-product-1.html"> <i class="icon material-icons md-add_box"></i>

@@ -86,7 +86,9 @@ $routes->group('admin', function($routes)
 	$routes->get('tambahproduk', 'Product::tambah_produk');
 	$routes->post('tambahproduk', 'Product::save');
 	$routes->get('products/delete/(:num)', 'Product::delete/$1');
+	$routes->get('products/edit/(:num)', 'Product::edit/$1');
 	$routes->get('products', 'Product::index');
+	$routes->post('products/search', 'Product::search');
 
 	// kategori
  //    $routes->get('kategori/(:alpha)/(:num)', 'Admin::kategori/$1/$2');
@@ -102,7 +104,7 @@ $routes->group('admin', function($routes)
 	$routes->get('orderdetail', 'Admin::order_detail');
 
 	// member g-tren
-	$routes->get('adminlist', 'Admin::member_admin');
+	$routes->get('member', 'Admin::member_admin');
 	$routes->get('financelist', 'Admin::member_finance');
 	$routes->get('addmember', 'Admin::add_member');
 

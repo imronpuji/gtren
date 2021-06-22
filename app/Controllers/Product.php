@@ -30,20 +30,38 @@ class Product extends BaseController
 		$data['products']   = $this->model->getProductWithCategory()->paginate(15, 'products');
 
 		$data['pager']      = $this->model->pager;
-
-
+		
 		return view('db_admin/produk/produk_list', $data);
 	}
 
-	public function edit()
+	public function edit($id)
+
 	{
+
 		return view('db_admin/produk/edit_produk');
 	}
 
 	public function delete($id)
 	{	
 
+		$path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/product_photos/';
+
+		$files = $this->photo->where('product_id', $id)->findAll();
+
+		$photos = $files;
+
+		$files = glob($path.'*');
+
+		foreach($files as $file){
+	      if(is_file($file))
+	        unlink($file); 
+    	}   
+
         $delete_product = $this->model->delete($id);
+
+        foreach($photos as $file){
+	      	$delete_photo = $this->photo->delete($file->id);
+    	} 
 
         if($delete_product) {
 	        session()->setFlashdata('success', 'Data Berhasil Dihapus');
@@ -94,7 +112,7 @@ class Product extends BaseController
 
 				$new_name = $file->getRandomName();
 
-				$file->move(WRITEPATH . 'uploads/product_photos', $new_name);
+				$file->move(ROOTPATH . 'public/uploads/product_photos', $new_name);
 
 				$photos   = [
 					[
@@ -124,4 +142,5 @@ class Product extends BaseController
 
 		return view('db_admin/produk/tambah_produk', $data);
 	}
+
 }

@@ -13,26 +13,43 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-3">
-                <form>
-                    <div class="mb-4">
-                        <label for="product_name" class="form-label">Username</label>
-                        <input type="text" placeholder="Type here" class="form-control" id="product_name" />
+               <form action="<?= route_to('register') ?>" method="post">
+                    <?= csrf_field() ?>
+
+                    <div class="form-group">
+                        <label for="email"><?=lang('Auth.email')?></label>
+                        <input type="email" class="form-control <?php if(session('errors.email')) : ?>is-invalid<?php endif ?>"
+                               name="email" aria-describedby="emailHelp" placeholder="<?=lang('Auth.email')?>" value="<?= old('email') ?>">
+<!--                         <small id="emailHelp" class="form-text text-muted"><?=lang('Auth.weNeverShare')?></small>
+ -->                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="username"><?=lang('Auth.username')?></label>
+                        <input type="text" class="form-control <?php if(session('errors.username')) : ?>is-invalid<?php endif ?>" name="username" placeholder="<?=lang('Auth.username')?>" value="<?= old('username') ?>">
                     </div>
-                    <div class="mb-4">
-                        <label for="product_slug" class="form-label">Password</label>
-                        <input type="text" placeholder="Type here" class="form-control" id="product_slug" />
+                    <br>
+                    <div class="form-group">
+                        <label for="password"><?=lang('Auth.password')?></label>
+                        <input type="password" name="password" class="form-control <?php if(session('errors.password')) : ?>is-invalid<?php endif ?>" placeholder="<?=lang('Auth.password')?>" autocomplete="off">
                     </div>
-                    <div class="mb-4">
-                        <label class="form-label">Jenis Akun</label>
-                        <select class="form-select">
-                            <option>Admin</option>
-                            <option>Finance</option>
+                    <br>
+                    <div class="form-group">
+                        <label for="pass_confirm"><?=lang('Auth.repeatPassword')?></label>
+                        <input type="password" name="pass_confirm" class="form-control <?php if(session('errors.pass_confirm')) : ?>is-invalid<?php endif ?>" placeholder="<?=lang('Auth.repeatPassword')?>" autocomplete="off">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="pass_confirm">Role Type</label>
+                        <select name="role" class="form-select">
+                            <option value="admin">admin</option>
+                            <option value="finance">finance</option>
                         </select>
                     </div>
-                    <div class="d-grid">
-                        <button class="btn btn-primary">Create Member</button>
-                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary btn-block w-100"><?=lang('Auth.register')?></button>
+                    <br>
                 </form>
+
             </div>
             <div class="col-md-9">
                 <div class="table-responsive">
@@ -64,152 +81,6 @@
                                 <td>Men clothes</td>
                                 <td>/men</td>
                                 <td>1</td>
-                                <td class="text-end">
-                                    <div class="dropdown">
-                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">View detail</a>
-                                            <a class="dropdown-item" href="#">Edit info</a>
-                                            <a class="dropdown-item text-danger" href="#">Delete</a>
-                                        </div>
-                                    </div> <!-- dropdown //end -->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" />
-                                    </div>
-                                </td>
-                                <td>2</td>
-                                <td><b>Women fashion</b></td>
-                                <td>Fashions for Women</td>
-                                <td>/women</td>
-                                <td>2</td>
-                                <td class="text-end">
-                                    <div class="dropdown">
-                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">View detail</a>
-                                            <a class="dropdown-item" href="#">Edit info</a>
-                                            <a class="dropdown-item text-danger" href="#">Delete</a>
-                                        </div>
-                                    </div> <!-- dropdown //end -->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" />
-                                    </div>
-                                </td>
-                                <td>3</td>
-                                <td><b>Kids clothes</b></td>
-                                <td>Clothes for kids</td>
-                                <td>/kids</td>
-                                <td>3</td>
-                                <td class="text-end">
-                                    <div class="dropdown">
-                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">View detail</a>
-                                            <a class="dropdown-item" href="#">Edit info</a>
-                                            <a class="dropdown-item text-danger" href="#">Delete</a>
-                                        </div>
-                                    </div> <!-- dropdown //end -->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"><i class="material-icons md-subdirectory_arrow_right text-muted"></i></td>
-                                <td>4</td>
-                                <td><b>Hot Gifts</b></td>
-                                <td>Hot Gifts</td>
-                                <td>/gifts</td>
-                                <td>4</td>
-                                <td class="text-end">
-                                    <div class="dropdown">
-                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">View detail</a>
-                                            <a class="dropdown-item" href="#">Edit info</a>
-                                            <a class="dropdown-item text-danger" href="#">Delete</a>
-                                        </div>
-                                    </div> <!-- dropdown //end -->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"><i class="material-icons md-subdirectory_arrow_right text-muted"></i></td>
-                                <td>5</td>
-                                <td><b>Electronics</b></td>
-                                <td>Electronics</td>
-                                <td>/electr</td>
-                                <td>5</td>
-                                <td class="text-end">
-                                    <div class="dropdown">
-                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">View detail</a>
-                                            <a class="dropdown-item" href="#">Edit info</a>
-                                            <a class="dropdown-item text-danger" href="#">Delete</a>
-                                        </div>
-                                    </div> <!-- dropdown //end -->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" />
-                                    </div>
-                                </td>
-                                <td>6</td>
-                                <td><b>Accessories</b></td>
-                                <td>Accessories</td>
-                                <td>/accessories</td>
-                                <td>6</td>
-                                <td class="text-end">
-                                    <div class="dropdown">
-                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">View detail</a>
-                                            <a class="dropdown-item" href="#">Edit info</a>
-                                            <a class="dropdown-item text-danger" href="#">Delete</a>
-                                        </div>
-                                    </div> <!-- dropdown //end -->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" />
-                                    </div>
-                                </td>
-                                <td>7</td>
-                                <td><b>Jewellery</b></td>
-                                <td>Jewellery</td>
-                                <td>/jewel</td>
-                                <td>7</td>
-                                <td class="text-end">
-                                    <div class="dropdown">
-                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">View detail</a>
-                                            <a class="dropdown-item" href="#">Edit info</a>
-                                            <a class="dropdown-item text-danger" href="#">Delete</a>
-                                        </div>
-                                    </div> <!-- dropdown //end -->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" />
-                                    </div>
-                                </td>
-                                <td>8</td>
-                                <td><b>Interiors</b></td>
-                                <td>Interiors</td>
-                                <td>/interior</td>
-                                <td>8</td>
                                 <td class="text-end">
                                     <div class="dropdown">
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>

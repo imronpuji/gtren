@@ -15,7 +15,7 @@ class Admin extends BaseController
 	{
 		return view('db_admin/produk/tambah_produk');
 	}
-
+	
 	public function produk_list()
 	{
 		return view('db_admin/produk/produk_list');

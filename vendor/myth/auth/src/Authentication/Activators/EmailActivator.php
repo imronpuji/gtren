@@ -39,6 +39,6 @@ class EmailActivator extends BaseActivator implements ActivatorInterface
             return false;
         }
 
-        return true;
+        return false;
     }
 }

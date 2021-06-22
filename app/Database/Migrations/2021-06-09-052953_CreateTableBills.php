@@ -16,7 +16,7 @@ class CreateTableBills extends Migration
 				'auto_increment' => true
 			],
             'bank_name'   => ['type' => 'varchar', 'constraint' => 255],
-            'bank_number' => ['type' => 'int', 'constraint'     => 50],
+            'bank_number' => ['type' => 'varchar', 'constraint'     => 50],
             'owner'       => ['type' => 'varchar', 'constraint' => 255],
             'created_at'  => ['type' => 'datetime', 'null'      => true],
             'updated_at'  => ['type' => 'datetime', 'null'      => true],

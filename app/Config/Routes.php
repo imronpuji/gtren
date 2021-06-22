@@ -46,6 +46,14 @@ $routes->get('/slug', 'Product::slug');
 $routes->get('/test', 'Testing::index');
 $routes->post('/testfoto', 'Testing::testfoto');
 
+// Bills
+// $routes->get('bills', 'Bill::index');
+// $routes->post('bills', 'Bill::index');
+// $routes->get('bills/add', 'Bill::add');
+// $routes->get('bills/edit/(:num)', 'Bill::edit/$1');
+// $routes->post('bills/update/(:num)', 'Bill::update/$1');
+// $routes->get('bills/delete/(:num)', 'Bill::delete/$1');
+
 
 
 $routes->group('', ['namespace' => 'Myth\Auth\Controllers'], function($routes) {

@@ -68,7 +68,7 @@
                     </div>
                     <div class="col-lg-2 col-sm-2 col-4 col-price"> <span><?= $product->sell_price ?></span> </div>
                     <div class="col-lg-2 col-sm-2 col-4 col-status">
-                        <span class="badge rounded-pill alert-success"><?= $product->category ?></span>
+                        <span class="badge rounded-pill alert-success"></span>
                     </div>
                     <div class="col-lg-1 col-sm-2 col-4 col-date">
                         <span><?= $product->updated_at ?></span>

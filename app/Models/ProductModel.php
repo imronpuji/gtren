@@ -11,12 +11,12 @@ class ProductModel extends Model
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
-	protected $returnType           = 'object';
+	protected $returnType           = 'App\Entities\Product';
 	protected $useSoftDeletes       = true;
 	protected $protectFields        = true;
 	protected $allowedFields        = [
-		'category_id', 'name', 'description',
-		'slug', 'fixed_price', 'sell_price',
+		'name', 'description', 'categories',
+		'slug', 'photos', 'fixed_price', 'sell_price',
 		'affiliate_commission', 'stockist_commission'
 	];
 

@@ -25,13 +25,37 @@ class Product extends BaseController
 	public function index()
 	{
 
+
 		$data['categories'] = $this->category->findAll();
 
-		$data['products']   = $this->model->getProductWithCategory()->paginate(15, 'products');
+		$data['products']   = $this->model->paginate(15, 'products');
 
 		$data['pager']      = $this->model->pager;
 		
 		return view('db_admin/produk/produk_list', $data);
+	}
+
+	public function commerce()
+	{
+
+		$data['products']   = $this->model->paginate(15, 'products');
+
+		// $data['categories'] = $this->category->findAll();
+
+		$data['pager']      = $this->model->pager;
+
+		// dd($data['products']);
+
+		return view('commerce/home', $data);
+
+	}
+
+	public function detail($slug)
+	{
+		$data['product'] = $this->model->where('slug', $slug)->first();
+
+		// dd($data['product']);
+		return view('commerce/product_detail', $data);
 	}
 
 	public function edit($id)
@@ -76,24 +100,40 @@ class Product extends BaseController
 
 	public function save()
 	{
-		$db   = db_connect('default'); 
-		$slug = new Slug();
+		$db      = db_connect('default'); 
+		$slug    = new Slug();
+		$product = new \App\Entities\Product();
 
 
 		// save product
-		$product = [
-			'category_id'          => $this->request->getPost('category'),
-			'name'                 => $this->request->getPost('name'),
-			'description'          => $this->request->getPost('description'),
-			'slug'                 => $slug->slugify($this->request->getPost('name')),
-			'fixed_price'          => $this->request->getPost('fixed_price'),
-			'sell_price'           => $this->request->getPost('sell_price'),
-			'affiliate_commission' => $this->request->getPost('affiliate_commission'),
-			'stockist_commission'  => $this->request->getPost('stockist_commission')
+		// $data = [
+		// 	'name'                 => $this->request->getPost('name'),
+		// 	'description'          => $this->request->getPost('description'),
+		// 	'categories'           => [1, 2, 3],
+		// 	'slug'                 => $this->request->getPost('name'),
+		// 	'photos'               => ['1.jpg', '2.jpg', '3.jpg'],
+		// 	'fixed_price'          => $this->request->getPost('fixed_price'),
+		// 	'sell_price'           => $this->request->getPost('sell_price'),
+		// 	'affiliate_commission' => $this->request->getPost('affiliate_commission'),
+		// 	'stockist_commission'  => $this->request->getPost('stockist_commission')
+		// ];
+		$data = [
+			'name'                 => "Product dua",
+			'description'          => "asdasdddsdsddsds",
+			'categories'           => ['1', '2', '3', '4'],
+			'slug'                 => "Product dua",
+			'photos'               => ['1.jpg', '2.jpg', '3.jpg'],
+			'fixed_price'          => 20000,
+			'sell_price'           => 30000,
+			'affiliate_commission' => 1000,
+			'stockist_commission'  => 1000
 		];
 
+		$product->fill($data);
 
-		$save_product = $this->model->insert($product);
+		$save_product = $this->model->save($product);
+
+		dd($save_product);
 
 		if(!$save_product) {
 			$data['categories'] = $this->category->findAll();
@@ -102,7 +142,7 @@ class Product extends BaseController
 	    }
 		
 
-		$product_id   = $db->insertID();
+		$product_id = $db->insertID();
 
 		
 		if ($this->request->getFileMultiple('file')) {
@@ -125,14 +165,10 @@ class Product extends BaseController
 				if (!$save_photo) {
 					session()->setFlashdata('danger', 'Data Gagal Disimpan');
 				}
-				// $msg        = 'Files has been uploaded';
 			}
 		}
 	    session()->setFlashdata('success', 'Data Berhasil Disimpan');
 	    return redirect()->to(base_url('admin/products'));
-		// session()->setFlashdata('danger', $this->model->errors());
-	    // return redirect()->to(base_url('admin/products')); 
-
 
 	}
 

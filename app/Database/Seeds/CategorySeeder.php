@@ -3,6 +3,7 @@
 namespace App\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
+use \CodeIgniter\I18n\Time;
 
 class CategorySeeder extends Seeder
 {
@@ -10,18 +11,26 @@ class CategorySeeder extends Seeder
 	{
 		$data = [
 			[
-				'category'        => 'Clothes'
+				'category'        => 'Clothes',
+				'description' => 'Men Clothes',
+				'created_at' => Time::now('Asia/Jakarta')
 			],
 			[
-				'category'        => 'Foods'
+				'category'        => 'Foods',
+				'description' => 'Delicious Food',
+				'created_at' => Time::now('Asia/Jakarta')
 			],
 			[
-				'category'        => 'Electronics'
+				'category'        => 'Electronics',
+				'description' => 'Electronic',
+				'created_at' => Time::now('Asia/Jakarta')
 			],
 			[
-				'category'        => 'Sports'
+				'category'        => 'Sports',
+				'description' => 'Sport',
+				'created_at' => Time::now('Asia/Jakarta')
 			]
 		];
-		$this->db->table('product_categories')->insertBatch($data);
+		$this->db->table('categories')->insertBatch($data);
 	}
 }

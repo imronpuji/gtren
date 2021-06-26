@@ -16,12 +16,8 @@ class Bill extends BaseController
 
 		if ($this->request->getPost()) {
 
-			$data = [
-				'bank_name'   => $this->request->getPost('bank_name'),
-				'bank_number' => $this->request->getPost('bank_number'),
-				'owner'       => $this->request->getPost('owner')
-			];
-
+			$data       = $this->request->getPost();
+			$bill       = new \App\Entities\Bill($data);
 			$validation =  \Config\Services::validation();
 			$validation->setRules(
 				[
@@ -45,11 +41,13 @@ class Bill extends BaseController
 	        ]
 			);
 
+	        // $isDataValid = $validation->withRequest($this->request)->run();
 	        $isDataValid = $validation->withRequest($this->request)->run();
+
 
 	        if ($isDataValid) {
 
-				$save  = $this->model->insert($data);
+				$save  = $this->model->save($bill);
 
 				if (!$save){
 					return redirect()->back()->withInput()->with('errors', $this->model->errors());
@@ -65,6 +63,7 @@ class Bill extends BaseController
 		}
 
 		$data['bills'] = $this->model->findAll();
+
 		return view('bills/index', $data);
 	}
 

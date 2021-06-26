@@ -22,7 +22,7 @@ $routes->setDefaultController('Commerce');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-$routes->setAutoRoute(true);
+$routes->setAutoRoute(false);
 
 /*
  * --------------------------------------------------------------------
@@ -30,21 +30,16 @@ $routes->setAutoRoute(true);
  * --------------------------------------------------------------------
  */
 
-// We get a performance increase by specifying the default
-// route since we don't have to scan directories.
-$routes->get('/', 'Commerce::index');
-$routes->get('/cart', 'Commerce::Cart', ['filter' => 'login']);
-$routes->get('/account', 'Commerce::Account');
-$routes->post('/track', 'Commerce::Track');
-$routes->get('/contact', 'Commerce::Contact');
-$routes->get('/checkout', 'Commerce::Checkout');
-$routes->get('/product-detail', 'Commerce::Product_detail');
-$routes->get('/wishlist', 'Commerce::wishlist', ['filter' => 'login']);
-$routes->get('/products', 'Product::index');
-$routes->get('/products/edit', 'Product::edit');
-$routes->get('/slug', 'Product::slug');
-$routes->get('/test', 'Testing::index');
-$routes->post('/testfoto', 'Testing::testfoto');
+ $routes->get('/', 'Product::commerce');
+// $routes->get('cart', 'User::cart', ['filter' => 'login']);
+// $routes->get('account', 'User::Account', ['filter' => 'login']);
+// $routes->post('track', 'User::Track', ['filter' => 'login']);
+// $routes->get('checkout', 'User::Checkout', ['filter' => 'login']);
+$routes->get('contact', 'Commerce::Contact');
+$routes->get('about', 'Commerce::About');
+$routes->get('product/(:any)', 'Product::detail/$1');
+// $routes->get('test', 'Testing::index');
+// $routes->post('testfoto', 'Testing::testfoto');
 
 // Bills
 // $routes->get('bills', 'Bill::index');
@@ -92,7 +87,8 @@ $routes->group('admin', function($routes)
 {
 	// produk
 	$routes->get('tambahproduk', 'Product::tambah_produk');
-	$routes->post('tambahproduk', 'Product::save');
+	// $routes->post('tambahproduk', 'Product::save');
+	$routes->get('saveproduk', 'Product::save');
 	$routes->get('products/delete/(:num)', 'Product::delete/$1');
 	$routes->get('products/edit/(:num)', 'Product::edit/$1');
 	$routes->get('products', 'Product::index');

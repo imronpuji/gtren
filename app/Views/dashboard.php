@@ -30,13 +30,7 @@
             </div>
         </div>
         <nav>
-          <!--   <?php if(in_groups(1)) :  ?>
-                 <?= $this->include('db_admin/sidebar_admin') ?>
-            <?php elseif(in_groups(5)) : ?>
-                <?= $this->include('db_finance/sidebar_finance') ?>
-            <?php elseif(in_groups(3)) : ?>
-            <?php endif;?> -->
-                            <?= $this->include('db_admin/sidebar_admin') ?>
+            <?= $this->include('db_admin/sidebar_admin') ?>
         </nav>
     </aside>
     <main class="main-wrap">

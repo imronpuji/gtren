@@ -5,7 +5,7 @@
                     <div class="col-lg-7 mb-md-3 mb-lg-0">
                         <div class="row align-items-center">
                             <div class="col flex-horizontal-center">
-                                <img class="icon-email" src="frontend/imgs/theme/icons/icon-email.svg" alt="">
+                                <img class="icon-email" src="<?= base_url() ?>/frontend/imgs/theme/icons/icon-email.svg" alt="">
                                 <h4 class="font-size-20 mb-0 ml-3">Sign up to Newsletter</h4>
                             </div>
                             <div class="col my-4 my-md-0">
@@ -30,7 +30,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="widget-about font-md mb-md-5">
                             <div class="logo logo-width-1 wow fadeIn animated">
-                                <a href="index.html"><img src="frontend/imgs/theme/logo-default.png" alt="logo"></a>
+                                <a href="index.html"><img src="<?= base_url() ?>/frontend/imgs/theme/logo-default.png" alt="logo"></a>
                             </div>
                             <h4 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h4>
                             <p class="wow fadeIn animated">
@@ -78,13 +78,13 @@
                             <div class="col-md-8 col-lg-12">
                                 <p class="wow fadeIn animated">From App Store or Google Play</p>
                                 <div class="download-app wow fadeIn animated">
-                                    <a href="#" class="hover-up mb-sm-4"><img src="frontend/imgs/theme/app-store.jpg" alt=""></a>
-                                    <a href="#" class="hover-up"><img src="frontend/imgs/theme/google-play.jpg" alt=""></a>
+                                    <a href="#" class="hover-up mb-sm-4"><img src="<?= base_url() ?>/frontend/imgs/theme/app-store.jpg" alt=""></a>
+                                    <a href="#" class="hover-up"><img src="<?= base_url() ?>/frontend/imgs/theme/google-play.jpg" alt=""></a>
                                 </div>
                             </div>
                             <div class="col-md-4 col-lg-12">
                                 <p class="mb-20 wow fadeIn animated mt-md-3">Secured Payment Gateways</p>
-                                <img class="wow fadeIn animated" src="frontend/imgs/theme/payment-method.png" alt="">
+                                <img class="wow fadeIn animated" src="<?= base_url() ?>/frontend/imgs/theme/payment-method.png" alt="">
                             </div>
                         </div>
                     </div>

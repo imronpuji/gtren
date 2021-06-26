@@ -9,8 +9,8 @@
             <span class="text">Products</span>
         </a>
         <div class="submenu">
-            <a href="<?= base_url() ?>/finance/produk">Product List</a>
-            <a href="<?= base_url() ?>/finance/kategori">Categories</a>
+            <a href="<?= base_url() ?>/products">Product List</a>
+            <a href="<?= base_url() ?>/category">Categories</a>
         </div>
     </li>
     <li class="menu-item has-submenu">
@@ -18,8 +18,8 @@
             <span class="text">Orders</span>
         </a>
         <div class="submenu">
-            <a href="<?= base_url() ?>/finance/order">Order list </a>
-            <a href="<?= base_url() ?>/finance/orderdetail">Order detail</a>
+            <a href="<?= base_url() ?>/order">Order list </a>
+            <a href="<?= base_url() ?>/orderdetail">Order detail</a>
         </div>
     </li>
     <li class="menu-item has-submenu">
@@ -27,7 +27,7 @@
             <span class="text">Transactions</span>
         </a>
         <div class="submenu">
-            <a href="<?= base_url() ?>/finance/transaksi">Transaksi</a>
+            <a href="<?= base_url() ?>/transaksi">Transaksi</a>
         </div>
     </li>
 

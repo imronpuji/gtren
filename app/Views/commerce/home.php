@@ -39,6 +39,22 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="single-hero-slider single-animation-wrap">
+                                    <div class="container">
+                                        <div class="slider-1-height-3 slider-animated-1">
+                                            <div class="hero-slider-content-2">
+                                                <h4 class="animated">Tech Promotions</h4>
+                                                <h2 class="animated fw-900">Tech Trending</h2>
+                                                <h1 class="animated fw-900">Great Collection</h1>
+                                                <p class="animated">Save more with coupons & up to 20% off</p>
+                                                <a class="animated btn btn-default btn-rounded" href="shop-product-right.html"> SHOP NOW <i class="fa fa-arrow-right"></i> </a>
+                                            </div>
+                                            <div class="slider-img">
+                                                <img src="frontend/imgs/slider/slider-5.png" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="slider-arrow hero-slider-1-arrow style-3"></div>
                         </div>

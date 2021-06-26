@@ -24,8 +24,9 @@ class AuthController extends Controller
 	{
 		// Most services in this controller require
 		// the session to be started - so fire it up!
-		$this->session = service('session');
+		helper('in_groups');
 
+		$this->session = service('session');
 		$this->config = config('Auth');
 		$this->auth = service('authentication');
 	}
@@ -172,7 +173,9 @@ class AuthController extends Controller
 		// Save the user
 		$allowedPostFields = array_merge(['password', 'role'], $this->config->validFields, $this->config->personalFields);
 		$user = new User($this->request->getPost($allowedPostFields));
+		
 		$this->config->requireActivation === null ? $user->activate : $user->generateActivateHash();
+		// $this->request->getPost('role') !== null ? $user->active = 1 : $user->active = 0;
 
 		// Ensure default group gets assigned if set
 
@@ -198,11 +201,19 @@ class AuthController extends Controller
 			}
 
 			// Success!
-			return redirect()->route('login')->with('message', lang('Auth.activationSuccess'));
+			if($this->request->getPost('role') !== null){
+
+			return redirect()->route('member')->with('message', lang('Auth.registerSuccess'));
+			} else {
+
+				return redirect()->route('login')->with('message', lang('Auth.registerSuccess'));
+			}
 		}
 
 		// Success!
-		return redirect()->route('login')->with('message', lang('Auth.registerSuccess'));
+
+			return redirect()->route('login')->with('message', lang('Auth.registerSuccess'));
+
 	}
 
 	//--------------------------------------------------------------------
@@ -345,6 +356,7 @@ class AuthController extends Controller
 	{
 		$users = model(UserModel::class);
 
+
 		// First things first - log the activation attempt.
 		$users->logActivationAttempt(
 			$this->request->getGet('token'),
@@ -352,16 +364,17 @@ class AuthController extends Controller
 			(string) $this->request->getUserAgent()
 		);
 
-		$throttler = service('throttler');
-
-		if ($throttler->check($this->request->getIPAddress(), 2, MINUTE) === false)
-        {
-			return service('response')->setStatusCode(429)->setBody(lang('Auth.tooManyRequests', [$throttler->getTokentime()]));
-        }
+		// $throttler = service('throttler');
+		// if ($throttler->check($this->request->getIPAddress(), 2, MINUTE) === false)
+  //       {
+		// 	return service('response')->setStatusCode(429)->setBody(lang('Auth.tooManyRequests', [$throttler->getTokentime()]));
+  //       }
 
 		$user = $users->where('activate_hash', $this->request->getGet('token'))
 					  ->where('active', 0)
 					  ->first();
+
+
 
 		if (is_null($user))
 		{

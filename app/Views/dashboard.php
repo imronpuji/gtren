@@ -30,13 +30,15 @@
             </div>
         </div>
         <nav>
-          <!--   <?php if(in_groups(1)) :  ?>
+        
+          <?php if(in_groups(1)) :  ?>
                  <?= $this->include('db_admin/sidebar_admin') ?>
-            <?php elseif(in_groups(5)) : ?>
+            <?php elseif(in_groups(2)) : ?>
                 <?= $this->include('db_finance/sidebar_finance') ?>
             <?php elseif(in_groups(3)) : ?>
-            <?php endif;?> -->
-                            <?= $this->include('db_admin/sidebar_admin') ?>
+                <?= $this->include('db_stokis/sidebar_stokis') ?>
+
+            <?php endif ?>
         </nav>
     </aside>
     <main class="main-wrap">
@@ -45,6 +47,7 @@
         <!-- header -->
         <section class="content-main">
             <?= $this->renderSection('content') ?>
+            
         </section> <!-- content-main end// -->
         <?= $this->include('db_components/footer') ?>
     </main>

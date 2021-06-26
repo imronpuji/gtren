@@ -11,7 +11,6 @@
     <title>Bills</title>
   </head>
   <body>
-    
 
     <div class="container mt-5">
     	<h1>List Bills</h1>

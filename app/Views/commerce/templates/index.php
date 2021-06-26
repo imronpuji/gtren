@@ -17,10 +17,9 @@
     <link rel="stylesheet" href="<?= base_url()  ?>/frontend/css/main.css">
 </head>
 <body>
-        <main class="main">
+        <main class="main single-page">
                 <?= $this->include('commerce/templates/header') ?>
 
-    
                 <?php $this->renderSection('content') ?>
                 <?= $this->include('commerce/templates/footer') ?>
 
@@ -32,6 +31,8 @@
     <script src="<?= base_url()  ?>/frontend/js/vendor/bootstrap.bundle.min.js"></script>
     <script src="<?= base_url()  ?>/frontend/js/plugins/slick.js"></script>
     <script src="<?= base_url()  ?>/frontend/js/plugins/jquery.syotimer.min.js"></script>
+    <script src="<?= base_url()  ?>/frontend/js/plugins/jquery.elevatezoom.js"></script>
+    <script src="<?= base_url()  ?>/frontend/js/plugins/jquery.theia.sticky.js"></script>
     <script src="<?= base_url()  ?>/frontend/js/plugins/wow.js"></script>
     <script src="<?= base_url()  ?>/frontend/js/plugins/jquery-ui.js"></script>
     <script src="<?= base_url()  ?>/frontend/js/plugins/perfect-scrollbar.js"></script>

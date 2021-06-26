@@ -9,10 +9,11 @@ class Commerce extends BaseController
 		return view('commerce/home');
 	}
 
-	public function Auth()
+	public function about()
 	{
-		return view('commerce/auth_commerce/login_register');
+		
 	}
+
 
 	public function Cart()
 	{
@@ -91,10 +92,6 @@ class Commerce extends BaseController
 		return view('commerce/product_detail');
 	}
 
-	public function Wishlist()
-	{
-		return view('commerce/wishlist');
-	}
 
 	public function Courier()
 	{

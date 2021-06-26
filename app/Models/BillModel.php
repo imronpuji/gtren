@@ -11,7 +11,7 @@ class BillModel extends Model
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
-	protected $returnType           = 'object';
+	protected $returnType           = 'App\Entities\Bill';
 	protected $useSoftDeletes       = true;
 	protected $protectFields        = true;
 	protected $allowedFields        = ['bank_name', 'bank_number', 'owner'];

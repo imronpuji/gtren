@@ -44,7 +44,7 @@
             <div class="container">
                 <div class="header-wrap header-space-between">
                     <div class="logo logo-width-1">
-                        <a href="index.html"><img src="frontend/imgs/theme/logo-default.png" alt="logo"></a>
+                        <a href="index.html"><img src="<?= base_url() ?>/frontend/imgs/theme/logo-default.png" alt="logo"></a>
                     </div>
                     <div class="search-style-2">
                         <form action="#">
@@ -69,20 +69,20 @@
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
                                 <a href="/wishlist">
-                                    <img class="svgInject" alt="wowy" src="frontend/imgs/theme/icons/icon-heart.svg">
+                                    <img class="svgInject" alt="wowy" src="<?= base_url() ?>/frontend/imgs/theme/icons/icon-heart.svg">
                                     <span class="pro-count blue">4</span>
                                 </a>
                             </div>
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="/cart">
-                                    <img alt="wowy" src="frontend/imgs/theme/icons/icon-cart.svg">
+                                    <img alt="wowy" src="<?= base_url() ?>/frontend/imgs/theme/icons/icon-cart.svg">
                                     <span class="pro-count blue">2</span>
                                 </a>
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                     <ul>
                                         <li>
                                             <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img alt="wowy" src="frontend/imgs/shop/thumbnail-3.jpg"></a>
+                                                <a href="shop-product-right.html"><img alt="wowy" src="<?= base_url() ?>/frontend/imgs/shop/thumbnail-3.jpg"></a>
                                             </div>
                                             <div class="shopping-cart-title">
                                                 <h4><a href="shop-product-right.html">Apple Watch Serial 7</a></h4>
@@ -94,7 +94,7 @@
                                         </li>
                                         <li>
                                             <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img alt="wowy" src="frontend/imgs/shop/thumbnail-1.jpg"></a>
+                                                <a href="shop-product-right.html"><img alt="wowy" src="<?= base_url() ?>/frontend/imgs/shop/thumbnail-1.jpg"></a>
                                             </div>
                                             <div class="shopping-cart-title">
                                                 <h4><a href="shop-product-right.html">Macbook Pro 2022</a></h4>
@@ -118,7 +118,7 @@
                             </div>
                             <div class="header-action-icon-2">
                                 <a href="/account">
-                                    <img alt="wowy" src="frontend/imgs/theme/icons/icon-user.svg">
+                                    <img alt="wowy" src="<?= base_url() ?>/frontend/imgs/theme/icons/icon-user.svg">
                                 </a>
                             </div>
                         </div>
@@ -130,7 +130,7 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative main-nav">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="index.html"><img src="frontend/imgs/theme/logo-white.png" alt="logo"></a>
+                        <a href="index.html"><img src="<?= base_url() ?>/frontend/imgs/theme/logo-white.png" alt="logo"></a>
                     </div>
                     <div class="main-categori-wrap d-none d-lg-block">
                         <a class="categori-button-active" href="#">
@@ -174,7 +174,7 @@
                                             </li>
                                             <li class="mega-menu-col col-lg-5">
                                                 <div class="header-banner2">
-                                                    <img src="frontend/imgs/banner/menu-banner-2.jpg" alt="menu_banner1">
+                                                    <img src="<?= base_url() ?>/frontend/imgs/banner/menu-banner-2.jpg" alt="menu_banner1">
                                                     <div class="banne_info">
                                                         <h6>10% Off</h6>
                                                         <h4>New Arrival</h4>
@@ -182,7 +182,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="header-banner2">
-                                                    <img src="frontend/imgs/banner/menu-banner-3.jpg" alt="menu_banner2">
+                                                    <img src="<?= base_url() ?>/frontend/imgs/banner/menu-banner-3.jpg" alt="menu_banner2">
                                                     <div class="banne_info">
                                                         <h6>15% Off</h6>
                                                         <h4>Hot Deals</h4>
@@ -228,7 +228,7 @@
                                             </li>
                                             <li class="mega-menu-col col-lg-5">
                                                 <div class="header-banner2">
-                                                    <img src="frontend/imgs/banner/menu-banner-4.jpg" alt="menu_banner1">
+                                                    <img src="<?= base_url() ?>/frontend/imgs/banner/menu-banner-4.jpg" alt="menu_banner1">
                                                     <div class="banne_info">
                                                         <h6>10% Off</h6>
                                                         <h4>New Arrival</h4>
@@ -275,7 +275,7 @@
                                             </li>
                                             <li class="mega-menu-col col-lg-5">
                                                 <div class="header-banner2">
-                                                    <img src="frontend/imgs/banner/menu-banner-5.jpg" alt="menu_banner1">
+                                                    <img src="<?= base_url() ?>/frontend/imgs/banner/menu-banner-5.jpg" alt="menu_banner1">
                                                     <div class="banne_info">
                                                         <h6>10% Off</h6>
                                                         <h4>New Arrival</h4>
@@ -283,7 +283,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="header-banner2">
-                                                    <img src="frontend/imgs/banner/menu-banner-6.jpg" alt="menu_banner2">
+                                                    <img src="<?= base_url() ?>/frontend/imgs/banner/menu-banner-6.jpg" alt="menu_banner2">
                                                     <div class="banne_info">
                                                         <h6>15% Off</h6>
                                                         <h4>Hot Deals</h4>
@@ -384,7 +384,7 @@
                                         </li>
                                         <li class="sub-mega-menu sub-mega-menu-width-34">
                                             <div class="menu-banner-wrap">
-                                                <a href="shop-product-right.html"><img src="frontend/imgs/banner/menu-banner.jpg" alt="wowy"></a>
+                                                <a href="shop-product-right.html"><img src="<?= base_url() ?>/frontend/imgs/banner/menu-banner.jpg" alt="wowy"></a>
                                                 <div class="menu-banner-content">
                                                     <h4>Hot deals</h4>
                                                     <h3>Don't miss<br> Trending</h3>
@@ -445,20 +445,20 @@
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
                                 <a href="shop-wishlist.html">
-                                    <img alt="wowy" src="frontend/imgs/theme/icons/icon-heart-white.svg">
+                                    <img alt="wowy" src="<?= base_url() ?>/frontend/imgs/theme/icons/icon-heart-white.svg">
                                     <span class="pro-count white">4</span>
                                 </a>
                             </div>
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="shop-cart.html">
-                                    <img alt="wowy" src="frontend/imgs/theme/icons/icon-cart-white.svg">
+                                    <img alt="wowy" src="<?= base_url() ?>/frontend/imgs/theme/icons/icon-cart-white.svg">
                                     <span class="pro-count white">02</span>
                                 </a>
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                     <ul>
                                         <li>
                                             <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img alt="wowy" src="frontend/imgs/shop/thumbnail-3.jpg"></a>
+                                                <a href="shop-product-right.html"><img alt="wowy" src="<?= base_url() ?>/frontend/imgs/shop/thumbnail-3.jpg"></a>
                                             </div>
                                             <div class="shopping-cart-title">
                                                 <h4><a href="shop-product-right.html">Apple Watch Serial 7</a></h4>
@@ -470,7 +470,7 @@
                                         </li>
                                         <li>
                                             <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img alt="wowy" src="frontend/imgs/shop/thumbnail-4.jpg"></a>
+                                                <a href="shop-product-right.html"><img alt="wowy" src="<?= base_url() ?>/frontend/imgs/shop/thumbnail-4.jpg"></a>
                                             </div>
                                             <div class="shopping-cart-title">
                                                 <h4><a href="shop-product-right.html">Macbook Pro 2022</a></h4>
@@ -494,7 +494,7 @@
                             </div>
                             <div class="header-action-icon-2">
                                 <a href="page-login-register.html">
-                                    <img alt="wowy" src="frontend/imgs/theme/icons/icon-user-white.svg">
+                                    <img alt="wowy" src="<?= base_url() ?>/frontend/imgs/theme/icons/icon-user-white.svg">
                                 </a>
                             </div>
                             <div class="header-action-icon-2 d-block d-lg-none">
@@ -514,7 +514,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="index.html"><img src="frontend/imgs/theme/logo-default.png" alt="logo"></a>
+                    <a href="index.html"><img src="<?= base_url() ?>/frontend/imgs/theme/logo-default.png" alt="logo"></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">

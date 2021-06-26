@@ -8,7 +8,7 @@ class TestSeeder extends Seeder
 {
 	public function run()
 	{
-		$this->call('AuthGroupsSeeder');
+		// $this->call('AuthGroupsSeeder');
 		$this->call('CategorySeeder');
 		$this->call('ProductSeeder');
 		$this->call('ProductsPhotosSeeder');

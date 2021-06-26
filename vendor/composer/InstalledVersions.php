@@ -29,18 +29,11 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '114459a63a07ad80fb48078b372b7c8954231e3c',
+    'reference' => 'cec9a47fb6706f75dfdb125c68c34351d68cf5b3',
     'name' => 'codeigniter4/framework',
   ),
   'versions' => 
   array (
-    'codeigniter4/authentication-implementation' => 
-    array (
-      'provided' => 
-      array (
-        0 => '1.0',
-      ),
-    ),
     'codeigniter4/codeigniter4-standard' => 
     array (
       'pretty_version' => 'v1.1.1',
@@ -57,7 +50,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '114459a63a07ad80fb48078b372b7c8954231e3c',
+      'reference' => 'cec9a47fb6706f75dfdb125c68c34351d68cf5b3',
     ),
     'doctrine/instantiator' => 
     array (
@@ -125,15 +118,6 @@ private static $installed = array (
       array (
         0 => '1.10.2',
       ),
-    ),
-    'myth/auth' => 
-    array (
-      'pretty_version' => 'v1.0',
-      'version' => '1.0.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '9bba52bd710a0c35a0b2d8cef64a70706224648a',
     ),
     'nikic/php-parser' => 
     array (

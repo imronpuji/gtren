@@ -30,6 +30,7 @@
             </div>
         </div>
         <nav>
+
         
           <?php if(in_groups(1)) :  ?>
                  <?= $this->include('db_admin/sidebar_admin') ?>
@@ -39,6 +40,7 @@
                 <?= $this->include('db_stokis/sidebar_stokis') ?>
 
             <?php endif ?>
+
         </nav>
     </aside>
     <main class="main-wrap">

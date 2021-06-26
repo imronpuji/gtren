@@ -83,7 +83,7 @@ $routes->group('/auth', ['namespace' => 'Myth\Auth\Controllers'], function($rout
 $routes->get('/dashboard', 'Dashboard::index');
 
 
-$routes->group('admin', function($routes)
+$routes->group('', function($routes)
 {
 	// produk
 	$routes->get('tambahproduk', 'Product::tambah_produk');
@@ -108,14 +108,13 @@ $routes->group('admin', function($routes)
 	$routes->get('orderdetail', 'Admin::order_detail');
 
 	// member g-tren
-	$routes->get('member', 'Admin::member_admin');
-	$routes->get('financelist', 'Admin::member_finance');
-	$routes->get('addmember', 'Admin::add_member');
+	$routes->get('member', 'Member::index', ['as' => 'member']);
+	$routes->post('member/search', 'Member::search');
 
 }
 );
 
-$routes->group('finance', function($routes)
+$routes->group('', function($routes)
 {
 	$routes->get('tambahproduk', 'Finance::index');
 	$routes->get('products', 'Product::index');
@@ -131,7 +130,7 @@ $routes->group('finance', function($routes)
 }
 );
 
-$routes->group('stokis', function($routes)
+$routes->group('', function($routes)
 {
 	$routes->get('tambahproduk', 'Stokis::index');
 	$routes->get('produk', 'Stokis::produk_list');

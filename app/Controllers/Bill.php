@@ -64,7 +64,9 @@ class Bill extends BaseController
 
 		$data['bills'] = $this->model->findAll();
 
-		return view('bills/index', $data);
+		return view('db_admin/bills/index', $data);
+
+
 	}
 
 	public function edit($id)
@@ -72,7 +74,7 @@ class Bill extends BaseController
 		$data['bill'] = $this->model->getWhere([
 			'id' => $id
 		])->getRow();
-		return view('bills/index', $data);
+		return view('db_admin/bills/index', $data);
 	}
 
 	public function update($id)
@@ -135,5 +137,14 @@ class Bill extends BaseController
 	        session()->setFlashdata('danger', 'Data Gagal Dihapus');
 	        return redirect()->to(base_url('bill')); 
 	    }
+	}
+
+	public function search()
+	{
+
+		$keyword      = $this->request->getPost('keyword');
+		$data['bills'] = $this->model->like(['bank_name' => $keyword])->findAll();
+
+		return view('db_admin/bills/index', $data);;
 	}
 }

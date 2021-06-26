@@ -9,8 +9,8 @@
             <span class="text">Products</span>
         </a>
         <div class="submenu">
-            <a href="<?= base_url() ?>/admin/products">Product List</a>
-            <a href="<?= base_url() ?>/admin/category">Categories</a>
+            <a href="<?= base_url() ?>/products">Product List</a>
+            <a href="<?= base_url() ?>/category">Categories</a>
         </div>
     </li>
     <li class="menu-item has-submenu">
@@ -18,13 +18,18 @@
             <span class="text">Orders</span>
         </a>
         <div class="submenu">
-            <a href="<?= base_url() ?>/admin/order">Order list </a>
-            <a href="<?= base_url() ?>/admin/orderdetail">Order detail</a>
+            <a href="<?= base_url() ?>/order">Order list </a>
+            <a href="<?= base_url() ?>/orderdetail">Order detail</a>
         </div>
     </li>
     <li class="menu-item">
-        <a class="menu-link" href="<?php base_url() ?>/admin/member"> <i class="icon material-icons md-store"></i>
+        <a class="menu-link" href="<?php base_url() ?>/member"> <i class="icon material-icons md-store"></i>
             <span class="text">Member g-tren</span>
+        </a>
+    </li>
+    <li class="menu-item">
+        <a class="menu-link" href="<?php base_url() ?>/bill"> <i class="icon material-icons md-monetization_on"></i>
+            <span class="text">Bills</span>
         </a>
     </li>
     <!-- <li class="menu-item has-submenu">

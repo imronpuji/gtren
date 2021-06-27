@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'cec9a47fb6706f75dfdb125c68c34351d68cf5b3',
+    'reference' => 'e98954b95a14109d850db3b7dfe9e97d3e0c67e9',
     'name' => 'codeigniter4/framework',
   ),
   'versions' => 
@@ -50,7 +50,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'cec9a47fb6706f75dfdb125c68c34351d68cf5b3',
+      'reference' => 'e98954b95a14109d850db3b7dfe9e97d3e0c67e9',
     ),
     'doctrine/instantiator' => 
     array (
@@ -81,21 +81,21 @@ private static $installed = array (
     ),
     'laminas/laminas-escaper' => 
     array (
-      'pretty_version' => '2.7.0',
-      'version' => '2.7.0.0',
+      'pretty_version' => '2.7.1',
+      'version' => '2.7.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '5e04bc5ae5990b17159d79d331055e2c645e5cc5',
+      'reference' => '67dac07c6b4857fbf2bd7a5257a4e1ca8a1c00d0',
     ),
     'laminas/laminas-zendframework-bridge' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.3.0',
+      'version' => '1.3.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '6cccbddfcfc742eb02158d6137ca5687d92cee32',
+      'reference' => '13af2502d9bb6f7d33be2de4b51fb68c6cdb476e',
     ),
     'mikey179/vfsstream' => 
     array (
@@ -229,12 +229,12 @@ private static $installed = array (
     ),
     'phpunit/phpunit' => 
     array (
-      'pretty_version' => '9.5.5',
-      'version' => '9.5.5.0',
+      'pretty_version' => '9.5.6',
+      'version' => '9.5.6.0',
       'aliases' => 
       array (
       ),
-      'reference' => '89ff45ea9d70e35522fb6654a2ebc221158de276',
+      'reference' => 'fb9b8333f14e3dce976a60ef6a7e05c7c7ed8bfb',
     ),
     'predis/predis' => 
     array (

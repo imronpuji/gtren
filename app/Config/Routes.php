@@ -87,7 +87,7 @@ $routes->group('', function($routes)
 {
 	// produk
 	$routes->get('tambahproduk', 'Product::tambah_produk');
-	// $routes->post('tambahproduk', 'Product::save');
+	$routes->post('tambahproduk', 'Product::save');
 	$routes->get('saveproduk', 'Product::save');
 	$routes->get('products/delete/(:num)', 'Product::delete/$1');
 	$routes->get('products/edit/(:num)', 'Product::edit/$1');

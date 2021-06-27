@@ -70,7 +70,7 @@ class Product extends BaseController
 
 		$path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/product_photos/';
 
-		$files = $this->photo->where('product_id', $id)->findAll();
+		$files = $this->model->find($id);
 
 		$photos = $files;
 
@@ -89,10 +89,10 @@ class Product extends BaseController
 
         if($delete_product) {
 	        session()->setFlashdata('success', 'Data Berhasil Dihapus');
-	        return redirect()->to(base_url('admin/products'));
+	        return redirect()->to(base_url('/products'));
 	    } else {
 	        session()->setFlashdata('danger', 'Data Gagal Dihapus');
-	        return redirect()->to(base_url('admin/products')); 
+	        return redirect()->to(base_url('/products')); 
 	    }
 
 		return view('db_admin/produk/produk_list');
@@ -105,46 +105,11 @@ class Product extends BaseController
 		$product = new \App\Entities\Product();
 
 
-		// save product
-		// $data = [
-		// 	'name'                 => $this->request->getPost('name'),
-		// 	'description'          => $this->request->getPost('description'),
-		// 	'categories'           => [1, 2, 3],
-		// 	'slug'                 => $this->request->getPost('name'),
-		// 	'photos'               => ['1.jpg', '2.jpg', '3.jpg'],
-		// 	'fixed_price'          => $this->request->getPost('fixed_price'),
-		// 	'sell_price'           => $this->request->getPost('sell_price'),
-		// 	'affiliate_commission' => $this->request->getPost('affiliate_commission'),
-		// 	'stockist_commission'  => $this->request->getPost('stockist_commission')
-		// ];
-		$data = [
-			'name'                 => "Product dua",
-			'description'          => "asdasdddsdsddsds",
-			'categories'           => ['1', '2', '3', '4'],
-			'slug'                 => "Product dua",
-			'photos'               => ['1.jpg', '2.jpg', '3.jpg'],
-			'fixed_price'          => 20000,
-			'sell_price'           => 30000,
-			'affiliate_commission' => 1000,
-			'stockist_commission'  => 1000
-		];
+		$photos = [];
+		$categories = array(
+		    'categories' => implode(",", $this->request->getPost('category'))
+		);
 
-		$product->fill($data);
-
-		$save_product = $this->model->save($product);
-
-		dd($save_product);
-
-		if(!$save_product) {
-			$data['categories'] = $this->category->findAll();
-			$data['errors']     = $this->model->errors();
-	        return view('db_admin/produk/tambah_produk', $data); 
-	    }
-		
-
-		$product_id = $db->insertID();
-
-		
 		if ($this->request->getFileMultiple('file')) {
 
 			foreach($this->request->getFileMultiple('file') as $file)
@@ -154,21 +119,35 @@ class Product extends BaseController
 
 				$file->move(ROOTPATH . 'public/uploads/product_photos', $new_name);
 
-				$photos   = [
-					[
-						'photo'      => $new_name,
-						'product_id' => $product_id,
-					]
-				];
+				array_push($photos, $new_name);
 
-				$save_photo = $this->photo->insertBatch($photos);
-				if (!$save_photo) {
-					session()->setFlashdata('danger', 'Data Gagal Disimpan');
-				}
 			}
 		}
+
+		$data = [
+			'name'                 => $this->request->getPost('name'),
+			'description'          => $this->request->getPost('description'),
+			'categories'           => $categories,
+			'slug'                 => $this->request->getPost('name'),
+			'photos'               => $photos,
+			'fixed_price'          => $this->request->getPost('fixed_price'),
+			'sell_price'           => $this->request->getPost('sell_price'),
+			'affiliate_commission' => $this->request->getPost('affiliate_commission'),
+			'stockist_commission'  => $this->request->getPost('stockist_commission')
+		];
+
+		$product->fill($data);
+
+		$save_product = $this->model->save($product);
+
+
+		if(!$save_product) {
+			$data['categories'] = $this->category->findAll();
+			$data['errors']     = $this->model->errors();
+	        return view('db_admin/produk/tambah_produk', $data); 
+	    }
 	    session()->setFlashdata('success', 'Data Berhasil Disimpan');
-	    return redirect()->to(base_url('admin/products'));
+	    return redirect()->to(base_url('/products'));
 
 	}
 

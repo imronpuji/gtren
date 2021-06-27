@@ -1,7 +1,7 @@
 <?php $this->extend('dashboard') ?>
 
 <?php $this->section('content') ?>
-<form action="<?= base_url('admin/tambahproduk') ?>" method="post" enctype="multipart/form-data">
+<form action="<?= base_url('/tambahproduk') ?>" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col-9">
             <div class="content-header">
@@ -117,7 +117,7 @@
                 <div class="card-body">
                         <div class="mb-4">
                             <label class="form-label">Kategori</label>
-                            <select name="category" class="form-select">
+                            <select multiple name="category[]" class="form-select">
                                 <?php foreach ($categories as $category): ?>
                                     <option value="<?= $category->id ?>">
                                         <?= $category->category ?>

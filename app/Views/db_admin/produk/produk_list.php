@@ -59,16 +59,25 @@
                     <div class="col-lg-4 col-sm-4 col-8 flex-grow-1 col-name">
                         <a class="itemside" href="#">
                             <div class="left">
-                                <img src="<?= base_url() ?>/backend/imgs/items/1.jpg" class="img-sm img-thumbnail" alt="Item">
+                                 <?php for($i = 0; $i < 1; $i++): ?>
+                                    <img class="img-sm img-thumbnail" src="<?= $product->photos[$i] ?>" alt="">
+                                <?php endfor ?>
                             </div>
                             <div class="info">
                                 <h6 class="mb-0"><?= $product->name ?></h6>
                             </div>
                         </a>
                     </div>
-                    <div class="col-lg-2 col-sm-2 col-4 col-price"> <span><?= $product->sell_price ?></span> </div>
+                    <div class="col-lg-2 col-sm-2 col-4 col-price"> <span><?= "Rp. ". number_format($product->sell_price) ?></span> </div>
+                     <div class="col-lg-2 col-sm-2 col-4 col-price"> <span><?= "Rp. ". number_format($product->fixed_price) ?></span> </div>
                     <div class="col-lg-2 col-sm-2 col-4 col-status">
-                        <span class="badge rounded-pill alert-success"></span>
+                        <?php $categories = $product->getCategory($product->categories); ?>
+
+                        <?php foreach($categories as $category): ?>
+                            <a href="<?= base_url('product/category/'. strtolower($category->category) ) ?>">
+                            <?= $category->category ?>
+                            </a>
+                        <?php endforeach ?>
                     </div>
                     <div class="col-lg-1 col-sm-2 col-4 col-date">
                         <span><?= $product->updated_at ?></span>
@@ -77,8 +86,8 @@
                         <div class="dropdown">
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="<?= base_url('admin/products/edit/'.$product->id)  ?>">Edit info</a>
-                                <a class="dropdown-item text-danger" href="<?= base_url('admin/products/delete/'.$product->id)  ?>">Delete</a>
+                                <a class="dropdown-item" href="<?= base_url('products/edit/'.$product->id)  ?>">Edit info</a>
+                                <a class="dropdown-item text-danger" href="<?= base_url('products/delete/'.$product->id)  ?>">Delete</a>
                             </div>
                         </div> 
                     </div>

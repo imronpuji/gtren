@@ -32,7 +32,11 @@ $routes->setAutoRoute(false);
 
  $routes->get('/', 'Product::commerce');
 // $routes->get('cart', 'User::cart', ['filter' => 'login']);
-// $routes->get('account', 'User::Account', ['filter' => 'login']);
+$routes->get('account', 'User::account', ['filter' => 'login']);
+$routes->get('orders', 'User::orders', ['filter' => 'login']);
+$routes->get('tracking', 'User::tracking', ['filter' => 'login']);
+$routes->get('address', 'User::address', ['filter' => 'login']);
+$routes->get('profile', 'User::profile', ['filter' => 'login']);
 // $routes->post('track', 'User::Track', ['filter' => 'login']);
 // $routes->get('checkout', 'User::Checkout', ['filter' => 'login']);
 $routes->get('contact', 'Commerce::Contact');

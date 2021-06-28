@@ -27,9 +27,8 @@ class Product extends BaseController
 
 
 		$data['categories'] = $this->category->findAll();
-
 		$data['products']   = $this->model->paginate(15, 'products');
-
+		
 		$data['pager']      = $this->model->pager;
 		
 		return view('db_admin/produk/produk_list', $data);
@@ -37,14 +36,14 @@ class Product extends BaseController
 
 	public function commerce()
 	{
-
+		
 		$data['products']   = $this->model->paginate(15, 'products');
-
-		// $data['categories'] = $this->category->findAll();
+		
+		$data['kategori'] = $this->category->findAll();
 
 		$data['pager']      = $this->model->pager;
 
-		// dd($data['products']);
+		// dd($data['categories']);
 
 		return view('commerce/home', $data);
 

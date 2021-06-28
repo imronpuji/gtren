@@ -20,6 +20,8 @@ class AuthController extends Controller
 	 */
 	protected $session;
 
+	protected $helpers = ['auth'];
+
 	public function __construct()
 	{
 		// Most services in this controller require

@@ -4855,18 +4855,22 @@ h6.post-title {
 }
 
 .search-style-1 form {
-  width: 370px;
+  width: 650px;
   position: relative;
+}
+
+.search-style-1 form button:hover {
+  color: #FFF !important;
 }
 
 .search-style-1 form input {
   font-size: 14px;
   height: 48px;
   color: #444;
-  border-radius: 26px;
+  border-radius: 100px !important;
   padding: 3px 50px 3px 20px;
   border: 1px solid #f5f5f5;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
   -webkit-transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
 }

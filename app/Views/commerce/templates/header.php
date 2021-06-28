@@ -7,12 +7,12 @@
                         <div class="header-info">
                             <ul>
                                 <li><a href="#">(+01) - 2345 - 6789</a></li>
-                                <li><i class="fa fa-map-marker-alt mr-5"></i><a target="_blank" href="page-location.html">Our location</a></li>
+                                <li><i class="fa fa-map-marker-alt mr-5"></i><a target="_blank" href="page-location.html">Lokasi Toko Kami</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-4">
-                        <div class="text-center">
+                        <!-- <div class="text-center">
                             <div id="news-flash" class="d-inline-block">
                                 <ul>
                                     <li><i class="fa fa-angle-double-right mr-5"></i> Get great devices up to 50% off <a class="active" href="shop-grid-right.html">View details</a></li>
@@ -20,20 +20,20 @@
                                     <li><i class="fa fa-bell mr-5"></i> <b> Trendy 25</b> silver jewelry, save up 35% off today <a href="shop-grid-right.html">Shop now</a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info header-info-right">
                             <ul>
-                                <li>
+                                <!-- <li>
                                     <a class="language-dropdown-active" href="#"> <i class="fa fa-globe-americas"></i> English <i class="fa fa-chevron-down"></i></a>
                                     <ul class="language-dropdown">
                                         <li><a href="#">Français</a></li>
                                         <li><a href="#">Deutsch</a></li>
                                         <li><a href="#">РУССКИЙ</a></li>
                                     </ul>
-                                </li>
-                                <li><a href="page-account.html"><i class="far fa-anchor"></i> Track Your Order</a></li>
+                                </li> -->
+                                <li><a href="page-account.html"><i class="far fa-truck-moving"></i> Cek Pesananmu</a></li>
                             </ul>
                         </div>
                     </div>
@@ -46,33 +46,14 @@
                     <div class="logo logo-width-1">
                         <a href="index.html"><img src="<?= base_url() ?>/frontend/imgs/theme/logo-default.png" alt="logo"></a>
                     </div>
-                    <div class="search-style-2">
+                    <div class="search-style-1">
                         <form action="#">
-                            <select class="select-active">
-                                <option>All Categories</option>
-                                <option>Women's Clothing</option>
-                                <option>Men's Clothing</option>
-                                <option>Cellphones</option>
-                                <option>Computer & Office</option>
-                                <option>Consumer Electronics</option>
-                                <option>Jewelry & Accessories</option>
-                                <option>Home & Garden</option>
-                                <option>Luggage & Bags</option>
-                                <option>Shoes</option>
-                                <option>Mother & Kids</option>
-                            </select>
-                            <input type="text" placeholder="Search for items…">
+                            <input type="text" placeholder="Cari Produk" class="rounded-3">
                             <button type="submit"> <i class="far fa-search"></i> </button>
                         </form>
                     </div>
                     <div class="header-action-right">
                         <div class="header-action-2">
-                            <div class="header-action-icon-2">
-                                <a href="/wishlist">
-                                    <img class="svgInject" alt="wowy" src="<?= base_url() ?>/frontend/imgs/theme/icons/icon-heart.svg">
-                                    <span class="pro-count blue">4</span>
-                                </a>
-                            </div>
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="/cart">
                                     <img alt="wowy" src="<?= base_url() ?>/frontend/imgs/theme/icons/icon-cart.svg">
@@ -117,9 +98,15 @@
                                 </div>
                             </div>
                             <div class="header-action-icon-2">
+                                <?php if(!logged_in()): ?>
+                                    <a href="<?= route_to('login') ?>">
+                                        <button class="btn btn-primary btn-sm">Login</button>
+                                    </a>
+                                <?php else: ?>
                                 <a href="/account">
                                     <img alt="wowy" src="<?= base_url() ?>/frontend/imgs/theme/icons/icon-user.svg">
                                 </a>
+                                <?php endif ?>
                             </div>
                         </div>
                     </div>
@@ -313,124 +300,14 @@
                             <div class="more_categories">Show more...</div>
                         </div>
                     </div>
-                    <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block main-menu-light-white hover-boder hover-boder-white">
+                    <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block align-items-start main-menu hover-boder hover-boder-white" style="width:65%">
                         <nav>
                             <ul>
-                                <li><a class="active" href="index.html">Home <i class="fa fa-chevron-down"></i></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="index.html">Home 1</a></li>
-                                        <li><a href="index-2.html">Home 2</a></li>
-                                        <li><a href="index-3.html">Home 3</a></li>
-                                        <li><a href="index-4.html">Home 4</a></li>
-                                    </ul>
+                                <li>
+                                    <a class="active" href="<?= base_url() ?>">Home</a>
                                 </li>
                                 <li>
                                     <a href="page-about.html">About</a>
-                                </li>
-                                <li><a href="shop-grid-right.html">Shop <i class="fa fa-chevron-down"></i></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="shop-grid-right.html">Shop – Left Sidebar</a></li>
-                                        <li><a href="shop-right-sidebar.html">Shop – Right Sidebar</a></li>
-                                        <li><a href="#">Single Product Layout <i class="fa fa-chevron-right"></i></a>
-                                            <ul class="level-menu">
-                                                <li><a href="shop-product-right.html">List – Left Sidebar</a></li>
-                                                <li><a href="shop-product-details-right-sidebar.html">List – Right Sidebar</a></li>
-                                                <li><a href="shop-product-details-no-sidebar.html">List – No Sidebar</a></li>
-                                                <li><a href="shop-product-details-tab-left-sidebar.html">Tabs – Left Sidebar</a></li>
-                                                <li><a href="shop-product-details-tab-right-sidebar.html">Tabs – Right Sidebar</a></li>
-                                                <li><a href="shop-product-details-tab-no-sidebar.html">Tabs – No Sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="shop-filter.html">Shop – Filter</a></li>
-                                        <li><a href="shop-wishlist.html">Wishlist</a></li>
-                                        <li><a href="shop-cart.html">Shopping Cart</a></li>
-                                        <li><a href="shop-checkout.html">Checkout</a></li>
-                                        <li><a href="shop-compare.html">Compare</a></li>
-                                    </ul>
-                                </li>
-                                <li class="position-static"><a href="#">Mega menu <i class="fa fa-chevron-down"></i></a>
-                                    <ul class="mega-menu">
-                                        <li class="sub-mega-menu sub-mega-menu-width-22">
-                                            <a class="menu-title" href="#">Women's Fashion</a>
-                                            <ul>
-                                                <li><a href="shop-product-right.html">Dresses</a></li>
-                                                <li><a href="shop-product-right.html">Blouses & Shirts</a></li>
-                                                <li><a href="shop-product-right.html">Hoodies & Sweatshirts</a></li>
-                                                <li><a href="shop-product-right.html">Wedding Dresses</a></li>
-                                                <li><a href="shop-product-right.html">Prom Dresses</a></li>
-                                                <li><a href="shop-product-right.html">Cosplay Costumes</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="sub-mega-menu sub-mega-menu-width-22">
-                                            <a class="menu-title" href="#">Men's Fashion</a>
-                                            <ul>
-                                                <li><a href="shop-product-right.html">Jackets</a></li>
-                                                <li><a href="shop-product-right.html">Casual Faux Leather</a></li>
-                                                <li><a href="shop-product-right.html">Genuine Leather</a></li>
-                                                <li><a href="shop-product-right.html">Casual Pants</a></li>
-                                                <li><a href="shop-product-right.html">Sweatpants</a></li>
-                                                <li><a href="shop-product-right.html">Harem Pants</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="sub-mega-menu sub-mega-menu-width-22">
-                                            <a class="menu-title" href="#">Technology</a>
-                                            <ul>
-                                                <li><a href="shop-product-right.html">Gaming Laptops</a></li>
-                                                <li><a href="shop-product-right.html">Ultraslim Laptops</a></li>
-                                                <li><a href="shop-product-right.html">Tablets</a></li>
-                                                <li><a href="shop-product-right.html">Laptop Accessories</a></li>
-                                                <li><a href="shop-product-right.html">Tablet Accessories</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="sub-mega-menu sub-mega-menu-width-34">
-                                            <div class="menu-banner-wrap">
-                                                <a href="shop-product-right.html"><img src="<?= base_url() ?>/frontend/imgs/banner/menu-banner.jpg" alt="wowy"></a>
-                                                <div class="menu-banner-content">
-                                                    <h4>Hot deals</h4>
-                                                    <h3>Don't miss<br> Trending</h3>
-                                                    <div class="menu-banner-price">
-                                                        <span class="new-price text-success">Save to 50%</span>
-                                                    </div>
-                                                    <div class="menu-banner-btn">
-                                                        <a href="shop-product-right.html">Shop now</a>
-                                                    </div>
-                                                </div>
-                                                <div class="menu-banner-discount">
-                                                    <h3>
-                                                        <span>35%</span>
-                                                        off
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a href="blog-category-fullwidth.html">Blog <i class="fa fa-chevron-down"></i></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog-category-fullwidth.html">Blog Grid – Left Sidebar</a></li>
-                                        <li><a href="blog-category-list.html">Blog Grid – Right Sidebar</a></li>
-                                        <li><a href="blog-grid-no-sidebar.html">Blog Grid – No Sidebar</a></li>
-                                        <li><a href="blog-grid-wide.html">Grid Wide</a></li>
-                                        <li><a href="#">Single Product Layout <i class="fa fa-chevron-right"></i></a>
-                                            <ul class="level-menu level-menu-modify">
-                                                <li><a href="blog-details.html">Left Sidebar</a></li>
-                                                <li><a href="blog-details-right-sidebar.html">Right Sidebar</a></li>
-                                                <li><a href="blog-details-no-sidebar.html">No Sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Pages <i class="fa fa-chevron-down"></i></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="page-about.html">About Us</a></li>
-                                        <li><a href="/contact">Contact</a></li>
-                                        <li><a href="page-account.html">My Account</a></li>
-                                        <li><a href="page-login-register.html">login/register</a></li>
-                                        <li><a href="page-purchase-guide.html">Purchase Guide</a></li>
-                                        <li><a href="page-privacy-policy.html">Privacy Policy</a></li>
-                                        <li><a href="page-terms.html">Terms of Service</a></li>
-                                        <li><a href="page-404.html">404 Page</a></li>
-                                    </ul>
                                 </li>
                                 <li>
                                     <a href="/contact">Contact</a>
@@ -439,7 +316,7 @@
                         </nav>
                     </div>
                     <div class="hotline d-none d-lg-block">
-                        <p><i class="fa fa-phone-alt"></i><span>Hotline</span> 1900 - 888 </p>
+                        <p><i class="fa fa-phone-alt"></i>CS (1900 - 888) </p>
                     </div>
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">

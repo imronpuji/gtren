@@ -113,7 +113,7 @@
         var sliderID='#'+id;
         var appendArrowsClassName = '#'+id+'-arrows'
 
-        $(sliderID).slick({
+        $(sliderID).not('.slick-initialized').slick({
             dots: false,
             infinite: true,
             speed: 1000,

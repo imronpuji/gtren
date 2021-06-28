@@ -21,7 +21,7 @@
         <?php if ($pager->hasNext()) : ?>
             <li class="page-item">
                 <a class="page-link" href="<?= $pager->getNext() ?>" aria-label="<?= lang('Pager.next') ?>">
-                    <span aria-hidden="true"><i class="material-icons md-chevron_right"></i></span>
+                    <span aria-hidden="true"><i class="fa fa-arrow-right"></i></span>
                 </a>
             </li>
             

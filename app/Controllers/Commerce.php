@@ -1,11 +1,15 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\CategoryModel;
 
 class Commerce extends BaseController
 {
 	public function index()
 	{
+		// $category = new CategoryModel();
+		// $data['categories'] = $category->findAll();
+		// dd($data['categories']);
 		return view('commerce/home');
 	}
 

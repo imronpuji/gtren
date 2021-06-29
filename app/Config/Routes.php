@@ -39,14 +39,13 @@ $routes->get('address', 'User::address', ['filter' => 'login']);
 $routes->get('profile', 'User::profile', ['filter' => 'login']);
 $routes->get('upgrade', 'User::upgrade', ['filter' => 'login']);
 $routes->post('upgrade', 'User::upgrade', ['filter' => 'login']);
-// $routes->post('track', 'User::Track', ['filter' => 'login']);
+$routes->post('track', 'User::Track', ['filter' => 'login']);
 // $routes->get('checkout', 'User::Checkout', ['filter' => 'login']);
 $routes->get('contact', 'Commerce::Contact');
 $routes->get('about', 'Commerce::About');
 $routes->get('product/(:any)', 'Product::detail/$1');
-$routes->post('updateproduk/(:any)', 'Product::update/$1');
-$routes->get('products/delete_photo/(:num)/(:any)', 'Product::delete_photo/$1/$2');
-$routes->get('products/delete_category/(:num)/(:any)', 'Product::delete_category/$1/$2');
+
+
 // $routes->get('test', 'Testing::index');
 // $routes->post('testfoto', 'Testing::testfoto');
 
@@ -82,18 +81,11 @@ $routes->group('', ['namespace' => 'Myth\Auth\Controllers'], function($routes) {
 });
 
 
-// $routes->get('/login', 'Myth\Auth\Controllers\AuthController::login');
-$routes->group('/auth', ['namespace' => 'Myth\Auth\Controllers'], function($routes) {
-
-	$routes->get('login', 'Auth::login');
-	$routes->get('register', 'Auth::register');
-});
-
-$routes->get('/dashboard', 'Dashboard::index');
 
 
 $routes->group('', function($routes)
 {
+	$routes->get('/dashboard', 'Dashboard::index');
 	// produk
 	$routes->get('tambahproduk', 'Product::tambah_produk');
 	$routes->post('tambahproduk', 'Product::save');
@@ -102,6 +94,9 @@ $routes->group('', function($routes)
 	$routes->get('products/edit/(:num)', 'Product::edit/$1');
 	$routes->get('products', 'Product::index');
 	$routes->post('products/search', 'Product::search');
+	$routes->post('updateproduk/(:any)', 'Product::update/$1');
+	$routes->get('products/delete_photo/(:num)/(:any)', 'Product::delete_photo/$1/$2');
+	$routes->get('products/delete_category/(:num)/(:any)', 'Product::delete_category/$1/$2');
 
 	// kategori
  //    $routes->get('kategori/(:alpha)/(:num)', 'Admin::kategori/$1/$2');
@@ -132,36 +127,6 @@ $routes->group('', function($routes)
 	$routes->post('banner/update/(:num)', 'Banner::update/$1');
 
 
-}
-);
-
-$routes->group('', function($routes)
-{
-	$routes->get('tambahproduk', 'Finance::index');
-	$routes->get('products', 'Product::index');
-
-	// kategori
-	$routes->get('kategori', 'Finance::kategori');
-
-	
-
-	// order
-	$routes->get('order', 'Finance::order');
-	$routes->get('orderdetail', 'Finance::order_detail');
-}
-);
-
-$routes->group('', function($routes)
-{
-	$routes->get('tambahproduk', 'Stokis::index');
-	$routes->get('produk', 'Stokis::produk_list');
-
-	// kategori
-	$routes->get('kategori', 'Stokis::kategori');
-
-	// order
-	$routes->get('order', 'Stokis::order');
-	$routes->get('orderdetail', 'Stokis::order_detail');
 }
 );
 

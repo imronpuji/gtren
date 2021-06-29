@@ -117,8 +117,12 @@ $routes->group('', function($routes)
 	$routes->get('orderdetail', 'Admin::order_detail');
 
 	// member g-tren
-	$routes->get('member', 'Member::index', ['as' => 'member']);
-	$routes->post('member/search', 'Member::search');
+	$routes->get('members', 'Member::index', ['as' => 'member']);
+	$routes->post('members/search', 'Member::search');
+
+
+	$routes->get('user/upgrade', 'User::upgradeList');
+	$routes->get('user/action/(:alpha)/(:num)', 'User::action/$1/$2');
 
 }
 );

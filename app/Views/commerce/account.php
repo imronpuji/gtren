@@ -224,7 +224,7 @@
                                                 </div>
                                                 <div class="mb-3 form-check">
                                                     <input type="checkbox" required class="form-check-input" id="exampleCheck1">
-                                                    <label class="form-check-label" for="exampleCheck1">Saya cuma mendapatkan kode dari admin</label>
+                                                    <label class="form-check-label" for="exampleCheck1">Saya benar telah mendapatkan kode dari admin</label>
                                                   </div>
                                                 <div class="col-md-12">
                                                     <button type="submit" class="btn btn-sm btn-fill-out submit" name="submit" value="Submit">

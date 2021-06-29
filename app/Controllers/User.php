@@ -77,4 +77,44 @@ class User extends BaseController
 		return view('commerce/account', $data);
 	}
 
+	public function upgradeList()
+	{
+		helper(['status_upgrade_helper']);
+		$upgrade         = new \App\Models\AccountUpgradeModel();
+		$data['members'] = $upgrade->getAll();
+		return view('db_admin/members/member_upgrade', $data);
+	}
+
+	public function action($value, $id)
+	{
+		$authorize = service('authorization');
+		$upgrade   = new \App\Models\AccountUpgradeModel();
+		$user      = $upgrade->getAll($id);
+
+		
+		switch ($value) {
+			case 'rerject':
+				$data = [
+					'status' => 'rejected'
+				];
+				$update = $upgrade->update($id, $data);
+				if ($update) {
+					return redirect()->back();
+				}
+				break;
+			
+			default:
+				$data = [
+					'status' => 'approved'
+				];
+				$update = $upgrade->update($id, $data);
+				if ($update) {
+					$add_to_group = $authorize->addUserToGroup($user->id_user, 'stockist');
+					// $remove_from_group = $authorize->removeUserFromGroup($user->id_user, 'user');
+					return redirect()->back();
+				}
+				break;
+		}
+	}
+
 }

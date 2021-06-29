@@ -39,4 +39,20 @@ class AccountUpgradeModel extends Model
 	protected $afterFind            = [];
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
+
+	public function getAll($id = null)
+	{
+		if ($id !== null) {
+			$this->select('account_upgrades.id, users.username, users.email, account_upgrades.code, account_upgrades.status, users.id as id_user');
+			$this->join('users', 'users.id = account_upgrades.user_id');
+			$this->where('account_upgrades.id', $id);
+			$data = $this->get();
+			return $data->getRow();
+		}
+		$this->select('account_upgrades.id, users.username, users.email, account_upgrades.code, account_upgrades.status');
+		$this->join('users', 'users.id = account_upgrades.user_id');
+		// $this->where('account_upgrades.status', 'pending');
+		$data = $this->get();
+		return $data->getResult('object');
+	}
 }

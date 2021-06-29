@@ -73,7 +73,6 @@
                         </thead>
                         <tbody>
                              <?php foreach ($users as $user): ?>
-                                <?php if(implode("", $user->getRoles()) == 'admin' || implode("", $user->getRoles()) == 'finance') :  ?>
 
                             <tr>
                                 <td class="text-center">
@@ -83,7 +82,7 @@
                                 </td>
                                 <td><b><?= $user->username ?></b></td>
                                 <td><?= $user->email  ?></td>
-                                <td><?= implode("", $user->getRoles())  ?></td>
+                                <td><?= $user->role  ?></td>
                                 <?php if($user->active == 0) : ?>
                                     <td>non active</td>
                                 <?php else : ?>
@@ -100,7 +99,7 @@
                                     </div> <!-- dropdown //end -->
                                 </td>
                             </tr>
-                                                            <?php endif; ?>
+                                                           
 
                         <?php endforeach  ?>
 
@@ -110,7 +109,7 @@
                     <div class="pagination-area mt-30 mb-50">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-start">
-                                <?= $pager->links('users', 'product_pagination'); ?>
+                                <?php //$pager->links('users', 'product_pagination'); ?>
                                 <!-- <li class="page-item active"><a class="page-link" href="#">01</a></li>
                                 <li class="page-item"><a class="page-link" href="#">02</a></li>
                                 <li class="page-item"><a class="page-link" href="#">03</a></li>

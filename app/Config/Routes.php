@@ -42,6 +42,9 @@ $routes->get('profile', 'User::profile', ['filter' => 'login']);
 $routes->get('contact', 'Commerce::Contact');
 $routes->get('about', 'Commerce::About');
 $routes->get('product/(:any)', 'Product::detail/$1');
+$routes->post('updateproduk/(:any)', 'Product::update/$1');
+$routes->get('products/delete_photo/(:num)/(:any)', 'Product::delete_photo/$1/$2');
+$routes->get('products/delete_category/(:num)/(:any)', 'Product::delete_category/$1/$2');
 // $routes->get('test', 'Testing::index');
 // $routes->post('testfoto', 'Testing::testfoto');
 

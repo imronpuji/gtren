@@ -37,7 +37,7 @@ class Product extends BaseController
 	public function commerce()
 	{
 		
-		$data['products']   = $this->model->paginate(15, 'products');
+		$data['products']   = $this->model->paginate(8, 'products');
 		
 		$data['kategori'] = $this->category->findAll();
 
@@ -61,7 +61,81 @@ class Product extends BaseController
 
 	{
 
-		return view('db_admin/produk/edit_produk');
+		$db = \Config\Database::connect();
+		$builder = $db->table('categories');
+
+		$product['product'] = $this->model->find($id);
+
+		$categories_id = $this->model->find($id)->categories; //[1,2,3]
+
+		$product['product_categories'] = $product['product']->getCategory($categories_id); //[adasdad,asdasd,asdasd]
+
+		$id_categories = [];
+
+		foreach($product['product_categories'] as $c ){
+			array_push($id_categories, $c->id);
+		}
+
+		$categories = $builder->whereNotIn('id', $id_categories);
+
+		$product['categories'] = $categories->get()->getResult(); //[4,5]
+		return view('db_admin/produk/edit_produk', $product);
+	}
+
+	public function update($id)
+
+	{
+		$product = new \App\Entities\Product();
+		$slug    = new Slug();
+
+		$photos = $this->model->find($id)->photos;
+		$categories = $this->model->find($id)->categories;
+
+		array_push($categories, $implode(",", $this->request->getPost('category')));
+
+		// $categories = array(
+		//     'categories' => implode(",", $this->request->getPost('category'))
+		// );
+
+		if ($this->request->getFileMultiple('file')) {
+
+			foreach($this->request->getFileMultiple('file') as $file)
+			{   
+
+				$new_name = $file->getRandomName();
+
+				$file->move(ROOTPATH . 'public/uploads/product_photos', $new_name);
+
+				array_push($photos, $new_name);
+
+			}
+		}
+
+		$data = [
+			'name'                 => $this->request->getPost('name'),
+			'description'          => $this->request->getPost('description'),
+			'categories'           => $categories,
+			'slug'                 => $this->request->getPost('name'),
+			'photos'               => $photos,
+			'fixed_price'          => $this->request->getPost('fixed_price'),
+			'sell_price'           => $this->request->getPost('sell_price'),
+			'affiliate_commission' => $this->request->getPost('affiliate_commission'),
+			'stockist_commission'  => $this->request->getPost('stockist_commission')
+		];
+
+		$product->fill($data);
+
+		$save_product = $this->model->save($product);
+
+		if(!$save_product) {
+			$data['categories'] = $this->category->findAll();
+			$data['errors']     = $this->model->errors();
+	        return view('db_admin/produk/tambah_produk', $data); 
+	    }
+	    session()->setFlashdata('success', 'Data Berhasil Disimpan');
+	    return redirect()->to(base_url('/products'));
+
+		return view('db_admin/produk/edit_produk', $product);
 	}
 
 	public function delete($id)
@@ -155,6 +229,52 @@ class Product extends BaseController
 		$data['categories'] = $this->category->findAll();
 
 		return view('db_admin/produk/tambah_produk', $data);
+	}
+
+	public function delete_photo($id, $photo)
+	{
+		$photos = $this->model->find($id)->photos;
+		
+		$uns    = $photos[$photo];
+
+
+		$path   = $_SERVER['DOCUMENT_ROOT'] . '/uploads/product_photos/';
+		
+		
+		if(file_exists($path.$uns)){
+
+			unlink($path.$uns); 
+
+		}
+
+		unset($photos[$photo]);
+
+		$data = [
+		    'id'       => $id,
+		    'photos' => implode(",", $photos)
+		];
+
+  		if($this->model->save($data)){
+  			return redirect()->back();
+  		}
+
+	}
+
+	public function delete_category($id, $category)
+	{
+		$categories = $this->model->find($id)->categories;
+		
+		unset($categories[$category]);
+		$data = [
+		    'id'       => $id,
+		    'categories' => implode(",", $categories)
+		];
+
+  		if($this->model->save($data)){
+  			return redirect()->back();
+  		}
+
+
 	}
 
 }

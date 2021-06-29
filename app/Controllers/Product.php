@@ -90,23 +90,24 @@ class Product extends BaseController
 
 		$photos = $this->model->find($id)->photos;
 		$categories = $this->model->find($id)->categories;
-
-		array_push($categories, $implode(",", $this->request->getPost('category')));
+		if($this->request->getPost('category') != null){
+			array_push($categories, implode(",", $this->request->getPost('category')));
+		}
 
 		// $categories = array(
 		//     'categories' => implode(",", $this->request->getPost('category'))
 		// );
-
-		if ($this->request->getFileMultiple('file')) {
+		if ($this->request->getFileMultiple('file') != null) {
 
 			foreach($this->request->getFileMultiple('file') as $file)
 			{   
+				if($file->getName() != ''){
+					$new_name = $file->getRandomName();
+					$file->move(ROOTPATH . 'public/uploads/product_photos', $new_name);
 
-				$new_name = $file->getRandomName();
+					array_push($photos, $new_name);
+				}
 
-				$file->move(ROOTPATH . 'public/uploads/product_photos', $new_name);
-
-				array_push($photos, $new_name);
 
 			}
 		}

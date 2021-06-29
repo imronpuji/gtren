@@ -1,17 +1,9 @@
 <?= $this->extend('commerce/templates/index') ?>
 <?= $this->section('content') ?>
-<div class="page-header breadcrumb-wrap">
-    <div class="container">
-        <div class="breadcrumb">
-            <a href="<?= base_url() ?>" rel="nofollow">Home</a>
-            <span></span> Dashboard
-        </div>
-    </div>
-</div>
-<section class="pt-150 pb-150">
+<section class="pt-50 pb-150">
     <div class="container">
         <div class="row">
-            <div class="col-lg-10 m-auto">
+            <div class="col-lg-12 ">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="dashboard-menu">
@@ -32,7 +24,10 @@
                                     <a class="nav-link <?= ($segments[0] == "profile" ? "active" : null) ?>" id="account-detail-tab" href="<?= base_url('profile') ?>" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fa fa-user-edit mr-15"></i>Account details</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/logout"><i class="fa fa-lock mr-15"></i>Logout</a>
+                                    <a class="nav-link <?= ($segments[0] == "upgrade" ? "active" : null) ?>" id="upgrade-tab" href="<?= base_url('upgrade') ?>" role="tab" aria-controls="upgrade" aria-selected="true"><i class="fa fa-upload mr-15"></i>Upgrade Akun</a>
+                                </li>
+                                <li class="nav-item bg-danger">
+                                    <a class="nav-link text-white" href="/logout"><i class="text-white fa fa-lock mr-15"></i>Logout</a>
                                 </li>
                             </ul>
                         </div>
@@ -113,11 +108,7 @@
                                                             <label>Nomor Resi</label>
                                                             <input name="awb" placeholder="Found in your order confirmation email" type="text" class="square">
                                                         </div>
-                                                        <div class="input-style mb-20">
-                                                            <label>Billing email</label>
-                                                            <input name="billing-email" placeholder="Email you used during checkout" type="email" class="square">
-                                                        </div>
-                                                        <button class="submit submit-auto-width" type="submit">Track</button>
+                                                        <button class="btn-sm submit submit-auto-width" type="submit"><i class="fa fa-paper-plane mr-15"></i>Track</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -205,16 +196,60 @@
                                         </div>
                                     </div>
                                 </div>
+                            <?php elseif($segments[0] == "upgrade"): ?>
+                                <div class="tab-pane fade active show" id="upgrade" role="tabpanel" aria-labelledby="upgrade-tab">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Upgrade Akun</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="pb-5 mb-20">
+                                                Silahkan masukkan kode untuk mengupgrade akun anda menjadi stokis
+                                            </p>
+                                            <?php if(!empty(session()->getFlashdata('success'))): ?>
+
+                                                <div class="alert alert-success bg-success text-white">
+                                                    <?php echo session()->getFlashdata('success');?>
+                                                </div>
+
+                                            <?php else : ?>
+                                                <div class="alert alert-warning bg-warning">
+                                                    <i class="fa fa-exclamation-triangle"></i> Kode hanya bisa didapatkan dari Admin Gtren.
+                                                </div>
+                                            <?php endif ?>
+                                            <form method="post">
+                                                <div class="form-group col-md-12">
+                                                    <label>Kode <span class="required">*</span></label>
+                                                    <input required class="form-control square" name="code" type="text">
+                                                </div>
+                                                <div class="mb-3 form-check">
+                                                    <input type="checkbox" required class="form-check-input" id="exampleCheck1">
+                                                    <label class="form-check-label" for="exampleCheck1">Saya cuma mendapatkan kode dari admin</label>
+                                                  </div>
+                                                <div class="col-md-12">
+                                                    <button type="submit" class="btn btn-sm btn-fill-out submit" name="submit" value="Submit">
+                                                        <i class="fa fa-upload"></i> Upgrade
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             <?php elseif($segments[0] == "account"): ?>
                                 <div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5 class="mb-0">Halo <?= user()->username ?>! </h5>
+                                            <h5 class="mb-0"><?= greeting(user()->username) ?> </h5>
                                         </div>
                                         <div class="card-body">
                                             <div class="text-center">
-                                                <img src="<?= base_url() ?>/frontend/imgs/page/avatar-1.jpg" class="rounded-circle w-25">
-                                                <p><?= user()->fullname ?></p>
+                                                <img src="<?= base_url() ?>/frontend/imgs/page/avatar-1.jpg" class="img-fluid rounded-circle w-25">
+                                                <h3><?= user()->fullname ?></h3>
+                                                <p>
+                                                    <?php foreach (user()->getRoles() as $role): ?>
+                                                        <?= $role ?>
+                                                    <?php endforeach ?>
+                                                </p>
 
                                             </div>
                                             <div class="row my-3">
@@ -239,9 +274,6 @@
                                     </div>
                                 </div>
                             <?php endif ?>
-                            
-                            
-                            
                             
                         </div>
                     </div>

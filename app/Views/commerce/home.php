@@ -5,54 +5,24 @@
         <!-- <div class="container"> -->
             <section class="home-slider bg-grey-9 position-relative">
                 <div class="hero-slider-1 style-2 dot-style-1 dot-style-1-position-1">
+                    <?php foreach ($banners as $banner): ?>
                     <div class="single-hero-slider single-animation-wrap">
                         <div class="container">
                             <div class="slider-1-height-2 slider-animated-1">
                                 <div class="hero-slider-content-2">
-                                    <h4 class="animated">Trade-In Offer</h4>
-                                    <h2 class="animated fw-900">Supper Value Deals</h2>
-                                    <h1 class="animated fw-900 text-brand">On All Products</h1>
-                                    <p class="animated">Save more with coupons & up to 70% off</p>
-                                    <a class="animated btn btn-default btn-rounded" href="shop-product-right.html"> SHOP NOW <i class="fa fa-arrow-right"></i> </a>
-                                </div>
-                                <div class="single-slider-img single-slider-img-1">
-                                    <img class="animated" src="<?= base_url() ?>/frontend/imgs/slider/slider-1.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-hero-slider single-animation-wrap">
-                        <div class="container">
-                            <div class="slider-1-height-2 slider-animated-1">
-                                <div class="hero-slider-content-2">
-                                    <h4 class="animated">Tech Promotions</h4>
-                                    <h2 class="animated fw-900">Tech Trending</h2>
-                                    <h1 class="animated fw-900 text-brand">Great Collection</h1>
-                                    <p class="animated">Save more with coupons & up to 20% off</p>
+                                    <h4 class="animated"><?= $banner->offer ?></h4>
+                                    <h2 class="animated fw-900"><?= $banner->title ?></h2>
+                                    <h1 class="animated fw-900 text-brand"><?= $banner->sub_title ?></h1>
+                                    <p class="animated"><?= $banner->description ?></p>
                                     <a class="animated btn btn-default btn-rounded" href="shop-product-right.html"> DISCOVER NOW <i class="fa fa-arrow-right"></i> </a>
                                 </div>
                                 <div class="single-slider-img single-slider-img-1">
-                                    <img class="animated" src="<?= base_url() ?>/frontend/imgs/slider/slider-2.png" alt="">
+                                    <img class="animated" src="<?= base_url() ?>/uploads/banner/<?= $banner->photo  ?>" alt="">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="single-hero-slider single-animation-wrap">
-                        <div class="container">
-                            <div class="slider-1-height-2 slider-animated-1">
-                                <div class="hero-slider-content-2">
-                                    <h4 class="animated">Upcoming Offer</h4>
-                                    <h2 class="animated fw-900">Big Deals From</h2>
-                                    <h1 class="animated fw-900 text-brand">Manufacturer</h1>
-                                    <p class="animated">Headphone, Gaming Laptop, PC and more...</p>
-                                    <a class="animated btn btn-default btn-rounded" href="shop-product-right.html"> SHOP NOW <i class="fa fa-arrow-right"></i> </a>
-                                </div>
-                                <div class="single-slider-img single-slider-img-1">
-                                    <img class="animated" src="<?= base_url() ?>/frontend/imgs/slider/slider-3.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach ?>
                 </div>
                 <div class="slider-arrow hero-slider-1-arrow"></div>
             </section>
@@ -68,7 +38,7 @@
                             <div class="product-img-action-wrap">
                                 <div class="product-img product-img-zoom">
                                     <a href="shop-product-right.html">
-             
+
                                     </a>
                                 </div>
                                 <div class="product-badges product-badges-position product-badges-mrg">

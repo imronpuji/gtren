@@ -32,6 +32,7 @@
             <span class="text">Bills</span>
         </a>
     </li>
+
     <!-- <li class="menu-item has-submenu">
         <a class="menu-link" href="page-form-product-1.html"> <i class="icon material-icons md-add_box"></i>
             <span class="text">Add product</span>
@@ -84,8 +85,8 @@
             <span class="text">Settings</span>
         </a>
         <div class="submenu">
-            <a href="page-settings-1.html">Setting sample 1</a>
-            <a href="page-settings-2.html">Setting sample 2</a>
+           <a class="menu-link" href="<?php base_url() ?>/banner">Banner
+            </a>
         </div>
     </li>
     <li class="menu-item">

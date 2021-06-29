@@ -120,6 +120,14 @@ $routes->group('', function($routes)
 	$routes->get('member', 'Member::index', ['as' => 'member']);
 	$routes->post('member/search', 'Member::search');
 
+	// Banner
+	$routes->get('banner', 'Banner::index');
+	$routes->post('banner', 'Banner::save');
+	$routes->get('banner/delete/(:num)', 'Banner::delete/$1');
+	$routes->get('banner/edit/(:num)', 'Banner::edit/$1');
+	$routes->post('banner/update/(:num)', 'Banner::update/$1');
+
+
 }
 );
 

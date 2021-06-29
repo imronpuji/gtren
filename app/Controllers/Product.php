@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\ProductModel;
+use App\Models\BannerModel;
 use App\Models\ProductPhoto;
 use App\Models\CategoryModel;
 use App\Libraries\Slug;
@@ -20,6 +21,7 @@ class Product extends BaseController
 		$this->model    = new ProductModel();
 		$this->category = new CategoryModel();
 		$this->photo    = new ProductPhoto();
+		$this->banner    = new BannerModel();
 	}
 
 	public function index()
@@ -40,6 +42,8 @@ class Product extends BaseController
 		$data['products']   = $this->model->paginate(8, 'products');
 		
 		$data['kategori'] = $this->category->findAll();
+
+		$data['banners'] = $this->banner->findAll();
 
 		$data['pager']      = $this->model->pager;
 
@@ -113,6 +117,7 @@ class Product extends BaseController
 		}
 
 		$data = [
+			'id'					=> $id,
 			'name'                 => $this->request->getPost('name'),
 			'description'          => $this->request->getPost('description'),
 			'categories'           => $categories,
@@ -126,7 +131,7 @@ class Product extends BaseController
 
 		$product->fill($data);
 
-		$save_product = $this->model->save($product);
+		$save_product = $this->model->replace($product);
 
 		if(!$save_product) {
 			$data['categories'] = $this->category->findAll();

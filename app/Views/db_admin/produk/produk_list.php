@@ -60,7 +60,7 @@
                         <a class="itemside" href="#">
                             <div class="left">
                                  <?php for($i = 0; $i < 1; $i++): ?>
-                                    <img class="img-sm img-thumbnail" src="<?= $product->photos[$i] ?>" alt="">
+                                    <img class="img-sm img-thumbnail" src="<?php base_url() ?>/uploads/product_photos/<?= $product->photos[$i] ?>" alt="">
                                 <?php endfor ?>
                             </div>
                             <div class="info">

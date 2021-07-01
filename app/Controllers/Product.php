@@ -64,26 +64,34 @@ class Product extends BaseController
 	public function edit($id)
 
 	{
-
 		$db = \Config\Database::connect();
 		$builder = $db->table('categories');
 
 		$product['product'] = $this->model->find($id);
 
 		$categories_id = $this->model->find($id)->categories; //[1,2,3]
-
 		$product['product_categories'] = $product['product']->getCategory($categories_id); //[adasdad,asdasd,asdasd]
 
 		$id_categories = [];
+		
 
 		foreach($product['product_categories'] as $c ){
 			array_push($id_categories, $c->id);
 		}
 
 		$categories = $builder->whereNotIn('id', $id_categories);
+		if(count($id_categories) != 0) {
+			$product['categories'] = $categories->get()->getResult(); //[4,5]
+			return view('db_admin/produk/edit_produk', $product);
 
-		$product['categories'] = $categories->get()->getResult(); //[4,5]
-		return view('db_admin/produk/edit_produk', $product);
+		} 
+		else {
+			$product['categories'] = $this->category->findAll(); //[4,5]
+
+			return view('db_admin/produk/edit_produk', $product);
+		}
+		
+
 	}
 
 	public function update($id)
@@ -94,13 +102,26 @@ class Product extends BaseController
 
 		$photos = $this->model->find($id)->photos;
 		$categories = $this->model->find($id)->categories;
+
 		if($this->request->getPost('category') != null){
-			array_push($categories, implode(",", $this->request->getPost('category')));
+			
+			if($categories[0] == ''){
+				$categories[0] = implode(",", $this->request->getPost('category'));
+			} else {
+				array_push($categories, implode(",", $this->request->getPost('category')));
+			}
 		}
+		
+
+
 
 		// $categories = array(
 		//     'categories' => implode(",", $this->request->getPost('category'))
 		// );
+		if($photos[0] == ''){
+			$photos = [];
+		}
+
 		if ($this->request->getFileMultiple('file') != null) {
 
 			foreach($this->request->getFileMultiple('file') as $file)
@@ -110,11 +131,13 @@ class Product extends BaseController
 					$file->move(ROOTPATH . 'public/uploads/product_photos', $new_name);
 
 					array_push($photos, $new_name);
+					 
 				}
 
 
 			}
 		}
+
 
 		$data = [
 			'id'					=> $id,
@@ -129,9 +152,10 @@ class Product extends BaseController
 			'stockist_commission'  => $this->request->getPost('stockist_commission')
 		];
 
+
 		$product->fill($data);
 
-		$save_product = $this->model->replace($product);
+		$save_product = $this->model->save($product);
 
 		if(!$save_product) {
 			$data['categories'] = $this->category->findAll();
@@ -268,14 +292,16 @@ class Product extends BaseController
 
 	public function delete_category($id, $category)
 	{
+
+
+
 		$categories = $this->model->find($id)->categories;
-		
+		print_r(array_filter($categories, 'strlen'));
 		unset($categories[$category]);
 		$data = [
 		    'id'       => $id,
 		    'categories' => implode(",", $categories)
 		];
-
   		if($this->model->save($data)){
   			return redirect()->back();
   		}

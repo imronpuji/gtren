@@ -38,7 +38,7 @@
                             <div class="product-img-action-wrap">
                                 <div class="product-img product-img-zoom">
                                     <a href="shop-product-right.html">
-
+                                        
                                     </a>
                                 </div>
                                 <div class="product-badges product-badges-position product-badges-mrg">

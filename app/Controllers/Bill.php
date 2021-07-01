@@ -41,7 +41,6 @@ class Bill extends BaseController
 	        ]
 			);
 
-	        // $isDataValid = $validation->withRequest($this->request)->run();
 	        $isDataValid = $validation->withRequest($this->request)->run();
 
 

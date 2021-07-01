@@ -27,36 +27,39 @@ class ProductModel extends Model
 	protected $updatedField         = 'updated_at';
 	protected $deletedField         = 'deleted_at';
 
+	protected $validationRules = [];
+	protected $validationMessages = [];
+
 	// Validation
-	protected $validationRules      = [
-		'name'                 => 'required|is_unique[products.name]',
-		'description'          => 'required',
-		'fixed_price'          => 'required',
-		'sell_price'           => 'required',
-		'affiliate_commission' => 'required',
-		'stockist_commission'  => 'required',
-	];
-	protected $validationMessages   = [
-		'name' => [
-			'required'  => 'Nama Produk Harus Diisi',
-			'is_unique' => 'Nama Produk Sudah Ada'
-		],
-		'description' => [
-			'required' => 'Deskripsi Produk Harus Diisi'
-		],
-		'fixed_price' => [
-			'required' => 'Harga Tetap Harus Diisi'
-		],
-		'sell_price' => [
-			'required' => 'Harga Jual Harus Diisi'
-		],
-		'affiliate_commission' => [
-			'required' => 'Komisi Affiliate Harus Diisi'
-		],
-		'stockist_commission' => [
-			'required' => 'Komisi Stokis Harus Diisi'
-		],
-	];
+	// protected $validationRules      = [
+	// 	'name'                 => 'required|is_unique[products.name]',
+	// 	'description'          => 'required',
+	// 	'fixed_price'          => 'required',
+	// 	'sell_price'           => 'required',
+	// 	'affiliate_commission' => 'required',
+	// 	'stockist_commission'  => 'required',
+	// ];
+	// protected $validationMessages   = [
+	// 	'name' => [
+	// 		'required'  => 'Nama Produk Harus Diisi',
+	// 		'is_unique' => 'Nama Produk Sudah Ada'
+	// 	],
+	// 	'description' => [
+	// 		'required' => 'Deskripsi Produk Harus Diisi'
+	// 	],
+	// 	'fixed_price' => [
+	// 		'required' => 'Harga Tetap Harus Diisi'
+	// 	],
+	// 	'sell_price' => [
+	// 		'required' => 'Harga Jual Harus Diisi'
+	// 	],
+	// 	'affiliate_commission' => [
+	// 		'required' => 'Komisi Affiliate Harus Diisi'
+	// 	],
+	// 	'stockist_commission' => [
+	// 		'required' => 'Komisi Stokis Harus Diisi'
+	// 	],
+	// ];
 	protected $skipValidation       = false;
 	protected $cleanValidationRules = true;
 

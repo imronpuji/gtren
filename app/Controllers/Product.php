@@ -97,75 +97,109 @@ class Product extends BaseController
 	public function update($id)
 
 	{
-		$product = new \App\Entities\Product();
-		$slug    = new Slug();
-
-		$photos = $this->model->find($id)->photos;
+		$product    = new \App\Entities\Product();
+		$slug       = new Slug();
+		$photos     = $this->model->find($id)->photos;
 		$categories = $this->model->find($id)->categories;
+		$validation =  \Config\Services::validation();
+		$validation->setRules(
+			[
+				'name'                 => "required|is_unique[products.name, id, $id]",
+				'description'          => 'required',
+				'fixed_price'          => 'required',
+				'sell_price'           => 'required',
+				'affiliate_commission' => 'required',
+				'stockist_commission'  => 'required',
+				'file'                 => 'max_size[file,1024]|ext_in[file,png,jpg]',
+			],
+			[
+	        	'name' => [
+    				'required'  => 'Nama Produk Harus Diisi',
+    				'is_unique' => 'Nama Produk Sudah Ada'
+    			],
+    			'description' => [
+    				'required' => 'Deskripsi Produk Harus Diisi'
+    			],
+    			'fixed_price' => [
+    				'required' => 'Harga Tetap Harus Diisi'
+    			],
+    			'sell_price' => [
+    				'required' => 'Harga Jual Harus Diisi'
+    			],
+    			'affiliate_commission' => [
+    				'required' => 'Komisi Affiliate Harus Diisi'
+    			],
+    			'stockist_commission' => [
+    				'required' => 'Komisi Stokis Harus Diisi'
+    			],
+    			'file' => [
+					'max_size' => 'Ukuran Gambar Maksimal 1Mb',
+					'ext_in'   => 'Ekstensi Gambar Tidak Diizinkan',
+    			],
+	        ]
+		);
 
-		if($this->request->getPost('category') != null){
-			
-			if($categories[0] == ''){
-				$categories[0] = implode(",", $this->request->getPost('category'));
-			} else {
-				array_push($categories, implode(",", $this->request->getPost('category')));
-			}
-		}
-		
+		$isDataValid = $validation->withRequest($this->request)->run();
 
 
+		if ($isDataValid) {
 
-		// $categories = array(
-		//     'categories' => implode(",", $this->request->getPost('category'))
-		// );
-		if($photos[0] == ''){
-			$photos = [];
-		}
-
-		if ($this->request->getFileMultiple('file') != null) {
-
-			foreach($this->request->getFileMultiple('file') as $file)
-			{   
-				if($file->getName() != ''){
-					$new_name = $file->getRandomName();
-					$file->move(ROOTPATH . 'public/uploads/product_photos', $new_name);
-
-					array_push($photos, $new_name);
-					 
+			if($this->request->getPost('category') != null){
+				
+				if($categories[0] == ''){
+					$categories[0] = implode(",", $this->request->getPost('category'));
+				} else {
+					array_push($categories, implode(",", $this->request->getPost('category')));
 				}
-
-
 			}
+			
+
+			if($photos[0] == ''){
+				$photos = [];
+			}
+
+			if ($this->request->getFileMultiple('file') != null) {
+
+				foreach($this->request->getFileMultiple('file') as $file)
+				{   
+					if($file->getName() != ''){
+						$new_name = $file->getRandomName();
+						$file->move(ROOTPATH . 'public/uploads/product_photos', $new_name);
+
+						array_push($photos, $new_name);
+						 
+					}
+				}
+			}
+
+			$data = [
+				'id'                   => $id,
+				'name'                 => $this->request->getPost('name'),
+				'description'          => $this->request->getPost('description'),
+				'categories'           => $categories,
+				'slug'                 => $this->request->getPost('name'),
+				'photos'               => $photos,
+				'fixed_price'          => $this->request->getPost('fixed_price'),
+				'sell_price'           => $this->request->getPost('sell_price'),
+				'affiliate_commission' => $this->request->getPost('affiliate_commission'),
+				'stockist_commission'  => $this->request->getPost('stockist_commission')
+			];
+
+
+			$product->fill($data);
+
+			$save_product = $this->model->save($product);
+
+			if(!$save_product) {
+				$data['categories'] = $this->category->findAll();
+				$data['errors']     = $this->model->errors();
+		        return view('db_admin/produk/tambah_produk', $data); 
+		    }
+		    session()->setFlashdata('success', 'Data Berhasil Disimpan');
+		    return redirect()->to(base_url('/products'));
+		} else {
+			return redirect()->back()->withInput()->with('errors', $this->model->errors());
 		}
-
-
-		$data = [
-			'id'					=> $id,
-			'name'                 => $this->request->getPost('name'),
-			'description'          => $this->request->getPost('description'),
-			'categories'           => $categories,
-			'slug'                 => $this->request->getPost('name'),
-			'photos'               => $photos,
-			'fixed_price'          => $this->request->getPost('fixed_price'),
-			'sell_price'           => $this->request->getPost('sell_price'),
-			'affiliate_commission' => $this->request->getPost('affiliate_commission'),
-			'stockist_commission'  => $this->request->getPost('stockist_commission')
-		];
-
-
-		$product->fill($data);
-
-		$save_product = $this->model->save($product);
-
-		if(!$save_product) {
-			$data['categories'] = $this->category->findAll();
-			$data['errors']     = $this->model->errors();
-	        return view('db_admin/produk/tambah_produk', $data); 
-	    }
-	    session()->setFlashdata('success', 'Data Berhasil Disimpan');
-	    return redirect()->to(base_url('/products'));
-
-		return view('db_admin/produk/edit_produk', $product);
 	}
 
 	public function delete($id)
@@ -203,54 +237,105 @@ class Product extends BaseController
 
 	public function save()
 	{
-		$db      = db_connect('default'); 
-		$slug    = new Slug();
-		$product = new \App\Entities\Product();
-
-
-		$photos = [];
-		$categories = array(
-		    'categories' => implode(",", $this->request->getPost('category'))
+		$db         = db_connect('default'); 
+		$slug       = new Slug();
+		$product    = new \App\Entities\Product();
+		$validation =  \Config\Services::validation();
+		$validation->setRules(
+			[
+				'name'                 => 'required|is_unique[products.name]',
+				'description'          => 'required',
+				'fixed_price'          => 'required',
+				'sell_price'           => 'required',
+				'affiliate_commission' => 'required',
+				'stockist_commission'  => 'required',
+				'file'                 => 'uploaded[file]|max_size[file,1024]|ext_in[file,png,jpg]',
+			],
+			[
+	        	'name' => [
+    				'required'  => 'Nama Produk Harus Diisi',
+    				'is_unique' => 'Nama Produk Sudah Ada'
+    			],
+    			'description' => [
+    				'required' => 'Deskripsi Produk Harus Diisi'
+    			],
+    			'fixed_price' => [
+    				'required' => 'Harga Tetap Harus Diisi'
+    			],
+    			'sell_price' => [
+    				'required' => 'Harga Jual Harus Diisi'
+    			],
+    			'affiliate_commission' => [
+    				'required' => 'Komisi Affiliate Harus Diisi'
+    			],
+    			'stockist_commission' => [
+    				'required' => 'Komisi Stokis Harus Diisi'
+    			],
+    			'file' => [
+					'uploaded' => 'Anda Harus Menyertakan Gambar Produk',
+					'max_size' => 'Ukuran Gambar Maksimal 1Mb',
+					'ext_in'   => 'Ekstensi Gambar Tidak Diizinkan',
+    			],
+	        ]
 		);
 
-		if ($this->request->getFileMultiple('file')) {
+        $isDataValid = $validation->withRequest($this->request)->run();
 
-			foreach($this->request->getFileMultiple('file') as $file)
-			{   
+        if ($isDataValid) {
+        	
 
-				$new_name = $file->getRandomName();
+			$photos     = [];
+			$categories = array(
+			    'categories' => implode(",", $this->request->getPost('category'))
+			);
 
-				$file->move(ROOTPATH . 'public/uploads/product_photos', $new_name);
+			if ($this->request->getFileMultiple('file')) {
 
-				array_push($photos, $new_name);
+				foreach($this->request->getFileMultiple('file') as $file)
+				{   
 
+					$new_name = $file->getRandomName();
+
+					$file->move(ROOTPATH . 'public/uploads/product_photos', $new_name);
+
+					array_push($photos, $new_name);
+
+				}
 			}
-		}
 
-		$data = [
-			'name'                 => $this->request->getPost('name'),
-			'description'          => $this->request->getPost('description'),
-			'categories'           => $categories,
-			'slug'                 => $this->request->getPost('name'),
-			'photos'               => $photos,
-			'fixed_price'          => $this->request->getPost('fixed_price'),
-			'sell_price'           => $this->request->getPost('sell_price'),
-			'affiliate_commission' => $this->request->getPost('affiliate_commission'),
-			'stockist_commission'  => $this->request->getPost('stockist_commission')
-		];
+			$data = [
+				'name'                 => $this->request->getPost('name'),
+				'description'          => $this->request->getPost('description'),
+				'categories'           => $categories,
+				'slug'                 => $this->request->getPost('name'),
+				'photos'               => $photos,
+				'fixed_price'          => $this->request->getPost('fixed_price'),
+				'sell_price'           => $this->request->getPost('sell_price'),
+				'affiliate_commission' => $this->request->getPost('affiliate_commission'),
+				'stockist_commission'  => $this->request->getPost('stockist_commission')
+			];
 
-		$product->fill($data);
-
-		$save_product = $this->model->save($product);
+			$product->fill($data);
 
 
-		if(!$save_product) {
-			$data['categories'] = $this->category->findAll();
-			$data['errors']     = $this->model->errors();
-	        return view('db_admin/produk/tambah_produk', $data); 
-	    }
-	    session()->setFlashdata('success', 'Data Berhasil Disimpan');
-	    return redirect()->to(base_url('/products'));
+			$save_product = $this->model->save($product);
+
+
+			if(!$save_product) {
+				$data['categories'] = $this->category->findAll();
+				$data['errors']     = $this->model->errors();
+		        return view('db_admin/produk/tambah_produk', $data); 
+		    }
+		    session()->setFlashdata('success', 'Data Berhasil Disimpan');
+		    return redirect()->to(base_url('/products'));
+
+        } else {
+
+			return redirect()->back()->withInput()->with('errors', $this->model->errors());
+        }
+
+
+
 
 	}
 

@@ -18,7 +18,7 @@
                                     <a class="nav-link <?= ($segments[0] == "tracking" ? "active" : null) ?>" id="track-orders-tab" href="<?= base_url('tracking') ?>" role="tab" aria-controls="track-orders" aria-selected="false"><i class="fa fa-paper-plane mr-15"></i>Track Your Order</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link <?= ($segments[0] == "address" ? "active" : null) ?>" id="address-tab" href="<?= base_url('address') ?>" role="tab" aria-controls="address" aria-selected="true"><i class="fa fa-map-marked mr-15"></i>My Address</a>
+                                    <a class="nav-link <?= ($segments[0] == "address" || $segments[0] == "billing-address" || $segments[0] == "shipping-address" || $segments[0] == "edit-billing" || $segments[0] == "edit-shipping" ? "active" : null) ?>" id="address-tab" href="<?= base_url('address') ?>" role="tab" aria-controls="address" aria-selected="true"><i class="fa fa-map-marked mr-15"></i>My Address</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link <?= ($segments[0] == "profile" ? "active" : null) ?>" id="account-detail-tab" href="<?= base_url('profile') ?>" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fa fa-user-edit mr-15"></i>Account details</a>
@@ -26,7 +26,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link <?= ($segments[0] == "upgrade" ? "active" : null) ?>" id="upgrade-tab" href="<?= base_url('upgrade') ?>" role="tab" aria-controls="upgrade" aria-selected="true"><i class="fa fa-upload mr-15"></i>Upgrade Akun</a>
                                 </li>
-                                <li class="nav-item bg-danger">
+                                <li class="nav-item ">
                                     <a class="nav-link text-white" href="/logout"><i class="text-white fa fa-lock mr-15"></i>Logout</a>
                                 </li>
                             </ul>
@@ -125,9 +125,17 @@
                             <?php elseif($segments[0] == "address"): ?>
                                 <div class="tab-pane fade active show" id="address" role="tabpanel" aria-labelledby="address-tab">
                                     <div class="row mb-3">
-                                        <div class="col-lg-12">
-                                            <button class="btn btn-primary btn-sm">Tambah Alamat</button>
-                                        </div>
+                                        <?php if(count($addresses) < 2): ?>
+                                            <div class="dropdown">
+                                              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Tambah Address
+                                              </button>
+                                              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li><a class="dropdown-item" href="<?php base_url() ?>/billing-address">Billing</a></li>
+                                                <li><a class="dropdown-item" href="<?php base_url() ?>/shipping-address">Shipping</a></li>
+                                              </ul>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6">
@@ -136,9 +144,15 @@
                                                     <h5 class="mb-0">Billing Address</h5>
                                                 </div>
                                                 <div class="card-body">
-                                                    <address>3522 Interstate<br> 75 Business Spur,<br> Sault Ste. <br>Marie, MI 49783</address>
-                                                    <p>New York</p>
-                                                    <a href="#" class="btn-small">Edit</a>
+                                                    <?php foreach ($addresses as $billing) :?>
+                                                        <?php if($billing->type == 'billing'): ?>
+                                                        <address><?= $billing->provinsi ?><br> <?= $billing->kabupaten ?>,<br> <?= $billing->kecamatan ?> <br><?= $billing->kode_pos ?> <br>
+                                                            <p><?= $billing->detail_alamat  ?></p>
+                                                        </address>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
+                                                    <a href="<?php base_url() ?>/edit-billing" class="btn-small">Edit</a>
+                                                    <a href="<?php base_url() ?>/delete/address/<?= $billing->id ?>" class="btn-small">Hapus</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -148,12 +162,141 @@
                                                     <h5 class="mb-0">Shipping Address</h5>
                                                 </div>
                                                 <div class="card-body">
-                                                    <address>4299 Express Lane<br>
-                                                        Sarasota, <br>FL 34249 USA <br>Phone: 1.941.227.4444</address>
-                                                    <p>Sarasota</p>
-                                                    <a href="#" class="btn-small">Edit</a>
+                                                    <?php foreach ($addresses as $billing) :?>
+                                                        <?php if($billing->type == 'shipping'): ?>
+                                                        <address><?= $billing->provinsi ?><br> <?= $billing->kabupaten ?>,<br> <?= $billing->kecamatan ?> <br><?= $billing->kode_pos ?> <br>
+                                                            <p><?= $billing->detail_alamat  ?></p>
+                                                        </address>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
+                                                    <a href="<?php base_url() ?>/edit-shipping" class="btn-small">Edit</a>
+                                                    <a href="<?php base_url() ?>/delete/address/<?= $billing->id ?>" class="btn-small">Hapus</a>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php elseif($segments[0] == "billing-address"): ?>
+                                <div class="tab-pane fade active show" id="account-detail" role="tabpanel" aria-labelledby="account-detail-tab">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Tambah Alamat Billing</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <?php $id = user()->id; ?>
+                                            <form method="post" action="/billing-address/<?= $id ?>">
+                                                <div class="row">
+                                                    <div class="form-group col-md-12">
+                                                        <label>Provinsi<span class="required">*</span></label>
+                                                        <input required="" class="form-control square" name="provinsi">
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label>Kabupaten<span class="required">*</span></label>
+                                                        <input required="" class="form-control square" name="kabupaten" type="text">
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label>Kecamatan<span class="required">*</span></label>
+                                                        <input required="" class="form-control square" name="kecamatan" type="text">
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label>Kode Pos<span class="required">*</span></label>
+                                                        <input required="" class="form-control square" name="kode_pos" type="text">
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label>Detail Alamat<span class="required">*</span></label>
+                                                        <input required="" class="form-control square" name="detail_alamat" type="text">
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <button type="submit" class="btn btn-fill-out submit" name="submit" value="Submit">Save</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php elseif($segments[0] == "edit-billing"): ?>
+                                <div class="tab-pane fade active show" id="account-detail" role="tabpanel" aria-labelledby="account-detail-tab">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Ubah Alamat Billing</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <?php foreach ($addresses as $address): ?>
+                                                <?php if($address->type == 'billing'): ?>
+                                                    <form method="post" action="/edit-billing/<?= $address->id ?>">
+                                                        <div class="row">
+                                                            <div class="form-group col-md-12">
+                                                                <label>Provinsi<span class="required">*</span></label>
+                                                                <input value="<?= $address->provinsi ?>" required="" class="form-control square" name="provinsi">
+                                                            </div>
+                                                            <div class="form-group col-md-12">
+                                                                <label>Kabupaten<span class="required">*</span></label>
+                                                                <input value="<?= $address->kabupaten ?>" required="" class="form-control square" name="kabupaten" type="text">
+                                                            </div>
+                                                            <div class="form-group col-md-12">
+                                                                <label>Kecamatan<span class="required">*</span></label>
+                                                                <input value="<?= $address->kecamatan ?>" required="" class="form-control square" name="kecamatan" type="text">
+                                                            </div>
+                                                            <div class="form-group col-md-12">
+                                                                <label>Kode Pos<span class="required">*</span></label>
+                                                                <input value="<?= $address->kode_pos ?>" required="" class="form-control square" name="kode_pos" type="text">
+                                                            </div>
+                                                            <div class="form-group col-md-12">
+                                                                <label>Detail Alamat<span class="required">*</span></label>
+                                                                <input value="<?= $address->detail_alamat ?>" required="" class="form-control square" name="detail_alamat" type="text">
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <button type="submit" class="btn btn-fill-out submit" name="submit" value="Submit">Ubah</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                <?php endif ?>
+                                                <?php endforeach ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php elseif($segments[0] == "edit-shipping"): ?>
+
+                                <div class="tab-pane fade active show" id="account-detail" role="tabpanel" aria-labelledby="account-detail-tab">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Ubah Alamat Billing</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <?php foreach ($addresses as $address): ?>
+                                                <?php if($address->type == 'shipping'): ?>
+                                                    <form method="post" action="/edit-shipping/<?= $address->id ?>">
+                                                        <div class="row">
+                                                            <div class="form-group col-md-12">
+                                                                <label>Provinsi<span class="required">*</span></label>
+                                                                <input value="<?= $address->provinsi ?>" required="" class="form-control square" name="provinsi">
+                                                            </div>
+                                                            <div class="form-group col-md-12">
+                                                                <label>Kabupaten<span class="required">*</span></label>
+                                                                <input value="<?= $address->kabupaten ?>" required="" class="form-control square" name="kabupaten" type="text">
+                                                            </div>
+                                                            <div class="form-group col-md-12">
+                                                                <label>Kecamatan<span class="required">*</span></label>
+                                                                <input value="<?= $address->kecamatan ?>" required="" class="form-control square" name="kecamatan" type="text">
+                                                            </div>
+                                                            <div class="form-group col-md-12">
+                                                                <label>Kode Pos<span class="required">*</span></label>
+                                                                <input value="<?= $address->kode_pos ?>" required="" class="form-control square" name="kode_pos" type="text">
+                                                            </div>
+                                                            <div class="form-group col-md-12">
+                                                                <label>Detail Alamat<span class="required">*</span></label>
+                                                                <input value="<?= $address->detail_alamat ?>" required="" class="form-control square" name="detail_alamat" type="text">
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <button type="submit" class="btn btn-fill-out submit" name="submit" value="Submit">Ubah</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                <?php endif ?>
+                                                <?php endforeach ?>
                                         </div>
                                     </div>
                                 </div>

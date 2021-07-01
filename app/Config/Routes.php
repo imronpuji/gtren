@@ -35,6 +35,19 @@ $routes->setAutoRoute(false);
 $routes->get('account', 'User::account', ['filter' => 'login']);
 $routes->get('orders', 'User::orders', ['filter' => 'login']);
 $routes->get('tracking', 'User::tracking', ['filter' => 'login']);
+
+//addresses
+$routes->get('billing-address', 'User::address', ['filter' => 'login']);
+$routes->post('billing-address/(:num)', 'User::save_billing/$1', ['filter' => 'login']);
+$routes->get('shipping-address', 'User::address', ['filter' => 'login']);
+$routes->post('shipping-address/(:num)', 'User::save_shipping/$1', ['filter' => 'login']);
+$routes->get('edit-billing', 'User::address', ['filter' => 'login']);
+$routes->get('edit-shipping', 'User::address', ['filter' => 'login']);
+$routes->get('delete/address/(:num)', 'User::delete/$1', ['filter' => 'login']);
+$routes->post('edit-billing/(:num)', 'User::edit_billing/$1', ['filter' => 'login']);
+$routes->post('edit-shipping/(:num)', 'User::edit_shipping/$1', ['filter' => 'login']);
+
+
 $routes->get('address', 'User::address', ['filter' => 'login']);
 $routes->get('profile', 'User::profile', ['filter' => 'login']);
 $routes->get('upgrade', 'User::upgrade', ['filter' => 'login']);

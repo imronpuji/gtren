@@ -2,13 +2,17 @@
 
 namespace App\Controllers;
 use App\Models\AccountUpgradeModel;
+use App\Models\AddressModel;
 
 class User extends BaseController
 {
+	public function __construct(){
+		$this->address = new AddressModel();
+	}
 	public function account()
 	{
 
-		helper(['greeting_helper']);
+		helper(['greeting_helper', 'user']);
 		$data['segments'] = $this->request->uri->getSegments();
 
 		return view('commerce/account', $data);
@@ -82,8 +86,9 @@ class User extends BaseController
 
 	public function address()
 	{
+		
 		$data['segments'] = $this->request->uri->getSegments();
-
+		$data['addresses'] = $this->address->where('user_id', user()->id)->get()->getResult();
 		return view('commerce/account', $data);
 	}
 
@@ -158,6 +163,106 @@ class User extends BaseController
 				}
 				break;
 		}
+	}
+
+	public function save_billing($id)
+	{
+
+		$data = [
+			'user_id'       => $id,
+			'provinsi'      => $this->request->getPost('provinsi'),
+			'kabupaten'     => $this->request->getPost('kabupaten'),
+			'kecamatan'     => $this->request->getPost('kecamatan'),
+			'kode_pos'      => $this->request->getPost('kode_pos'),
+			'detail_alamat' => $this->request->getPost('detail_alamat'),
+			'type'          => 'billing',
+		];
+
+		$save = $this->address->save($data);
+		if(!$save) {
+			$data['addresses'] = $this->address->find($id);
+			$data['errors']     = $this->address->errors();
+	        return view('/address', $data); 
+	    }
+	    session()->setFlashdata('success', 'Data Berhasil Disimpan');
+	    return redirect()->to(base_url('/address'));
+	}
+
+	public function save_shipping($id)
+	{
+
+		$data = [
+			'user_id'       => $id,
+			'provinsi'      => $this->request->getPost('provinsi'),
+			'kabupaten'     => $this->request->getPost('kabupaten'),
+			'kecamatan'     => $this->request->getPost('kecamatan'),
+			'kode_pos'      => $this->request->getPost('kode_pos'),
+			'detail_alamat' => $this->request->getPost('detail_alamat'),
+			'type'          => 'shipping',
+		];
+
+		$save = $this->address->save($data);
+		if(!$save) {
+			$data['addresses'] = $this->address->find($id);
+			$data['errors']     = $this->address->errors();
+	        return view('/address', $data); 
+	    }
+	    session()->setFlashdata('success', 'Data Berhasil Disimpan');
+	    return redirect()->to(base_url('/address'));
+	}
+
+	public function edit_billing($id)
+	{
+		$user_id = user()->id;
+
+		$data = [
+			'id'       => $id,
+			'provinsi'      => $this->request->getPost('provinsi'),
+			'kabupaten'     => $this->request->getPost('kabupaten'),
+			'kecamatan'     => $this->request->getPost('kecamatan'),
+			'kode_pos'      => $this->request->getPost('kode_pos'),
+			'detail_alamat' => $this->request->getPost('detail_alamat'),
+			'type'          => 'billing',
+		];
+
+		$save = $this->address->save($data);
+		if(!$save) {
+			$data['addresses'] = $this->address->find($user_id);
+			$data['errors']     = $this->address->errors();
+	        return view('/address', $data); 
+	    }
+	    session()->setFlashdata('success', 'Data Berhasil Diubah');
+	    return redirect()->to(base_url('/address'));
+	}
+
+	public function edit_shipping($id)
+	{
+		$user_id = user()->id;
+
+		$data = [
+			'id'       => $id,
+			'provinsi'      => $this->request->getPost('provinsi'),
+			'kabupaten'     => $this->request->getPost('kabupaten'),
+			'kecamatan'     => $this->request->getPost('kecamatan'),
+			'kode_pos'      => $this->request->getPost('kode_pos'),
+			'detail_alamat' => $this->request->getPost('detail_alamat'),
+			'type'          => 'shipping',
+		];
+
+		$save = $this->address->save($data);
+		if(!$save) {
+			$data['addresses'] = $this->address->find($user_id);
+			$data['errors']     = $this->address->errors();
+	        return view('/address', $data); 
+	    }
+	    session()->setFlashdata('success', 'Data Berhasil Diubah');
+	    return redirect()->to(base_url('/address'));
+	}
+
+	public function delete($id){
+
+		$this->address->delete($id);
+		return redirect()->back();
 	}
 
 }

@@ -8,15 +8,14 @@
                             <a href="index.html"><img src="<?= base_url() ?>/frontend/imgs/theme/logo-default.png" alt="logo"></a>
                         </div>
                         <h4 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h4>
-                        <p class="wow fadeIn animated">
-                            <strong>Address: </strong>562 Wellington Road, Street 32, San Francisco
-                        </p>
-                        <p class="wow fadeIn animated">
-                            <strong>Phone: </strong>+01 2222 365 /(+91) 01 2345 6789
-                        </p>
-                        <p class="wow fadeIn animated">
-                            <strong>Hours: </strong>10:00 - 18:00, Mon - Sat
-                        </p>
+                        <?php foreach($contacts as $contact):?>
+                            <p class="wow fadeIn animated">
+                                <strong>Address: </strong><?= $contact->address  ?>
+                            </p>
+                            <p class="wow fadeIn animated">
+                                <strong>Phone: </strong><?= $contact->phone  ?>
+                            </p>
+                        <?php endforeach; ?>
                         <h4 class="mb-10 mt-20 fw-600 text-grey-4 wow fadeIn animated">Follow Us</h4>
                         <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
                             <a class="facebook" href="#"><i class="fab fa-facebook-f"></i></a>
@@ -75,7 +74,7 @@
             </div>
             <div class="col-lg-6">
                 <p class="text-lg-end text-start font-sm text-muted mb-0">
-                        All rights reserved
+                    All rights reserved
                 </p>
             </div>
         </div>

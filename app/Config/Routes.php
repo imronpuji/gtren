@@ -39,36 +39,40 @@ $routes->get('tracking', 'User::tracking', ['filter' => 'login']);
 //addresses
 $routes->get('billing-address', 'User::address', ['filter' => 'login']);
 $routes->post('billing-address/(:num)', 'User::save_billing/$1', ['filter' => 'login']);
+
 $routes->get('shipping-address', 'User::address', ['filter' => 'login']);
 $routes->post('shipping-address/(:num)', 'User::save_shipping/$1', ['filter' => 'login']);
 $routes->get('edit-billing', 'User::address', ['filter' => 'login']);
 $routes->get('edit-shipping', 'User::address', ['filter' => 'login']);
-$routes->get('delete/address/(:num)', 'User::delete/$1', ['filter' => 'login']);
+$routes->get('address/delete/(:num)', 'User::delete/$1', ['filter' => 'login']);
 $routes->post('edit-billing/(:num)', 'User::edit_billing/$1', ['filter' => 'login']);
 $routes->post('edit-shipping/(:num)', 'User::edit_shipping/$1', ['filter' => 'login']);
 
 
 $routes->get('address', 'User::address', ['filter' => 'login']);
+
+// profile
 $routes->get('profile', 'User::profile', ['filter' => 'login']);
+$routes->post('profile', 'User::set_profile', ['filter' => 'login']);
+
 $routes->get('upgrade', 'User::upgrade', ['filter' => 'login']);
 $routes->post('upgrade', 'User::upgrade', ['filter' => 'login']);
 $routes->post('track', 'User::Track', ['filter' => 'login']);
 // $routes->get('checkout', 'User::Checkout', ['filter' => 'login']);
-$routes->get('contact', 'Commerce::Contact');
+$routes->get('abouts', 'Commerce::Contact');
 $routes->get('about', 'Commerce::About');
 $routes->get('product/(:any)', 'Product::detail/$1');
 
 
-// $routes->get('test', 'Testing::index');
-// $routes->post('testfoto', 'Testing::testfoto');
+$routes->get('test', 'Testing::index');
+$routes->post('testfoto', 'Testing::testfoto');
 
-// Bills
-// $routes->get('bills', 'Bill::index');
-// $routes->post('bills', 'Bill::index');
-// $routes->get('bills/add', 'Bill::add');
-// $routes->get('bills/edit/(:num)', 'Bill::edit/$1');
-// $routes->post('bills/update/(:num)', 'Bill::update/$1');
-// $routes->get('bills/delete/(:num)', 'Bill::delete/$1');
+$routes->get('bills', 'Bill::index');
+$routes->post('bills', 'Bill::index');
+$routes->get('bills/add', 'Bill::add');
+$routes->get('bills/edit/(:num)', 'Bill::edit/$1');
+$routes->post('bills/update/(:num)', 'Bill::update/$1');
+$routes->get('bills/delete/(:num)', 'Bill::delete/$1');
 
 
 
@@ -116,9 +120,8 @@ $routes->group('', function($routes)
 	// $routes->get('kategori', 'Admin::kategori');
     $routes->get('category', 'Category::index');
     $routes->get('category/edit/(:num)', 'Category::edit/$1');
-    // $routes->post('kategori/save', 'Category::save/$1');
-    // $routes->get('kategori/edit/(:num)', 'Category::edit/$1');
-    // $routes->resource('kategori', 'Category');
+    $routes->post('category/save', 'Category::save/$1');
+    $routes->get('category/edit/(:num)', 'Category::edit/$1');
 
 	// order
 	$routes->get('order', 'Admin::order');
@@ -138,6 +141,22 @@ $routes->group('', function($routes)
 	$routes->get('banner/delete/(:num)', 'Banner::delete/$1');
 	$routes->get('banner/edit/(:num)', 'Banner::edit/$1');
 	$routes->post('banner/update/(:num)', 'Banner::update/$1');
+
+		// offer
+	$routes->get('offer', 'Offer::index');
+	$routes->post('offer', 'Offer::save');
+	$routes->get('offer/delete/(:num)', 'Offer::delete/$1');
+	$routes->get('offer/edit/(:num)', 'Offer::edit/$1');
+	$routes->post('offer/update/(:num)', 'Offer::update/$1');
+	$routes->post('offer/search', 'Offer::search');
+
+		// contact
+	$routes->get('contact', 'Contact::index');
+	$routes->post('contact', 'Contact::save');
+	$routes->get('contact/delete/(:num)', 'Contact::delete/$1');
+	$routes->get('contact/edit/(:num)', 'Contact::edit/$1');
+	$routes->post('contact/update/(:num)', 'Contact::update/$1');
+	$routes->post('contact/search', 'Contact::search');
 
 
 }

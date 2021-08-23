@@ -1,16 +1,16 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\CategoryModel;
+use App\Models\OfferModel;
 
 class Commerce extends BaseController
 {
 	public function index()
 	{
-		// $category = new CategoryModel();
-		// $data['categories'] = $category->findAll();
-		// dd($data['categories']);
-		return view('commerce/home');
+		$model = new OfferModel();
+		$data['offers'] = $model->findAll();
+
+		return view('commerce/home', $data);
 	}
 
 	public function about()

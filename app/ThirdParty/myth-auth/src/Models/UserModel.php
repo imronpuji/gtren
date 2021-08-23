@@ -55,6 +55,11 @@ class UserModel extends Model
         ]);
     }
 
+
+    public function changeProfile(){
+        
+    }
+
     /**
      * Logs an activation attempt for posterity sake.
      *

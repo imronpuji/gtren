@@ -7,7 +7,7 @@
                         <div class="header-info">
                             <ul>
                                 <li><a href="#">(+01) - 2345 - 6789</a></li>
-                                <li><i class="fa fa-map-marker-alt mr-5"></i><a target="_blank" href="page-location.html">Lokasi Toko Kami</a></li>
+                                <li class="w-100"><i class="fa fa-map-marker-alt mr-5"></i><a id="location" target="_blank" href="page-location.html">Lokasi Toko Kami</a></li>
                             </ul>
                         </div>
                     </div>
@@ -300,7 +300,7 @@
                             <div class="more_categories">Show more...</div>
                         </div>
                     </div>
-                    <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block align-items-start main-menu hover-boder hover-boder-white" style="width:65%">
+                    <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block main-menu hover-boder hover-boder-white" style="width:65%">
                         <nav>
                             <ul>
                                 <li>

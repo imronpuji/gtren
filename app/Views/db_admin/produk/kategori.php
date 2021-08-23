@@ -46,6 +46,8 @@
                         <div class="mb-4">
                             <label for="category" class="form-label">Nama Kategori</label>
                             <input type="text" class="form-control" name="category" id="category" value="<?= $category->category ?>" />
+                            <label for="description" class="form-label">Deskripsi</label>
+                            <textarea type="text" class="form-control" name="description" id="category" value="<?= $category->description ?>"><?= $category->description ?></textarea>
                         </div>
                         <div class="d-grid">
                             <button class="btn btn-primary" type="submit">Simpan Data</button>
@@ -58,6 +60,8 @@
                         <div class="mb-4">
                             <label for="category" class="form-label">Nama Kategori</label>
                             <input type="text" placeholder="Type here" name="category" class="form-control" id="category" />
+                            <label for="category" class="form-label">Deskripsi</label>
+                            <textarea type="text" placeholder="Type here" name="description" class="form-control" id="description" /></textarea>
                         </div>
                         <div class="d-grid">
                             <button class="btn btn-primary" type="submit">Simpan Data</button>
@@ -72,12 +76,14 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Description</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td><b><?= $category->category ?></b></td>
+                                    <td><b><?= $category->description ?></b></td>
                                     <td>
                                         <a href="<?= base_url('category/edit/'.$category->id) ?>">
                                             <button class="btn btn-primary rounded">
@@ -101,6 +107,7 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Description</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -109,6 +116,7 @@
                                     
                                 <tr>
                                     <td><b><?= $category->category ?></b></td>
+                                    <td><b><?= $category->description ?></b></td>
                                     <td>
                                         <a href="<?= base_url('category/edit/'.$category->id) ?>" class="btn btn-brand rounded btn-sm font-sm">
                                             <i class="material-icons md-edit"></i>

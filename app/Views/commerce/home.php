@@ -30,15 +30,18 @@
         <!-- </div> -->
         <section class="product-tabs pt-30 pb-30 wow fadeIn animated">
             <div class="container">
+                
                 <div class="row product-grid-4">
                     <!-- Start -->
-                    <?php foreach ($products as $product): ?>
+                    <?php  foreach ($products as $product): ?>
                     <div class="col-lg-3 col-md-4 col-12 col-sm-6">
                         <div class="product-cart-wrap mb-30">
                             <div class="product-img-action-wrap">
                                 <div class="product-img product-img-zoom">
                                     <a href="shop-product-right.html">
-                                        
+                                        <?php for($i = 0; $i < 2; $i++): ?>
+                                            <img class="<?= $i == 0 ? 'default-img' : 'hover-img'  ?>" src="<?= $product->photos[$i] ?>" alt="">
+                                        <?php endfor ?>
                                     </a>
                                 </div>
                                 <div class="product-badges product-badges-position product-badges-mrg">
@@ -124,50 +127,19 @@
         <section class="featured section-padding-60">
             <div class="container">
                 <div class="row">
+                 <?php foreach ($offers as $offer): ?>
                     <div class="col-lg-3 col-md-6 mb-md-3">
                         <div class="banner-left-icon d-flex align-items-center wow fadeIn animated">
                             <div class="banner-icon">
-                                <img src="<?= base_url() ?>/frontend/imgs/theme/icons/icon-truck.svg" alt="">
+                                <img src="<?= base_url() ?>/uploads/offer/<?php echo $offer->photo ?>" alt="">
                             </div>
                             <div class="banner-text">
-                                <h3 class="icon-box-title">Free Shipping</h3>
-                                <p>Orders $50 or more</p>
+                                <h3 class="icon-box-title"><?= $offer->title ?></h3>
+                                <p><?= $offer->description ?></p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 mb-md-3">
-                        <div class="banner-left-icon d-flex align-items-center wow fadeIn animated">
-                            <div class="banner-icon">
-                                <img src="<?= base_url() ?>/frontend/imgs/theme/icons/icon-purchase.svg" alt="">
-                            </div>
-                            <div class="banner-text">
-                                <h3 class="icon-box-title">Free Returns</h3>
-                                <p>Within 30 days</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="banner-left-icon d-flex align-items-center wow fadeIn animated">
-                            <div class="banner-icon">
-                                <img src="<?= base_url() ?>/frontend/imgs/theme/icons/icon-bag.svg" alt="">
-                            </div>
-                            <div class="banner-text">
-                                <h3 class="icon-box-title">Get 20% Off 1 Item</h3>
-                                <p>When you sign up</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="banner-left-icon d-flex align-items-center wow fadeIn animated">
-                            <div class="banner-icon">
-                                <img src="<?= base_url() ?>/frontend/imgs/theme/icons/icon-operator.svg" alt="">
-                            </div>
-                            <div class="banner-text">
-                                <h3 class="icon-box-title">Support Center</h3>
-                                <p>24/7 amazing services</p>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </section>
@@ -192,7 +164,9 @@
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
-                                                       
+                                                     <?php for($i = 0; $i < 2; $i++): ?>
+                                                        <img class="<?= $i == 0 ? 'default-img' : 'hover-img'  ?>" src="<?= $p->photos[$i] ?>" alt="">
+                                                    <?php endfor ?>
                                                     </a>
                                                 </div>
                                                 <!-- <div class="product-badges product-badges-position product-badges-mrg">
@@ -247,7 +221,7 @@
             </div>
         </section>
     <!-- Preloader Start -->
-   <div id="preloader-active">
+   <!-- <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
                 <div class="text-center">
@@ -261,7 +235,7 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>  -->
     <!-- Vendor JS-->
         <?= $this->endSection() ?>
 

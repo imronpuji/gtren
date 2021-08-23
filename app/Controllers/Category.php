@@ -31,7 +31,8 @@ class Category extends BaseController
 	public function save()
 	{
 		$data = [
-			'category' => $this->request->getPost('category')
+			'category' => $this->request->getPost('category'),
+			'description' => $this->request->getPost('description')
 		];
 
 		$save = $this->model->insert($data);
@@ -58,7 +59,8 @@ class Category extends BaseController
 	public function update($id)
 	{
 		$data = [
-			'category' => $this->request->getPost('category')
+			'category' => $this->request->getPost('category'),
+			'description' => $this->request->getPost('description')
 		];
 
 		$update = $this->model->update($id, $data);

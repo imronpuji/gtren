@@ -4,28 +4,28 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class AddressModel extends Model
+class ContactModel extends Model
 {
 	protected $DBGroup              = 'default';
-	protected $table                = 'address';
+	protected $table                = 'contact';
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
-	protected $returnType           = 'App\Entities\Address';
-	protected $useSoftDeletes       = true;
+	protected $returnType           = 'App\Entities\Banner';
+	protected $useSoftDeletes       = false;
 	protected $protectFields        = true;
-	protected $allowedFields        = ['user_id', 'provinsi', 'kabupaten', 'kecamatan', 'kode_pos', 'detail_alamat', 'type'];
+	protected $allowedFields        = ['address',  'phone'];
 
 	// Dates
-	protected $useTimestamps        = true;
+	protected $useTimestamps        = false;
 	protected $dateFormat           = 'datetime';
 	protected $createdField         = 'created_at';
 	protected $updatedField         = 'updated_at';
 	protected $deletedField         = 'deleted_at';
 
+	// Validation
 	protected $validationRules      = [];
 	protected $validationMessages   = [];
-
 	protected $skipValidation       = false;
 	protected $cleanValidationRules = true;
 
@@ -39,6 +39,4 @@ class AddressModel extends Model
 	protected $afterFind            = [];
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
-
-	
 }

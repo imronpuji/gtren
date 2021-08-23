@@ -13,6 +13,8 @@ class User extends BaseController
 	{
 
 		helper(['greeting_helper', 'user']);
+
+
 		$data['segments'] = $this->request->uri->getSegments();
 
 		return view('commerce/account', $data);
@@ -86,9 +88,23 @@ class User extends BaseController
 
 	public function address()
 	{
+
 		
 		$data['segments'] = $this->request->uri->getSegments();
-		$data['addresses'] = $this->address->where('user_id', user()->id)->get()->getResult();
+
+		if($data['segments'][0] == 'billing-address' || $data['segments'] == 'shipping-address') {
+			if(count($this->address->where('type', 'billing')->where('deleted_at', null)->get()->getResultArray()) > 0){
+				return redirect()->to('/address');
+			}
+			if(count($this->address->where('type', 'shipping')->where('deleted_at', null)->get()->getResultArray()) > 0){
+				return redirect()->to('/address');
+			}
+
+		}
+		$data['billing_address'] = $this->address->where('type', 'billing')->where('deleted_at', null)->where('user_id', user()->id)->get()->getResult();
+		$data['shipping_address'] = $this->address->where('type', 'shipping')->where('deleted_at', null)->where('user_id', user()->id)->get()->getResult();
+
+		// verif
 		return view('commerce/account', $data);
 	}
 
@@ -97,6 +113,21 @@ class User extends BaseController
 		$data['segments'] = $this->request->uri->getSegments();
 
 		return view('commerce/account', $data);
+	}
+
+	public function set_profile()
+	{
+		helper(['user']);
+
+		$request = $this->request;
+		$data = [
+			'password' => $request->getPost('password'),
+			'username' => $request->getPost('username'),
+			'fullname' => $request->getPost('fullname'),
+			'email' => $request->getPost('email')
+		];
+
+		user()->setProfile($data);
 	}
 
 	public function upgrade()
@@ -170,9 +201,9 @@ class User extends BaseController
 
 		$data = [
 			'user_id'       => $id,
-			'provinsi'      => $this->request->getPost('provinsi'),
-			'kabupaten'     => $this->request->getPost('kabupaten'),
-			'kecamatan'     => $this->request->getPost('kecamatan'),
+			'provinsi'      => explode(",", $this->request->getPost('provinsi'))[1],
+			'kabupaten'     => explode(",", $this->request->getPost('kabupaten'))[1],
+			'kecamatan'     => explode(",", $this->request->getPost('kecamatan'))[1],
 			'kode_pos'      => $this->request->getPost('kode_pos'),
 			'detail_alamat' => $this->request->getPost('detail_alamat'),
 			'type'          => 'billing',
@@ -193,9 +224,9 @@ class User extends BaseController
 
 		$data = [
 			'user_id'       => $id,
-			'provinsi'      => $this->request->getPost('provinsi'),
-			'kabupaten'     => $this->request->getPost('kabupaten'),
-			'kecamatan'     => $this->request->getPost('kecamatan'),
+			'provinsi'      => explode(",", $this->request->getPost('provinsi'))[1],
+			'kabupaten'     => explode(",", $this->request->getPost('kabupaten'))[1],
+			'kecamatan'     => explode(",", $this->request->getPost('kecamatan'))[1],
 			'kode_pos'      => $this->request->getPost('kode_pos'),
 			'detail_alamat' => $this->request->getPost('detail_alamat'),
 			'type'          => 'shipping',
@@ -216,10 +247,10 @@ class User extends BaseController
 		$user_id = user()->id;
 
 		$data = [
-			'id'       => $id,
-			'provinsi'      => $this->request->getPost('provinsi'),
-			'kabupaten'     => $this->request->getPost('kabupaten'),
-			'kecamatan'     => $this->request->getPost('kecamatan'),
+			'id'            => $id,
+			'provinsi'      => explode(",", $this->request->getPost('provinsi'))[1],
+			'kabupaten'     => explode(",", $this->request->getPost('kabupaten'))[1],
+			'kecamatan'     => explode(",", $this->request->getPost('kecamatan'))[1],
 			'kode_pos'      => $this->request->getPost('kode_pos'),
 			'detail_alamat' => $this->request->getPost('detail_alamat'),
 			'type'          => 'billing',
@@ -240,10 +271,10 @@ class User extends BaseController
 		$user_id = user()->id;
 
 		$data = [
-			'id'       => $id,
-			'provinsi'      => $this->request->getPost('provinsi'),
-			'kabupaten'     => $this->request->getPost('kabupaten'),
-			'kecamatan'     => $this->request->getPost('kecamatan'),
+			'id'            => $id,
+			'provinsi'      => explode(",", $this->request->getPost('provinsi'))[1],
+			'kabupaten'     => explode(",", $this->request->getPost('kabupaten'))[1],
+			'kecamatan'     => explode(",", $this->request->getPost('kecamatan'))[1],
 			'kode_pos'      => $this->request->getPost('kode_pos'),
 			'detail_alamat' => $this->request->getPost('detail_alamat'),
 			'type'          => 'shipping',

@@ -6,7 +6,8 @@ class Dashboard extends BaseController
 {
 	public function index()
 	{
-		return view('dashboard');
+		$data['segments'] = $this->request->uri->getSegments();
+		return view('dashboard', $data);
 	}
 
 }

@@ -14,7 +14,7 @@ class CategoryModel extends Model
 	protected $returnType           = 'App\Entities\Category';
 	protected $useSoftDeletes       = true;
 	protected $protectFields        = true;
-	protected $allowedFields        = ['category'];
+	protected $allowedFields        = ['category','description'];
 
 	// Dates
 	protected $useTimestamps        = true;

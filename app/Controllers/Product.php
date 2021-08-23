@@ -7,6 +7,8 @@ use App\Models\ProductModel;
 use App\Models\BannerModel;
 use App\Models\ProductPhoto;
 use App\Models\CategoryModel;
+use App\Models\OfferModel;
+use App\Models\ContactModel;
 use App\Libraries\Slug;
 
 
@@ -22,6 +24,8 @@ class Product extends BaseController
 		$this->category = new CategoryModel();
 		$this->photo    = new ProductPhoto();
 		$this->banner    = new BannerModel();
+		$this->offer    = new OfferModel();
+		$this->contact    = new ContactModel();
 	}
 
 	public function index()
@@ -44,6 +48,10 @@ class Product extends BaseController
 		$data['kategori'] = $this->category->findAll();
 
 		$data['banners'] = $this->banner->findAll();
+
+		$data['offers'] = $this->offer->findAll();
+
+		$data['contacts'] = $this->contact->findAll();
 
 		$data['pager']      = $this->model->pager;
 

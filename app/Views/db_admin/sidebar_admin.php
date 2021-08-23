@@ -23,12 +23,12 @@
         </div>
     </li>
     <li class="menu-item">
-        <a class="menu-link" href="<?php base_url() ?>/member"> <i class="icon material-icons md-store"></i>
+        <a class="menu-link" href="<?php base_url() ?>/members"> <i class="icon material-icons md-store"></i>
             <span class="text">Member g-tren</span>
         </a>
     </li>
     <li class="menu-item">
-        <a class="menu-link" href="<?php base_url() ?>/bill"> <i class="icon material-icons md-monetization_on"></i>
+        <a class="menu-link" href="<?php base_url() ?>/bills"> <i class="icon material-icons md-monetization_on"></i>
             <span class="text">Bills</span>
         </a>
     </li>
@@ -81,18 +81,14 @@
 <hr>
 <ul class="menu-aside">
     <li class="menu-item has-submenu">
-        <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
-            <span class="text">Settings</span>
+        <a class="menu-link" href="page-products-list.html"> <i class="icon material-icons md-settings"></i>
+            <span class="text">Setting</span>
         </a>
         <div class="submenu">
-           <a class="menu-link" href="<?php base_url() ?>/banner">Banner
-            </a>
+            <a href="<?= base_url() ?>/offer">offer</a>
+            <a href="<?= base_url() ?>/banner">banner</a>
+            <a href="<?= base_url() ?>/office">contact</a>
         </div>
-    </li>
-    <li class="menu-item">
-        <a class="menu-link" href="page-blank.html"> <i class="icon material-icons md-local_offer"></i>
-            <span class="text"> Starter page </span>
-        </a>
     </li>
 </ul>
 <br>

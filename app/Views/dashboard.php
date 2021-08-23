@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Wowy Dashboard</title>
+    <title>Gtren DasboardWowy Dashboard</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -44,7 +44,9 @@
         <!-- header -->
         <section class="content-main">
             <?= $this->renderSection('content') ?>
-            
+            <?php if(isset($segments)): ?>
+                <?php echo 'this dashboard' ?>
+            <?php endif ?>
         </section> <!-- content-main end// -->
         <?= $this->include('db_components/footer') ?>
     </main>

@@ -4,6 +4,7 @@ use CodeIgniter\Entity;
 use Myth\Auth\Authorization\GroupModel;
 use Myth\Auth\Authorization\PermissionModel;
 use Myth\Auth\Password;
+use Myth\Auth\Models\UserModel;
 
 class User extends Entity
 {
@@ -70,6 +71,17 @@ class User extends Entity
         $this->attributes['reset_expires'] = null;
 	}
 
+    /*
+        set profile, username, fullname, password
+    */
+
+    public function setProfile(array $data)
+    {
+
+        $this->attributes['password_hash'] = Password::hash($data['password']);
+
+
+    }
     /**
      * Force a user to reset their password on next page refresh
      * or login. Checked in the LocalAuthenticator's check() method.
